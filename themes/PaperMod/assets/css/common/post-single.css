@@ -407,3 +407,21 @@ img.in-text {
     display: inline;
     margin: auto;
 }
+
+.center-audio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.center-audio audio {
+    margin-bottom: 10px;
+}
+
+.center-audio p {
+    font-size: 14px;
+    color: var(--secondary);
+}

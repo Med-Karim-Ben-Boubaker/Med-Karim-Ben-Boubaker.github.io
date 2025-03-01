@@ -14,6 +14,15 @@
       </span>
       {{- end }}
     </h1>
+    {{ if .Params.audio }}
+    <div class="center-audio">
+        <audio controls>
+            <source src="{{ .Params.audio }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <p>Listen to a Podcast version of this post (Generated with <a href="https://www.notebooklm.com/">NotebookLM</a>)</p>
+    </div>
+    {{ end }}
     {{- if .Description }}
     <div class="post-description">
       {{ .Description }}

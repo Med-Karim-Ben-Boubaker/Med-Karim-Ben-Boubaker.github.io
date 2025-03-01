@@ -3,7 +3,7 @@ title: "Test AI Post"
 summary: Testing first AI post.
 date: 2024-11-22
 author: ["Mohamed Karim Ben Boubaker"]
-draft: false
+draft: true
 weight: 2
 taxonomies:
     tag: Artificial-Intelligence

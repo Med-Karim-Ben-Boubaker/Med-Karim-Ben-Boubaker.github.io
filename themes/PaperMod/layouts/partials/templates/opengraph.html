@@ -12,6 +12,12 @@
   <meta property="og:description" content="{{ . }}">
 {{- end }}
 
+{{- with .Params.audio }}
+  {{- if . }}
+    <meta property="og:audio" content="{{ . | absURL }}">
+  {{- end }}
+{{- end }}
+
 {{- with or .Params.locale site.Language.LanguageCode site.Language.Lang }}
   <meta property="og:locale" content="{{ . }}">
 {{- end }}
@@ -49,10 +55,8 @@
   {{- end }}
 {{- end }}
 
-{{- with .Params.audio }}
-  {{- range . | first 6  }}
-    <meta property="og:audio" content="{{ . | absURL }}">
-  {{- end }}
+{{- if .Params.audio }}
+  <meta property="og:audio" content="{{ .Params.audio | absURL }}">
 {{- end }}
 
 {{- with .Params.videos }}
