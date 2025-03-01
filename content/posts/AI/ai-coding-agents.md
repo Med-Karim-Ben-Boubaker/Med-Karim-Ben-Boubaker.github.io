@@ -54,7 +54,7 @@ This shift could fundamentally transform the role of software engineers. Future 
 
 Large language models (LLMs) are fundamentally **autoregressive systems** that predict the next token by modeling the conditional probability distribution, $P(w_t | w_{<t})$ optimized via cross-entropy loss minimization over their training set. While they excel at capturing statistical regularities in human language, their operations are fundamentally distinct from human cognition; they lack **grounded world models** or **causal reasoning frameworks.**
 
-To partially bridge this gap, [**Chain-of-Thought (CoT)](https://arxiv.org/abs/2201.11903) prompting** was introduced in 2022. This technique leverages the Transformer’s inherent capacity for **in-context learning** by explicitly prompting models to generate intermediate reasoning steps. However, depending solely on autoregressive, prompt-driven generation often produces code that, while syntactically correct, falls short on handling complex logical dependencies; this means that we need more context-aware, reasoning-enhanced approaches [(Chen et al., 2024)](https://arxiv.org/pdf/2401.07870).
+To partially bridge this gap, [Chain-of-Thought (CoT)](https://arxiv.org/abs/2201.11903) prompting was introduced in 2022. This technique leverages the Transformer’s inherent capacity for **in-context learning** by explicitly prompting models to generate intermediate reasoning steps. However, depending solely on autoregressive generation, prompt-driven approaches often produce code that, while syntactically correct, falls short on handling complex logical dependencies; this means that we need more context-aware, reasoning-enhanced approaches [(Chen et al., 2024)](https://arxiv.org/pdf/2401.07870).
 
 ## 2.1 The Statelessness Problem
 
@@ -166,7 +166,7 @@ The results consistently showed that JUMPCODER enhances performance across diffe
 
 # 4. Future Directions
 
-While the presented architecture has created new ways of using LLMs to generate code. These solutions are just workarounds around the root problems of these models. AI coding agents must overcome current limitations and embrace new paradigms to reach their full potential.
+While the presented architectures have created new ways of using LLMs to generate code. These solutions are just workarounds around the root problems of these models. AI coding agents must overcome current limitations and embrace new paradigms to reach their full potential.
 
 ## 4.1 Enhanced contextual understanding
 
