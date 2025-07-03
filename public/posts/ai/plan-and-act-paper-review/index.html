@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents | Mohamed Karim Ben Boubaker</title>
+<meta name="keywords" content="">
+<meta name="description" content="PLAN-AND-ACT is a novel AI agent architecture that significantly improves performance in complex, goal-directed tasks on the web by separating high-level planning from low-level execution and training both components with an innovative reverse-engineered synthetic data pipeline.">
+<meta name="author" content="Mohamed Karim Ben Boubaker">
+<link rel="canonical" href="http://localhost:1313/posts/ai/plan-and-act-paper-review/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/ai/plan-and-act-paper-review/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/posts/ai/plan-and-act-paper-review/">
+  <meta property="og:site_name" content="Mohamed Karim Ben Boubaker">
+  <meta property="og:title" content="PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents">
+  <meta property="og:description" content="PLAN-AND-ACT is a novel AI agent architecture that significantly improves performance in complex, goal-directed tasks on the web by separating high-level planning from low-level execution and training both components with an innovative reverse-engineered synthetic data pipeline.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-03T00:00:00+00:00">
+    <meta property="og:image" content="http://localhost:1313/covers/plan-and-act-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/covers/plan-and-act-cover.png">
+<meta name="twitter:title" content="PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents">
+<meta name="twitter:description" content="PLAN-AND-ACT is a novel AI agent architecture that significantly improves performance in complex, goal-directed tasks on the web by separating high-level planning from low-level execution and training both components with an innovative reverse-engineered synthetic data pipeline.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Artificial Intelligence",
+      "item": "http://localhost:1313/posts/ai/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents",
+      "item": "http://localhost:1313/posts/ai/plan-and-act-paper-review/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents",
+  "name": "PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents",
+  "description": "PLAN-AND-ACT is a novel AI agent architecture that significantly improves performance in complex, goal-directed tasks on the web by separating high-level planning from low-level execution and training both components with an innovative reverse-engineered synthetic data pipeline.",
+  "keywords": [
+    
+  ],
+  "articleBody": " 🎧 Listen to this article PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents.\nYour browser does not support the audio element. TL; DR\nLarge Language Models (LLMs) are great at simple tasks, but they fall short when it comes to complex, goal-directed behaviour, especially in unpredictable environments like the web. PLAN-AND-ACT (Erdogan et al. (2025)) is a system that separates high-level planning (what to do and why) from low-level execution (how to do it), and trains both using synthetic data pipelines. The key innovation? Instead of planning forward, they reverse-engineer plans from successful executions, making them grounded and effective. The results show this strategy leads to state-of-the-art performance in real-world web navigation.\nLarge Language Models (LLMs) are excellent at simple and straightforward tasks. Ask them to summarize an article or write a simple email, and they do it easily. But when faced with complex, multi-step challenges, especially in dynamic environments like the web, things become too difficult.\nThe main problem is that LLMs are not trained enough to do long-term planning in environments where the situation changes constantly. Their static nature makes them struggle to adapt to changes. And this is fundamentally because of the scarcity of high-quality planning data around the internet.\nFigure 1: An illustration that shows the difference between LLMs and humans in the way ther perceive the web.\nImagine an agent trying to complete the complex task of booking or managing a project through an unfamiliar webpage. While it can be intuitive for us, since webpages are designed around the human visual system, agents only see text. Pure HTML comes with no visual context. A simple wrong tag labelling can make the agent do something completely wrong.\nSeparating Roles, PLAN then ACT What if we could design an LLM agent with fundamentally two different parts? One focuses on the high-level tasks, and the other is responsible for the precise actions.\nThis is the main idea behind PLAN-AND-ACT, an architecture that aims to make LLMs more adaptive and goal-oriented by separating thinking and doing.\nSo, how does this system achieve this? It simply divides the agent’s brain into two clear, connected components:\nThe Planner acts as a high-level sub-task generator, much like a project manager assigning tasks to a team. When a user provides a broad goal, such as “find the cheapest direct flight from Tunisia to Italy,” the Planner breaks it down into clear, manageable steps. Its primary role is to determine the “what” and the “why” of these actions (Section 3.1).\nFor example:\nNavigate to a flight search page Input the origin and destination Set the dates Filter for direct flights and find the price Its job is to know what to do and why it’s needed.\nNext, there’s the Executor. This LLM acts as a tool invoker and action-taker. It receives the high-level steps from the Planner and translates them into specific, immediate actions for the environment (Section 3.2). For example, If the planner says, “Navigate to the flight search page,” the executor knows what to do next:\nClick on the “Flights” tab Look for a prominent “Book a Flight” button Type “flights” into the search bar The executor focuses on the how of doing things.\nFigure 2: PLAN-AND-ACT System Diagram Erdogan et al. (2025)\nWhy does this separation work?\nTrying to force one model to plan and act simultaneously creates too much noise. The paper assumes this dual responsibility overloads the context window and confuses the model. Separating the responsibilities simplifies the task for both components.\nSynthetic Data Generation As previously noted, Large Language Models (LLMs) inherently lack robust planning capabilities. This assertion is supported by Yann LeCun, who describes LLMs as “mere token generators,” underscoring their deficiency in essential planning functions. Furthermore, LLMs are typically not well-trained or fine-tuned on high-quality planning data. These limitations present a significant challenge for developing an effective planning node.\nSo, the paper introduces its true innovation: synthetic data generation. They designed a scalable synthetic data generation pipeline, which might become a foundational method in agentic AI systems.\nFigure 3: Synthetic Data Generation Pipeline. Erdogan et al. (2025)\nTeaching the Executor: Generating Action Trajectories The Executor needs to learn how to interact with websites. This means gathering lots of (query, action sequence) examples (Section 4.1).\nTeacher LLM Generates Diverse Queries: They start with a small set of hand-written queries. Then, GPT-4o creates thousands of variations like: “Find the cheapest direct flight from Tunisia to Italy for August 20th, departing after 3 PM.”\nDemonstrator Agent Executes Tasks: These queries are passed to a capable web agent (WebRL-Llama-3.1-70B) in a simulated environment like WebArena-Lite. While the agent performs actions, each move is recorded. Only the successful trajectories are kept. eward Model Filters the Good Trajectories: After the agent finishes, an Outcome-Supervised Reward Model (ORM) like ORM-Llama-3.1-8B checks if the task was successful using predefined rules (Section 4.1, Section 5.1). Only those passing the filter become training data for the Executor. Figure 4: Synthetic Data Generation Pipeline - Action Trajectory Generation. Erdogan et al. (2025)\nGrounding the Planner: Reverse Engineering Traditionally, asking an LLM to “Generate a plan for ‘book a flight’” yields a generic, logical-sounding sequence like “Navigate to the flight search page, input origin and destination, select dates.”\nThe problem is, LLMs can’t “see” a website. They don’t know if a “flight search page” is a direct link or what a date picker looks like. This gap makes these logical sounding but “ungrounded plans” impossible to carry out in the real world. Such broad plans would simply confuse an executor.\nPLAN-AND-ACT flips this around. Instead of “forward planning” (creating a plan first, which often leads to wrong assumptions), it reverse-engineers the plan from what actually worked (Section 4.2). This clever twist is key to its innovative approach.\nThe Teacher LLM is important for making these practical plans.\nGets Information: The Teacher LLM receives two main things: the user’s original request (what they wanted to achieve) and the successful steps the Executor took to complete the task. Figures Out a General Plan: Using its natural ability to summarize and find common themes, the Teacher LLM examines these successful steps. It identifies smaller actions that naturally group together to achieve a clear mini goal. Combines Actions into Plan Steps: For instance, a series of actions like “clicking a box,” “typing words,” and “pressing enter” might be combined into a single, higher-level plan step, like “Type in where you’re flying from.” Connects Plans to Real Actions: Most importantly, the Teacher LLM also highlights which specific actions from the original successful list (e.g., actions 1, 2, and 3) correspond to each new plan step. This connection is vital. It guarantees that the plans aren’t just theoretical but are firmly based on actual, successful actions, making them useful and ready for the Executor to follow. Figure 5: Synthetic Data Generation Pipeline - Grounded Plan Generation. Erdogan et al. (2025)\nGenerating More Planner Data: Alpaca-Style Expansion Now we have a new issue. One long, successful action trajectory doesn’t necessarily generate one high-level plan for the planner. Which means that we will end up with more “action” training data than “plan” training data. So, there’s a data imbalance here (Section 4.3).\nAlso, generating the full action trajectories is a very slow process because of the simulation and recording process. This is why we also need a synthetic data generation method for the Planner’s data.\nHere, they also use Teacher LLM, similar to a method known as “Alpaca-style instruction generation.” Which is the basic idea of giving an LLM a few good starting examples and making it create many more new training examples, following the same structure and logic. The prompt for this looks like this (Appendix A.6):\nThis method is very effective. The paper notes that they have generated 10,000 additional query-plan pairs in under an hour using GPT-4o, which is incomparable to the days or weeks it would take to collect 10,000 full action trajectories through simulation. The approach sped up the process of getting enough high-quality planning data.\nFigure 5: Synthetic Data Generation Pipeline - Synthetic Plan Expansion. Erdogan et al. (2025)\nDynamic Replanning Even a good plan needs to adapt. Sticking to one plan isn’t always wise, especially when new situations pop up. This is where the concept of dynamic replanning becomes crucial (Section 3.3).\nIn this system, the Planner actually updates its plan after every single action the Executor takes (Section 3.3). This continuous adjustment is incredibly important in ever-changing web environments. For instance, if the Executor tries to click a button that isn’t there, the Planner immediately revises its strategy, either by attempting a different approach or choosing an alternative action (Section 3.3, Appendix A.2).\nBoth the Planner and Executor also use Chain-of-Thought (CoT) Reasoning (Section 3.4). This means they’re prompted to generate intermediate reasoning steps before delivering their final plan or action. This adds a layer of interpretability, as the Planner will explain its chosen steps, and the Executor will do the same for its actions (Section 3.4).\nTesting the System We’ve explored the architecture and the clever synthetic data pipeline. But the most important question remains: does it actually deliver? Do all these changes to how it’s built and how data is made truly lead to better performance? What did the results reveal, and what can we learn from them?\nThe researchers primarily tested PLAN-AND-ACT on the WebArena-Lite benchmark (Section 5.1). This benchmark features 165 web navigation tasks spanning various web environments, including sites like Reddit and GitLab (Section 5.1).\nThe evaluation was straightforward: did the agent successfully complete the task, yes or no? For this particular benchmark, they used Llama-3.3-70B-Instruct models for both the Planner and the Executor.\nTable 1: The table shows the task success rate (SR) of PLAN-AND-ACT on WebArena-Lite (Table 1). The approach achieved a state-of-the-art result of 57.58%.\nThe most impressive results is the part where their QWQ-32B based agent achieved an 81.36% success rate, setting a new leading result for text-only agents on this real-world benchmark (Section 5.5, Table 4).\nTable 2: This table shows that the innovative synthetic data generation pipelines and agentic architectures can make Smaller LLMs outperform better than SOTA LLMs (Table 1, Table 4).\nConclusion In summary, the combination of PLAN-AND-ACT’s separate planning and execution, dynamic replanning, a comprehensive synthetic data pipeline for training, and Chain-of-Thought reasoning delivered top-tier results in both controlled settings and the open web. This points to a powerful new design pattern and framework for building more capable AI agents.\nSo, what are the key takeaways for engineers aiming to build more advanced systems?\nExplicit Planning Works Well: Separating planning from actual execution greatly simplifies tasks for LLMs and significantly boosts performance. It gives our models a more organized way to “think” before they “act” (Section 6). Synthetic Data is Very Important: It’s not just helpful; it’s crucial for overcoming the shortage of real-world data, especially for complex planning tasks. Every step of their pipeline—from creating action paths to forming grounded plans, expanding them, and adding specific details—provides significant, measurable benefits. It’s a prime example of using LLMs to create the data they need to learn (Section 5.2, Section 6). Adaptability is Necessary: Dynamic replanning is essential for real-world robustness. It enables an agent to correct its course, remain consistent, and succeed in ever-changing web environments. Fixed plans simply aren’t enough (Section 5.3, Section 6). Reasoning Quality Matters: Incorporating Chain-of-Thought reasoning further enhances the internal decision-making process. It helps guide better choices, providing that final, crucial improvement in accuracy (Section 5.3.2, Section 6). This research goes beyond just making slightly better web agents. It offers a strong framework for tackling complex, multi-step problems in AI more broadly. As LLMs continue to advance, architectures like PLAN-AND-ACT demonstrate how to harness their power not just for generating language but for intelligent, independent actions in the real world. It’s a thrilling time to be involved in this field.\n",
+  "wordCount" : "1984",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/covers/plan-and-act-cover.png","datePublished": "2025-07-03T00:00:00Z",
+  "dateModified": "2025-07-03T00:00:00Z",
+  "author":[{
+    "@type": "Person",
+    "name": "Mohamed Karim Ben Boubaker"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/ai/plan-and-act-paper-review/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mohamed Karim Ben Boubaker",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Mohamed Karim Ben Boubaker (Alt + H)">Mohamed Karim Ben Boubaker</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/ai/">Artificial Intelligence</a></div>
+    <h1 class="post-title entry-hint-parent">
+      PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents
+    </h1>
+    <div class="post-meta"><span title='2025-07-03 00:00:00 +0000 UTC'>July 3, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1984 words&nbsp;·&nbsp;Mohamed Karim Ben Boubaker
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/covers/plan-and-act-cover.png" alt="An illustration that shows the difference between LLMs and humans in the way ther perceive the web. Generated by [SORA](https://openai.com/sora/)">
+        <figcaption>An illustration that shows the difference between LLMs and humans in the way ther perceive the web. Generated by <a href="https://openai.com/sora/">SORA</a></figcaption>
+</figure><div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#separating-roles-plan-then-act" aria-label="Separating Roles, PLAN then ACT">Separating Roles, PLAN then ACT</a></li>
+                <li>
+                    <a href="#synthetic-data-generation" aria-label="Synthetic Data Generation">Synthetic Data Generation</a><ul>
+                        
+                <li>
+                    <a href="#teaching-the-executor-generating-action-trajectories" aria-label="Teaching the Executor: Generating Action Trajectories">Teaching the Executor: Generating Action Trajectories</a></li>
+                <li>
+                    <a href="#grounding-the-planner-reverse-engineering" aria-label="Grounding the Planner: Reverse Engineering">Grounding the Planner: Reverse Engineering</a></li>
+                <li>
+                    <a href="#generating-more-planner-data-alpaca-style-expansion" aria-label="Generating More Planner Data: Alpaca-Style Expansion">Generating More Planner Data: Alpaca-Style Expansion</a></li></ul>
+                </li>
+                <li>
+                    <a href="#dynamic-replanning" aria-label="Dynamic Replanning">Dynamic Replanning</a></li>
+                <li>
+                    <a href="#testing-the-system" aria-label="Testing the System">Testing the System</a></li>
+                <li>
+                    <a href="#conclusion" aria-label="Conclusion">Conclusion</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><div class="enhanced-audio-player" style="
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--entry) 0%, rgba(var(--primary-rgb), 0.05) 100%);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+">
+  
+  <div style="
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.03) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  "></div>
+  
+  
+  <div style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  ">
+    <div style="
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, rgba(var(--primary-rgb), 0.8) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
+    ">
+      <span style="font-size: 1.5rem; color: white;">🎧</span>
+    </div>
+    <div>
+      <h4 style="
+        margin: 0 0 0.25rem 0;
+        color: var(--primary);
+        font-size: 1.2rem;
+        font-weight: 600;
+      ">Listen to this article</h4>
+      
+      <p style="
+        margin: 0;
+        color: var(--secondary);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      ">PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents.</p>
+      
+    </div>
+  </div>
+
+  
+  <div style="position: relative; z-index: 1;">
+    <audio controls style="
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(var(--primary-rgb), 0.2);
+      padding: 8px;
+    ">
+      <source src="/audio/planAndAct.wav" type="audio/wav">
+      <source src="/audio/planAndAct.wav" type="audio/mpeg">
+      <source src="/audio/planAndAct.wav" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+
+
+  
+  <style>
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .enhanced-audio-player:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    
+     
+    .enhanced-audio-player audio {
+      width: 100%;
+      height: 50px;
+    }
+  </style>
+</div> 
+<blockquote>
+<p><strong>TL; DR</strong></p>
+<p>Large Language Models (LLMs) are great at simple tasks, but they fall short when it comes to complex, goal-directed behaviour, especially in unpredictable environments like the web. PLAN-AND-ACT <a href="https://arxiv.org/abs/2503.09572">(Erdogan et al. (2025))</a> is a system that separates high-level planning (what to do and why) from low-level execution (how to do it), and trains both using synthetic data pipelines. The key innovation? Instead of planning forward, they reverse-engineer plans from successful executions, making them grounded and effective. The results show this strategy leads to state-of-the-art performance in real-world web navigation.</p></blockquote>
+<hr>
+<p>Large Language Models (LLMs) are excellent at simple and straightforward tasks. Ask them to summarize an article or write a simple email, and they do it easily. But when faced with complex, multi-step challenges, especially in dynamic environments like the web, things become too difficult.</p>
+<p>The main problem is that LLMs are not trained enough to do long-term planning in environments where the situation changes constantly. Their static nature makes them struggle to adapt to changes. And this is fundamentally because of the <strong>scarcity of high-quality planning data</strong> around the internet.</p>
+<p><img alt="Figure 1: An illustration that shows the difference between LLMs and humans in the way ther perceive the web." loading="lazy" src="/images/posts/AI/plan-and-act/image.png"></p>
+<p>Figure 1: An illustration that shows the difference between LLMs and humans in the way ther perceive the web.</p>
+<p>Imagine an agent trying to complete the complex task of booking or managing a project through an unfamiliar webpage. While it can be intuitive for us, since webpages are designed around the human visual system, agents only see text. Pure HTML comes with no visual context. A simple wrong tag labelling can make the agent do something completely wrong.</p>
+<hr>
+<h2 id="separating-roles-plan-then-act">Separating Roles, PLAN then ACT<a hidden class="anchor" aria-hidden="true" href="#separating-roles-plan-then-act">#</a></h2>
+<p>What if we could design an LLM agent with fundamentally two different parts? One focuses on the high-level tasks, and the other is responsible for the precise actions.</p>
+<p>This is the main idea behind <strong>PLAN-AND-ACT,</strong> an architecture that aims to make LLMs more adaptive and goal-oriented by separating thinking and doing.</p>
+<p>So, how does this system achieve this? It simply divides the agent&rsquo;s brain into two clear, connected components:</p>
+<p>The <strong>Planner</strong> acts as a high-level sub-task generator, much like a project manager assigning tasks to a team. When a user provides a broad goal, such as &ldquo;find the cheapest direct flight from Tunisia to Italy,&rdquo; the Planner breaks it down into clear, manageable steps. Its primary role is to determine the &ldquo;what&rdquo; and the &ldquo;why&rdquo; of these actions (Section 3.1).</p>
+<p>For example:</p>
+<ol>
+<li>Navigate to a flight search page</li>
+<li>Input the origin and destination</li>
+<li>Set the dates</li>
+<li>Filter for direct flights and find the price</li>
+</ol>
+<p>Its job is to know <em>what</em> to do and <em>why</em> it&rsquo;s needed.</p>
+<p>Next, there&rsquo;s the <strong>Executor</strong>. This LLM acts as a tool invoker and action-taker. It receives the high-level steps from the Planner and translates them into specific, immediate actions for the environment (Section 3.2). For example, If the planner says, “Navigate to the flight search page,” the executor knows what to do next:</p>
+<ul>
+<li>Click on the “Flights” tab</li>
+<li>Look for a prominent “Book a Flight” button</li>
+<li>Type “flights” into the search bar</li>
+</ul>
+<p>The executor focuses on the <em>how</em> of doing things.</p>
+<p><img alt="Figure 2: PLAN-AND-ACT System Diagram" loading="lazy" src="/images/posts/AI/plan-and-act/image_1.png"></p>
+<p>Figure 2: PLAN-AND-ACT System Diagram <a href="https://arxiv.org/abs/2503.09572">Erdogan et al. (2025)</a></p>
+<p>Why does this separation work?</p>
+<p>Trying to force one model to plan and act simultaneously creates too much noise. The paper assumes this dual responsibility overloads the context window and confuses the model. Separating the responsibilities simplifies the task for both components.</p>
+<hr>
+<h2 id="synthetic-data-generation">Synthetic Data Generation<a hidden class="anchor" aria-hidden="true" href="#synthetic-data-generation">#</a></h2>
+<p>As previously noted, Large Language Models (LLMs) inherently lack robust planning capabilities. This assertion is supported by Yann LeCun, who describes LLMs as &ldquo;mere token generators,&rdquo; underscoring their deficiency in essential planning functions. Furthermore, LLMs are typically not well-trained or fine-tuned on high-quality planning data. These limitations present a significant challenge for developing an effective planning node.</p>
+<p>So, the paper introduces its <strong>true innovation: synthetic data generation.</strong> They designed a scalable synthetic data generation pipeline, which might become a foundational method in agentic AI systems.</p>
+<p><img alt="Figure 3: Synthetic Data Generation Pipeline." loading="lazy" src="/images/posts/AI/plan-and-act/image_2.png"></p>
+<p>Figure 3: Synthetic Data Generation Pipeline. <a href="https://arxiv.org/abs/2503.09572">Erdogan et al. (2025)</a></p>
+<h3 id="teaching-the-executor-generating-action-trajectories">Teaching the Executor: Generating Action Trajectories<a hidden class="anchor" aria-hidden="true" href="#teaching-the-executor-generating-action-trajectories">#</a></h3>
+<p>The Executor needs to learn how to interact with websites. This means gathering lots of (query, action sequence) examples (Section 4.1).</p>
+<ol>
+<li><strong>Teacher LLM Generates Diverse Queries</strong>: They start with a small set of hand-written queries. Then, GPT-4o creates thousands of variations like:</li>
+</ol>
+<blockquote>
+<p>&ldquo;Find the cheapest direct flight from Tunisia to Italy for August 20th, departing after 3 PM.”</p></blockquote>
+<ol>
+<li><strong>Demonstrator Agent Executes Tasks:</strong> These queries are passed to a capable web agent (<strong>WebRL-Llama-3.1-70B)</strong> in a <strong>simulated environment</strong> like WebArena-Lite. While the agent performs actions, each move is recorded. Only the <strong>successful</strong> trajectories are kept.</li>
+<li><strong>eward Model Filters the Good Trajectories:</strong> After the agent finishes, an <strong>Outcome-Supervised Reward Model (ORM)</strong> like <strong>ORM-Llama-3.1-8B</strong> checks if the task was successful using predefined rules (Section 4.1, Section 5.1). Only those passing the filter become training data for the <strong>Executor</strong>.</li>
+</ol>
+<p><img alt="Figure 4: Synthetic Data Generation Pipeline - Action Trajectory Generation." loading="lazy" src="/images/posts/AI/plan-and-act/image_3.png"></p>
+<p>Figure 4: Synthetic Data Generation Pipeline - Action Trajectory Generation. <a href="https://arxiv.org/abs/2503.09572">Erdogan et al. (2025)</a></p>
+<h3 id="grounding-the-planner-reverse-engineering">Grounding the Planner: Reverse Engineering<a hidden class="anchor" aria-hidden="true" href="#grounding-the-planner-reverse-engineering">#</a></h3>
+<p>Traditionally, asking an LLM to &ldquo;Generate a plan for &lsquo;book a flight&rsquo;&rdquo; yields a generic, logical-sounding sequence like &ldquo;Navigate to the flight search page, input origin and destination, select dates.&rdquo;</p>
+<p>The problem is, LLMs can&rsquo;t &ldquo;see&rdquo; a website. They don&rsquo;t know if a &ldquo;flight search page&rdquo; is a direct link or what a date picker looks like. This gap makes these logical sounding but <strong>&ldquo;ungrounded plans&rdquo;</strong> impossible to carry out in the real world. Such broad plans would simply confuse an executor.</p>
+<p><strong>PLAN-AND-ACT</strong> flips this around. Instead of <strong>&ldquo;forward planning&rdquo;</strong> (creating a plan first, which often leads to wrong assumptions), it <strong>reverse-engineers</strong> the plan from what actually worked (Section 4.2). This clever twist is key to its innovative approach.</p>
+<p>The <strong>Teacher LLM</strong> is important for making these practical plans.</p>
+<ol>
+<li><strong>Gets Information:</strong> The Teacher LLM receives two main things: the <strong>user&rsquo;s original request</strong> (what they wanted to achieve) and the <strong>successful steps</strong> the Executor took to complete the task.</li>
+<li><strong>Figures Out a General Plan:</strong> Using its natural ability to summarize and find common themes, the Teacher LLM examines these successful steps. It identifies smaller actions that naturally group together to achieve a clear mini goal.</li>
+<li><strong>Combines Actions into Plan Steps:</strong> For instance, a series of actions like &ldquo;clicking a box,&rdquo; &ldquo;typing words,&rdquo; and &ldquo;pressing enter&rdquo; might be combined into a single, higher-level plan step, like <strong>&ldquo;Type in where you&rsquo;re flying from.&rdquo;</strong></li>
+<li><strong>Connects Plans to Real Actions:</strong> Most importantly, the Teacher LLM also highlights which specific actions from the original successful list (e.g., actions 1, 2, and 3) correspond to each new plan step. This <strong>connection</strong> is vital. It guarantees that the plans aren&rsquo;t just theoretical but are firmly based on actual, successful actions, making them useful and ready for the Executor to follow.</li>
+</ol>
+<p><img alt="Figure 5: Synthetic Data Generation Pipeline - Grounded Plan Generation." loading="lazy" src="/images/posts/AI/plan-and-act/image_4.png"></p>
+<p>Figure 5: Synthetic Data Generation Pipeline - Grounded Plan Generation. <a href="https://arxiv.org/abs/2503.09572">Erdogan et al. (2025)</a></p>
+<h3 id="generating-more-planner-data-alpaca-style-expansion">Generating More Planner Data: Alpaca-Style Expansion<a hidden class="anchor" aria-hidden="true" href="#generating-more-planner-data-alpaca-style-expansion">#</a></h3>
+<p>Now we have a new issue. One long, successful action trajectory doesn&rsquo;t necessarily generate one high-level plan for the planner. Which means that we will end up with more &ldquo;action&rdquo; training data than &ldquo;plan&rdquo; training data. So, there’s a data imbalance here (Section 4.3).</p>
+<p>Also, generating the full action trajectories is a very slow process because of the simulation and recording process. This is why we also need a synthetic data generation method for the Planner&rsquo;s data.</p>
+<p>Here, they also use Teacher LLM, similar to a method known as &ldquo;Alpaca-style instruction generation.&rdquo; Which is the basic idea of giving an LLM a few good starting examples and making it create many more new training examples, following the same structure and logic. The prompt for this looks like this (Appendix A.6):</p>
+<p>This method is very effective. The paper notes that they have generated 10,000 additional query-plan pairs in under an hour using GPT-4o, which is incomparable to the days or weeks it would take to collect 10,000 full action trajectories through simulation. The approach sped up the process of getting enough high-quality planning data.</p>
+<p><img alt="Figure 5: Synthetic Data Generation Pipeline - Synthetic Plan Expansion." loading="lazy" src="/images/posts/AI/plan-and-act/image_5.png"></p>
+<p>Figure 5: Synthetic Data Generation Pipeline - Synthetic Plan Expansion. <a href="https://arxiv.org/abs/2503.09572">Erdogan et al. (2025)</a></p>
+<hr>
+<h2 id="dynamic-replanning">Dynamic Replanning<a hidden class="anchor" aria-hidden="true" href="#dynamic-replanning">#</a></h2>
+<p>Even a good plan needs to adapt. Sticking to one plan isn&rsquo;t always wise, especially when new situations pop up. This is where the concept of <strong>dynamic replanning</strong> becomes crucial (Section 3.3).</p>
+<p>In this system, the <strong>Planner</strong> actually updates its plan after every single action the <strong>Executor</strong> takes (Section 3.3). This continuous adjustment is incredibly important in ever-changing web environments. For instance, if the Executor tries to click a button that isn&rsquo;t there, the Planner immediately revises its strategy, either by attempting a different approach or choosing an alternative action (Section 3.3, Appendix A.2).</p>
+<p>Both the Planner and Executor also use <strong>Chain-of-Thought (CoT) Reasoning</strong> (Section 3.4). This means they&rsquo;re prompted to generate intermediate reasoning steps <em>before</em> delivering their final plan or action. This adds a layer of <strong>interpretability</strong>, as the Planner will explain its chosen steps, and the Executor will do the same for its actions (Section 3.4).</p>
+<hr>
+<h2 id="testing-the-system"><strong>Testing the System</strong><a hidden class="anchor" aria-hidden="true" href="#testing-the-system">#</a></h2>
+<p>We&rsquo;ve explored the architecture and the clever synthetic data pipeline. But the most important question remains: does it actually deliver? Do all these changes to how it&rsquo;s built and how data is made truly lead to better performance? What did the results reveal, and what can we learn from them?</p>
+<p>The researchers primarily tested <strong>PLAN-AND-ACT</strong> on the <strong>WebArena-Lite benchmark</strong> (Section 5.1). This benchmark features 165 web navigation tasks spanning various web environments, including sites like Reddit and GitLab (Section 5.1).</p>
+<p>The evaluation was straightforward: did the agent successfully complete the task, yes or no? For this particular benchmark, they used <strong>Llama-3.3-70B-Instruct models</strong> for both the Planner and the Executor.</p>
+<p><img alt="Table 1: The table shows the task success rate (SR) of PLAN-AND-ACT on WebArena-Lite (Table 1). The approach achieved a state-of-the-art result of 57.58%." loading="lazy" src="/images/posts/AI/plan-and-act/image_6.png"></p>
+<p>Table 1: The table shows the task success rate (SR) of PLAN-AND-ACT on WebArena-Lite (Table 1). The approach achieved a state-of-the-art result of 57.58%.</p>
+<p>The most impressive results is the part where their QWQ-32B based agent achieved an <strong>81.36%</strong> success rate, setting a new leading result for text-only agents on this real-world benchmark (Section 5.5, Table 4).</p>
+<p><img alt="Table 2: This table shows that the innovative synthetic data generation pipelines and agentic architectures can make Smaller LLMs outperform better than SOTA LLMs (Table 1, Table 4)." loading="lazy" src="/images/posts/AI/plan-and-act/image_7.png"></p>
+<p>Table 2: This table shows that the innovative synthetic data generation pipelines and agentic architectures can make Smaller LLMs outperform better than SOTA LLMs (Table 1, Table 4).</p>
+<hr>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>In summary, the combination of <strong>PLAN-AND-ACT&rsquo;s</strong> separate planning and execution, dynamic replanning, a comprehensive synthetic data pipeline for training, and Chain-of-Thought reasoning delivered top-tier results in both controlled settings and the open web. This points to a powerful new design pattern and framework for building more capable AI agents.</p>
+<p>So, what are the key takeaways for engineers aiming to build more advanced systems?</p>
+<ul>
+<li><strong>Explicit Planning Works Well:</strong> Separating planning from actual execution greatly simplifies tasks for LLMs and significantly boosts performance. It gives our models a more organized way to &ldquo;think&rdquo; before they &ldquo;act&rdquo; (Section 6).</li>
+<li><strong>Synthetic Data is Very Important:</strong> It&rsquo;s not just helpful; it&rsquo;s crucial for overcoming the shortage of real-world data, especially for complex planning tasks. Every step of their pipeline—from creating action paths to forming grounded plans, expanding them, and adding specific details—provides significant, measurable benefits. It&rsquo;s a prime example of using LLMs to <em>create</em> the data they need to learn (Section 5.2, Section 6).</li>
+<li><strong>Adaptability is Necessary:</strong> Dynamic replanning is essential for real-world robustness. It enables an agent to correct its course, remain consistent, and succeed in ever-changing web environments. Fixed plans simply aren&rsquo;t enough (Section 5.3, Section 6).</li>
+<li><strong>Reasoning Quality Matters:</strong> Incorporating Chain-of-Thought reasoning further enhances the internal decision-making process. It helps guide better choices, providing that final, crucial improvement in accuracy (Section 5.3.2, Section 6).</li>
+</ul>
+<p>This research goes beyond just making slightly better web agents. It offers a strong framework for tackling complex, multi-step problems in AI more broadly. As LLMs continue to advance, architectures like <strong>PLAN-AND-ACT</strong> demonstrate how to harness their power not just for generating language but for intelligent, independent actions in the real world. It&rsquo;s a thrilling time to be involved in this field.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/ai/ai-coding-agents/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Understanding AI Coding Agents: Architectures, Challenges, and Future Scope</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Mohamed Karim Ben Boubaker</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -15,20 +15,20 @@ TocOpen: true
 ShowWordCount: true
 ShowCodeCopyButtons: true
 math: true
-audio: /audio/ai-coding-agents/ai-coding-agents.wav
 ---
 
 # 1. Evolving Software Engineering Paradigms
 
 Imagine you are tasked with updating a decade-old e-commerce platform. The codebase consists of legacy systems, undocumented dependencies, and missing technical context accumulated over years. While reviewing the system, you identify a critical performance bottleneck—a slow database query affecting the checkout process.
 
-A tool like [Cursor](https://www.cursor.com/) might suggest an optimized SQL syntax to speed up the query. However, it **lacks the ability to diagnose the root cause:** a missing index on a frequently joined table, likely caused by an outdated ORM layer. This issue goes beyond simple code completion; it requires **strategic thinking, investigation, and a deep understanding of the system’s architecture** to resolve.
+A tool like [Cursor](https://www.cursor.com/) might suggest an optimized SQL syntax to speed up the query. However, it **lacks the ability to diagnose the root cause:** a missing index on a frequently joined table, likely caused by an outdated ORM layer. This issue goes beyond simple code completion; it requires **strategic thinking, investigation, and a deep understanding of the system's architecture** to resolve.
 
 This distinction highlights the fundamental difference between **AI coding assistants** like Cursor and [GitHub Copilot](https://github.com/features/copilot), which enhance productivity by suggesting code improvements, and **AI coding agents** like [Devin](https://devin.ai/) and [OpenHands](https://github.com/All-Hands-AI/OpenHands), which aim for **higher-level autonomy** by reasoning about complex problems, making architectural decisions, and executing solutions with minimal human intervention.
 
+
 ## 1.1 Software Engineering is not about writing code
 
-The popular perception of software engineering often focuses on coding. However, a [Microsoft survey](https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fresearch%2Fuploads%2Fprod%2F2019%2F04%2Fdevtime-preprint-TSE19.pdf) found that developers spend only about **37%** of their time on development-heavy activities. A significant **30%** is dedicated to communication and planning—activities that require collaboration, requirement gathering, and strategic decision-making.
+The popular perception of software engineering often focuses on coding. However, a [Microsoft survey](https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fresearch%2Fuploads%2Fprod%2F2019%2F04%2Fdevtime-preprint-TSE19.pdf) found that developers spend only about **37%** of their time on development-heavy activities. A significant **30%** is dedicated to communication and planning—activities that require collaboration, requirement gathering, and strategic decision-making.
 
 ![The Microsoft survey Today was a Good Day, The Daily Life of Software Developers.](/images/posts/AI/ai-coding-agents/image.png)
 
@@ -42,9 +42,9 @@ This evolution points toward a future dominated by **R&D-driven roles**. Enginee
 
 Fully automating software development remains a challenge due to the fundamental limitations of current Large Language Models (LLMs) in handling long-range dependencies, understanding complex system architectures, and adapting to evolving codebases.
 
-AI-powered coding assistants like Cursor built on top of LLMs enhance the developer experience through carefully designed prompting techniques and innovations that leverage the **in-context learning** capability of transformers.
+AI-powered coding assistants like Cursor built on top of LLMs enhance the developer experience through carefully designed prompting techniques and innovations that leverage the **in-context learning** capability of transformers.
 
-This represents the **first level of automation**, where LLMs handle a significant portion of coding tasks, but human engineers still play an important role in guiding the model. A more advanced stage involves **coding agents**, aiming for near-complete automation. In this paradigm, the ideal coding agent would handle development autonomously, with engineers primarily reviewing pull requests and monitoring feedback rather than actively writing code.
+This represents the **first level of automation**, where LLMs handle a significant portion of coding tasks, but human engineers still play an important role in guiding the model. A more advanced stage involves **coding agents**, aiming for near-complete automation. In this paradigm, the ideal coding agent would handle development autonomously, with engineers primarily reviewing pull requests and monitoring feedback rather than actively writing code.
 
 This shift could fundamentally transform the role of software engineers. Future engineers might concentrate on high-level architecture, system design, and ensuring that AI agents are strategically aligned with business goals.
 
@@ -52,9 +52,9 @@ This shift could fundamentally transform the role of software engineers. Future 
 
 # 2. LLM Limitations
 
-Large language models (LLMs) are fundamentally **autoregressive systems** that predict the next token by modeling the conditional probability distribution, $P(w_t | w_{<t})$ optimized via cross-entropy loss minimization over their training set. While they excel at capturing statistical regularities in human language, their operations are fundamentally distinct from human cognition; they lack **grounded world models** or **causal reasoning frameworks.**
+Large language models (LLMs) are fundamentally **autoregressive systems** that predict the next token by modeling the conditional probability distribution, $P(w_t | w_{<t})$ optimized via cross-entropy loss minimization over their training set. While they excel at capturing statistical regularities in human language, their operations are fundamentally distinct from human cognition; they lack **grounded world models** or **causal reasoning frameworks.**
 
-To partially bridge this gap, [Chain-of-Thought (CoT)](https://arxiv.org/abs/2201.11903) prompting was introduced in 2022. This technique leverages the Transformer’s inherent capacity for **in-context learning** by explicitly prompting models to generate intermediate reasoning steps. However, depending solely on autoregressive generation, prompt-driven approaches often produce code that, while syntactically correct, falls short on handling complex logical dependencies; this means that we need more context-aware, reasoning-enhanced approaches [(Chen et al., 2024)](https://arxiv.org/pdf/2401.07870).
+To partially bridge this gap, [Chain-of-Thought (CoT)](https://arxiv.org/abs/2201.11903) prompting was introduced in 2022. This technique leverages the Transformer's inherent capacity for **in-context learning** by explicitly prompting models to generate intermediate reasoning steps. However, depending solely on autoregressive generation, prompt-driven approaches often produce code that, while syntactically correct, falls short on handling complex logical dependencies; this means that we need more context-aware, reasoning-enhanced approaches [(Chen et al., 2024)](https://arxiv.org/pdf/2401.07870).
 
 ## 2.1 The Statelessness Problem
 
@@ -62,13 +62,13 @@ Large Language Models (LLMs) built on the Transformer architecture process text 
 
 One key limitation arises from their inconsistent ability to retrieve and utilize information embedded in the middle of long input sequences. This phenomenon was highlighted in a study by [(Liu et al. 2023)](https://arxiv.org/pdf/2307.03172), which examined how well models recall specific pieces of information placed at various points within their context window.
 
-A common method for evaluating this behavior is the n**eedle in a haystack (NIAH) test**, where a specific piece of information (the "needle") is inserted at different positions within a prompt (the "haystack"). The model is then asked to retrieve it, revealing how well it retains and utilizes context across different positions. The following figure illustrates an example from Liu et al.’s study:
+A common method for evaluating this behavior is the n**eedle in a haystack (NIAH) test**, where a specific piece of information (the "needle") is inserted at different positions within a prompt (the "haystack"). The model is then asked to retrieve it, revealing how well it retains and utilizes context across different positions. The following figure illustrates an example from Liu et al.'s study:
 
 ![Snippet from (Liu et al. 2023)](/images/posts/AI/ai-coding-agents/image_1.png)
 
 Snippet from [(Liu et al. 2023)](https://arxiv.org/pdf/2307.03172)
 
-Results from such evaluations often exhibit a **U-shaped performance curve**. Models are most effective at retrieving information located at the beginning (primacy bias) or end (recency bias) of their input window, while struggling with details positioned in the middle. Primacy bias likely arises because the model's initial hidden state is strongly influenced by the earliest tokens. Recency bias occurs because the final tokens have the most direct impact on the next-token prediction. This means that crucial information placed in the middle of a long code file or documentation might be effectively "invisible" to the LLM.
+Results from such evaluations often exhibit a **U-shaped performance curve**. Models are most effective at retrieving information located at the beginning (primacy bias) or end (recency bias) of their input window, while struggling with details positioned in the middle. Primacy bias likely arises because the model's initial hidden state is strongly influenced by the earliest tokens. Recency bias occurs because the final tokens have the most direct impact on the next-token prediction. This means that crucial information placed in the middle of a long code file or documentation might be effectively "invisible" to the LLM.
 
 ![Snippet from (Liu et al. 2023)](/images/posts/AI/ai-coding-agents/image_2.png)
 
@@ -86,13 +86,13 @@ This disparity comes from the **distribution of training data**. LLMs are typica
 
 This issue has real-world implications. In industries relying on legacy systems (e.g., banking, which still uses COBOL extensively), AI coding agents may provide little to no assistance. Similarly, fields requiring highly specialized languages—such as FPGA programming (VHDL, Verilog)—are likely to see weaker AI support unless training datasets become more balanced. 
 
-Addressing this challenge requires **better dataset curation**, including efforts to expand training data with high-quality code from underrepresented languages.
+Addressing this challenge requires **better dataset curation**, including efforts to expand training data with high-quality code from underrepresented languages.
 
 A promising yet challenging approach to addressing the underrepresentation of certain programming languages in training data is the use of synthetic data to generate artificial code samples. However, this method presents a paradox: the very lack of representation in the data makes it difficult to ensure that the synthetic data produced by an LLM is of high quality. If the model has not been sufficiently exposed to the underrepresented language, its ability to generate accurate and reliable code may be compromised.
 
 ## 2.3 The Localization and Navigation Problem
 
-Beyond the inherent limitations of LLMs, AI coding agents face environmental challenges. One crucial challenge is the **localization and navigation problem**. This refers to the agent's ability to efficiently find and utilize relevant information within a large, complex codebase. Unlike a human developer who can use tools like IDEs and debuggers.
+Beyond the inherent limitations of LLMs, AI coding agents face environmental challenges. One crucial challenge is the **localization and navigation problem**. This refers to the agent's ability to efficiently find and utilize relevant information within a large, complex codebase. Unlike a human developer who can use tools like IDEs and debuggers.
 
 To better explain the problem, imagine the task of fixing a bug in a specific function not mentioned to the agent.
 

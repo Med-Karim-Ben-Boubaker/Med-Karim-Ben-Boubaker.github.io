@@ -1,0 +1,105 @@
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $title := .Get "title" | default "Listen to this article" -}}
+{{- $subtitle := .Get "subtitle" | default "" -}}
+{{- $icon := .Get "icon" | default "🎧" -}}
+
+<div class="enhanced-audio-player" style="
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--entry) 0%, rgba(var(--primary-rgb), 0.05) 100%);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Decorative elements -->
+  <div style="
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.03) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  "></div>
+  
+  <!-- Header -->
+  <div style="
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  ">
+    <div style="
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, rgba(var(--primary-rgb), 0.8) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.3);
+    ">
+      <span style="font-size: 1.5rem; color: white;">{{ $icon }}</span>
+    </div>
+    <div>
+      <h4 style="
+        margin: 0 0 0.25rem 0;
+        color: var(--primary);
+        font-size: 1.2rem;
+        font-weight: 600;
+      ">{{ $title }}</h4>
+      {{ if $subtitle }}
+      <p style="
+        margin: 0;
+        color: var(--secondary);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      ">{{ $subtitle }}</p>
+      {{ end }}
+    </div>
+  </div>
+
+  <!-- Audio Player -->
+  <div style="position: relative; z-index: 1;">
+    <audio controls style="
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(var(--primary-rgb), 0.2);
+      padding: 8px;
+    ">
+      <source src="{{ $src }}" type="audio/wav">
+      <source src="{{ $src }}" type="audio/mpeg">
+      <source src="{{ $src }}" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+
+
+  <!-- CSS Animation -->
+  <style>
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .enhanced-audio-player:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    
+    /* Remove problematic audio control styling */
+    .enhanced-audio-player audio {
+      width: 100%;
+      height: 50px;
+    }
+  </style>
+</div> 

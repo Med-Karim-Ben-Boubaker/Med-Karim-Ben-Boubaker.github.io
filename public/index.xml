@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Karim&#39;s Blog</title>
+    <title>Mohamed Karim Ben Boubaker</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Karim&#39;s Blog</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <description>Recent content on Mohamed Karim Ben Boubaker</description>
+    <generator>Hugo -- 0.147.9</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 28 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 03 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents</title>
+      <link>http://localhost:1313/posts/ai/plan-and-act-paper-review/</link>
+      <pubDate>Thu, 03 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ai/plan-and-act-paper-review/</guid>
+      <description>PLAN-AND-ACT is a novel AI agent architecture that significantly improves performance in complex, goal-directed tasks on the web by separating high-level planning from low-level execution and training both components with an innovative reverse-engineered synthetic data pipeline.</description>
+    </item>
     <item>
       <title>Understanding AI Coding Agents: Architectures, Challenges, and Future Scope</title>
       <link>http://localhost:1313/posts/ai/ai-coding-agents/</link>
