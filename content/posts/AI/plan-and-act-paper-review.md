@@ -17,13 +17,6 @@ ShowCodeCopyButtons: true
 math: true
 ---
 
-{{< audio 
-    src="/audio/planAndAct.wav"
-    title="Listen to this article"
-    subtitle="PLAN-AND-ACT: New blueprint for building more capable and reliable AI agents."
-    icon="🎧"
->}}
-
 > **TL; DR**
 > 
 > 
