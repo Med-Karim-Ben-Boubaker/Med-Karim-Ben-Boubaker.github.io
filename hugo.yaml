@@ -1,6 +1,6 @@
 baseURL: https://Med-Karim-Ben-Boubaker.github.io/
 languageCode: en-us
-title: Mohamed Karim Ben Boubaker
+title: Karim Ben Boubaker
 theme: [PaperMod]
 pagination.pagerSize: 5
 
@@ -106,6 +106,13 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    extensions:
+      math:
+        enable: true
+        katex:
+          enable: true
+          css: true
+          js: true
   highlight:
     noClasses: false
     # anchorLineNos: true
@@ -135,6 +142,6 @@ markup:
 services:
   instagram:
     disableInlineCSS: true
-  twitter:
+  x:
     disableInlineCSS: true
 

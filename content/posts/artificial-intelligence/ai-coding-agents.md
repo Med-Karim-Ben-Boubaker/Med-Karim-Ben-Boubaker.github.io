@@ -2,11 +2,11 @@
 title: "Understanding AI Coding Agents: Architectures, Challenges, and Future Scope"
 summary: AI coding assistants enhance productivity by suggesting improvements, while AI coding agents aim for higher autonomy by reasoning about complex problems
 date: 2025-02-28
-author: ["Mohamed Karim Ben Boubaker"]
+author: ["Karim Ben Boubaker"]
 draft: false
 weight: 2
 taxonomies:
-    tag: Artificial-Intelligence
+    tag: artificial-intelligence
 cover:
     image: covers/cover-ai-coding-agents.jpg
     caption: "Generated image from [Leonardo AI](https://leonardo.ai/)"
@@ -30,7 +30,7 @@ This distinction highlights the fundamental difference between **AI coding assis
 
 The popular perception of software engineering often focuses on coding. However, a [Microsoft survey](https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fresearch%2Fuploads%2Fprod%2F2019%2F04%2Fdevtime-preprint-TSE19.pdf) found that developers spend only about **37%** of their time on development-heavy activities. A significant **30%** is dedicated to communication and planning—activities that require collaboration, requirement gathering, and strategic decision-making.
 
-![The Microsoft survey Today was a Good Day, The Daily Life of Software Developers.](/images/posts/AI/ai-coding-agents/image.png)
+![The Microsoft survey Today was a Good Day, The Daily Life of Software Developers.](/images/posts/artificial-intelligence/ai-coding-agents/image.png)
 
 The Microsoft survey Today was a Good Day, The Daily Life of Software Developers.
 
@@ -64,13 +64,13 @@ One key limitation arises from their inconsistent ability to retrieve and utiliz
 
 A common method for evaluating this behavior is the n**eedle in a haystack (NIAH) test**, where a specific piece of information (the "needle") is inserted at different positions within a prompt (the "haystack"). The model is then asked to retrieve it, revealing how well it retains and utilizes context across different positions. The following figure illustrates an example from Liu et al.'s study:
 
-![Snippet from (Liu et al. 2023)](/images/posts/AI/ai-coding-agents/image_1.png)
+![Snippet from (Liu et al. 2023)](/images/posts/artificial-intelligence/ai-coding-agents/image_1.png)
 
 Snippet from [(Liu et al. 2023)](https://arxiv.org/pdf/2307.03172)
 
 Results from such evaluations often exhibit a **U-shaped performance curve**. Models are most effective at retrieving information located at the beginning (primacy bias) or end (recency bias) of their input window, while struggling with details positioned in the middle. Primacy bias likely arises because the model's initial hidden state is strongly influenced by the earliest tokens. Recency bias occurs because the final tokens have the most direct impact on the next-token prediction. This means that crucial information placed in the middle of a long code file or documentation might be effectively "invisible" to the LLM.
 
-![Snippet from (Liu et al. 2023)](/images/posts/AI/ai-coding-agents/image_2.png)
+![Snippet from (Liu et al. 2023)](/images/posts/artificial-intelligence/ai-coding-agents/image_2.png)
 
 Snippet from [(Liu et al. 2023)](https://arxiv.org/pdf/2307.03172)
 
@@ -78,7 +78,7 @@ Snippet from [(Liu et al. 2023)](https://arxiv.org/pdf/2307.03172)
 
 Not all programming languages are equally well supported by LLMs. While models like GPT-4 and Code Llama perform exceptionally well in widely used languages like Python, Java, C, and C++, their capabilities drop significantly for less common languages such as COBOL, MATLAB, or even domain-specific scripting languages like Dockerfile.
 
-![Snippet from (Lachaux et al., 2022)](/images/posts/AI/ai-coding-agents/image_3.png)
+![Snippet from (Lachaux et al., 2022)](/images/posts/artificial-intelligence/ai-coding-agents/image_3.png)
 
 Snippet from [(Lachaux et al., 2022)](https://arxiv.org/pdf/2211.15533)
 
@@ -110,7 +110,7 @@ This agent is designed to solve real-world GitHub issues. It uses a specialized 
 
 This agent can be classified as a ReAct agent [(Yao et al., 2022)](https://arxiv.org/abs/2210.03629). It performs actions within a defined set of tools and commands, such as navigating repositories, searching files, viewing files, and editing lines. After each action, the agent observes the resulting changes in the computer environment, which includes a terminal and a file system.
 
-![Snippet from (Yang et al., 2024)](/images/posts/AI/ai-coding-agents/image_4.png)
+![Snippet from (Yang et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_4.png)
 
 Snippet from [(Yang et al., 2024)](https://arxiv.org/abs/2405.15793)
 
@@ -118,7 +118,7 @@ This architecture implements key requirements for building coding agents. The ag
 
 Following the ReAct architecture, this agent generates both a thought and a command. It then incorporates feedback from the command's execution within the environment. **While this is not a comprehensive planning system, this approach allows for localized decision-making, focusing on the next best action rather than attempting to create a full, complex plan, which can be challenging for LLMs.**
 
-![Snippet from (Yang et al., 2024)](/images/posts/AI/ai-coding-agents/image_5.png)
+![Snippet from (Yang et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_5.png)
 
 Snippet from [(Yang et al., 2024)](https://arxiv.org/abs/2405.15793)
 
@@ -130,13 +130,13 @@ However, using a ReAct-based architecture for coding agents has drawbacks, notab
 
 The CodeAct agent [(Wang et al., 2024)](https://arxiv.org/abs/2210.03629) employs a distinct problem-solving strategy by generating executable Python code as its actions. This method capitalizes on the LLM's coding abilities, enabling it to interact with the environment through code execution and feedback. This approach allows CodeAct to consolidate all agent-environment interactions into code, resulting in a much broader action space compared to the SWE-Agent.
 
-![Snippet from (Wang et al., 2024)](/images/posts/AI/ai-coding-agents/image_6.png)
+![Snippet from (Wang et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_6.png)
 
 Snippet from [(Wang et al., 2024)](https://arxiv.org/abs/2210.03629)
 
 This architecture is designed for multi-turn interactions. It allows for dynamic adjustments to actions based on observations, such as code execution results. This facilitates iterative refinement and adaptation during problem-solving.
 
-![Snippet from (Wang et al., 2024)](/images/posts/AI/ai-coding-agents/image_7.png)
+![Snippet from (Wang et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_7.png)
 
 Snippet from [(Wang et al., 2024)](https://arxiv.org/abs/2210.03629)
 
@@ -148,7 +148,7 @@ For closed-source models, CodeAct agent outperforms the SWE-Agent on the M3ToolE
 
 The autoregressive nature of transformers, which involves predicting the next token sequentially, presents challenges for code generation. Coding is not merely a next-token prediction task but rather an iterative process of modifying existing code to add features or alter behaviour. JUMPCODER [(Chen et al., 2024)](https://arxiv.org/abs/2401.07870) addresses the irreversibility limitation of large language models in code generation, adopting an infill-first, judge-later approach.
 
-![Snippet from (Chen et al., 2024)](/images/posts/AI/ai-coding-agents/image_8.png)
+![Snippet from (Chen et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_8.png)
 
 Snippet from [(Chen et al., 2024)](https://arxiv.org/abs/2401.07870) 
 
@@ -158,7 +158,7 @@ The model identifies the most uncertain parts of the current code by quantifying
 
 After infilling, the modification is judged using both an Abstract Syntax Tree (AST) parser and Generation Model Scoring. The AST parser enables a deterministic assessment of the infill's correctness, particularly when the code uses undefined identifiers, providing a clear yes/no answer to whether the infill resolves potential issues. Generation Model Scoring assesses the overall generation quality to determine the potential impact of infills.
 
-![Snippet from (Chen et al., 2024)](/images/posts/AI/ai-coding-agents/image_9.png)
+![Snippet from (Chen et al., 2024)](/images/posts/artificial-intelligence/ai-coding-agents/image_9.png)
 
 Snippet from [(Chen et al., 2024)](https://arxiv.org/abs/2401.07870) 
 
@@ -174,7 +174,7 @@ To truly understand and manipulate code like a human developer, agents need to m
 
 Recent advancements in AI research have explored models with enhanced memory capabilities. For instance, the M+ model integrates a long-term memory mechanism with a co-trained retriever, dynamically retrieving relevant information during text generation, thereby significantly enhancing long-term information retention [(Wang et al., 2025)](https://arxiv.org/abs/2502.00592).
 
-![Snippet from (Wang et al., 2025)](/images/posts/AI/ai-coding-agents/image_10.png)
+![Snippet from (Wang et al., 2025)](/images/posts/artificial-intelligence/ai-coding-agents/image_10.png)
 
 Snippet from [(Wang et al., 2025)](https://arxiv.org/abs/2502.00592)
 
@@ -184,12 +184,12 @@ This suggest also employing hierarchical representations of code, such as graph-
 
 To advance AI coding agents beyond statistical pattern matching, integrating sophisticated reasoning capabilities is essential. One promising approach involves combining Large Language Models (LLMs) with symbolic reasoning. The VERUS-LM framework exemplifies this by merging LLMs' semantic understanding with symbolic solvers to enhance complex reasoning tasks [(Callewaert et al., 2025)](https://arxiv.org/abs/2501.14540).
 
-![Snippet from (Callewaert et al., 2025)](/images/posts/AI/ai-coding-agents/image_11.png)
+![Snippet from (Callewaert et al., 2025)](/images/posts/artificial-intelligence/ai-coding-agents/image_11.png)
 
 Snippet from [(Callewaert et al., 2025)](https://arxiv.org/abs/2501.14540)
 
 Another active research area focuses on collaborative multi-agent frameworks to improve decision-making and reliability. AgentCoder introduces a multi-agent system where specialized agents—such as a programmer agent, a test designer agent, and a test executor agent—collaborate iteratively to generate, test, and optimize code, thereby enhancing overall code quality [(Huang et al., 2023)](https://arxiv.org/abs/2312.13010). 
 
-![Snippet from (Huang et al., 2023)](/images/posts/AI/ai-coding-agents/image_12.png)
+![Snippet from (Huang et al., 2023)](/images/posts/artificial-intelligence/ai-coding-agents/image_12.png)
 
 Snippet from [(Huang et al., 2023)](https://arxiv.org/abs/2312.13010)

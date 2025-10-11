@@ -6,7 +6,7 @@ author: ["Mohamed Karim Ben Boubaker"]
 draft: true
 weight: 2
 taxonomies:
-    tag: Artificial-Intelligence
+    tag: artificial-intelligence
 cover:
     image: covers/first-ai-post-cover.avif
     caption: "test image"
