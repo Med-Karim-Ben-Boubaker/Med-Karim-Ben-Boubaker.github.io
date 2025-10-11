@@ -9,7 +9,7 @@ taxonomies:
     tag: artificial-intelligence
 cover:
     image: covers/ai-infrastructure-is-something-diffrent-cover.png
-    caption: "Generated image from [Gemini](https://gemini.google.com/app)"
+    caption: "Image from [The Development of AI Infrastructure](https://gcore.com/learning/evolution-of-ai-infrastructure)"
 ShowToc: true
 TocOpen: true
 ShowWordCount: true
