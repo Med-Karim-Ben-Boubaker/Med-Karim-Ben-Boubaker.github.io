@@ -1,0 +1,48 @@
+{{- $currentPath := .RelPermalink -}}
+{{- $items := slice
+  (dict "label" "Home" "href" ("" | relURL) "icon" "home")
+  (dict "label" "About" "href" ("about/" | relURL) "icon" "about")
+  (dict "label" "Projects" "href" ("projects/" | relURL) "icon" "projects")
+  (dict "label" "Experience" "href" ("experience/" | relURL) "icon" "experience")
+  (dict "label" "Skills" "href" ("skills/" | relURL) "icon" "skills")
+  (dict "label" "Blog" "href" ("blog/" | relURL) "icon" "blog")
+-}}
+
+<nav class="site-nav" aria-label="Primary navigation">
+  <ul class="site-nav-list">
+    {{- range $items }}
+      {{- $isCurrent := eq $currentPath .href }}
+      <li class="site-nav-item">
+        <a
+          class="site-nav-link{{ if $isCurrent }} is-current{{ end }}"
+          href="{{ .href }}"
+          aria-label="{{ .label }}"
+          {{ if $isCurrent }}aria-current="page"{{ end }}
+        >
+          <svg class="site-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            {{- if eq .icon "home" }}
+              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+              <path d="M3 10.5 12 3l9 7.5" />
+              <path d="M5 9v12h14V9" />
+            {{- else if eq .icon "about" }}
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 0 0-16 0" />
+            {{- else if eq .icon "projects" }}
+              <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L11 4.1A2 2 0 0 0 9.31 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+            {{- else if eq .icon "experience" }}
+              <rect width="20" height="14" x="2" y="6" rx="2" />
+              <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              <path d="M2 10h20" />
+            {{- else if eq .icon "skills" }}
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z" />
+            {{- else if eq .icon "blog" }}
+              <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+            {{- end }}
+          </svg>
+          <span class="site-nav-tooltip" aria-hidden="true">{{ .label }}</span>
+        </a>
+      </li>
+    {{- end }}
+  </ul>
+</nav>

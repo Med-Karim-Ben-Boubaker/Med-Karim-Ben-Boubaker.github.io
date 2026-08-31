@@ -143,13 +143,9 @@ Help the visitor understand the person behind the projects: Karim's trajectory, 
 
 Explain the progression in a short narrative:
 
-> I began with intelligent systems, machine learning, embedded AI, computer vision, and robotics. Over time, my focus moved toward language-model systems that operate around expert knowledge. My professional experience now includes legal and regulatory AI, healthcare and scientific research, retrieval pipelines, knowledge graphs, evaluation systems, and cloud-based deployment.
+> I began my engineering journey in robotics and embedded systems, where I learned how software is built in layers of abstraction: each layer hides the complexity below it so we can focus on what matters. AI adds another layer to that stack, helping us handle more complexity and stay focused on the important questions. I began my career working on this layer in legal technology and regulatory compliance, and more recently in healthcare.
 
 This is a trajectory from models and components toward complete AI systems that have to work within a domain, a workflow, and an operational environment.
-
-### What motivates the work
-
-> The most interesting AI problems are not only about making a model generate an answer. They are about connecting the model to the right knowledge, measuring whether the result is useful, handling failure, and giving people enough visibility to review and improve the system.
 
 ### How I work
 
