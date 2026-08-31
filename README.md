@@ -1,45 +1,31 @@
-# Personal Blog
+# Karim Ben Boubaker
 
-A Hugo-based personal blog using the PaperMod theme.
-
-## Setup
-
-### Install Hugo
-```powershell
-# Using Chocolatey
-choco install hugo
-
-# Using Scoop
-scoop install hugo
-```
-
-### Install PaperMod Theme
-```bash
-git submodule update --init --recursive
-```
+A fresh Hugo site under construction. The legacy content and theme dependency
+have been removed so the information architecture and presentation can be
+rebuilt deliberately from the design system.
 
 ## Development
 
-### Start Development Server
-```bash
-hugo server
-```
-Access at: `http://localhost:1313`
+Install Hugo, then start the local development server:
 
-### Build for Production
+```bash
+hugo server --buildDrafts
+```
+
+Open `http://localhost:1313`.
+
+Build the site locally with:
+
 ```bash
 hugo --minify
 ```
 
-### Create New Post
-```bash
-hugo new posts/post-name.md
-```
-
 ## Configuration
 
-Site configuration is managed in `hugo.yaml`. The site uses the PaperMod theme and is configured for GitHub Pages deployment.
+The site is intentionally empty of content and has no theme dependency.
+Design decisions are recorded in [`DESIGN.md`](./DESIGN.md).
 
 ## Deployment
 
-The site automatically deploys to GitHub Pages when changes are pushed to the `main` branch.
+The site is configured to deploy to GitHub Pages when changes are pushed to the
+`main` branch.
