@@ -16,7 +16,7 @@
           class="site-nav-link{{ if $isCurrent }} is-current{{ end }}"
           href="{{ .href }}"
           aria-label="{{ .label }}"
-          {{ if $isCurrent }}aria-current="page"{{ end }}
+          {{- if $isCurrent }}aria-current="page"{{ end -}}
         >
           <svg class="site-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             {{- if eq .icon "about" }}

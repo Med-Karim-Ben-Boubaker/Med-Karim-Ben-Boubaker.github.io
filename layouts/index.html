@@ -1,7 +1,43 @@
 {{ define "main" }}
-  <section class="reset-state" aria-labelledby="reset-title">
-    <p class="eyebrow">A new beginning</p>
-    <h1 id="reset-title">The site is being rebuilt.</h1>
-    <p class="reset-copy">The previous site has been cleared. The information architecture and content will return after the new foundation is defined.</p>
-  </section>
+  {{- $portrait := resources.Get "images/karim-portrait.png" -}}
+
+  <article class="about-page" aria-labelledby="about-title">
+    <section class="about-hero">
+      <div class="about-hero-copy">
+        <p class="eyebrow">About</p>
+        <h1 id="about-title">Hello, I’m Karim.</h1>
+        <p class="about-role">AI Engineer</p>
+        <p class="about-intro">I’m exploring how humans and AI agents can collaborate, especially in knowledge work. I build reliable and transparent knowledge systems that help people find, understand, and use domain information with less friction. My work brings together LLMs, symbolic AI, information retrieval, and knowledge graphs.</p>
+        <p class="about-meta">AI Research Intern @ Hochschule Offenburg <span aria-hidden="true">·</span> Building Agents for Knowledge Workers<br>Offenburg, Baden-Württemberg, Germany</p>
+      </div>
+
+      <figure class="about-portrait">
+        {{- with $portrait -}}
+          {{- with .Resize "640x webp q85" -}}
+            <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="Portrait of Mohamed Karim Ben Boubaker">
+          {{- end -}}
+        {{- end -}}
+      </figure>
+    </section>
+
+    <section class="about-trajectory" aria-labelledby="trajectory-title">
+      <div class="about-trajectory-copy">
+        <h2 id="trajectory-title">From components to complete systems</h2>
+        <p>I began my engineering journey in robotics and embedded systems, where I learned how software is built in layers of abstraction: each layer hides the complexity below it so we can focus on what matters. AI adds another layer to that stack, helping us handle more complexity and stay focused on the important questions. I began my career working on this layer in legal technology and regulatory compliance, and more recently in healthcare.</p>
+        <p class="about-institutions">Offenburg University of Applied Sciences<br>INSAT – Institut National des Sciences Appliquées et de Technologie</p>
+      </div>
+    </section>
+
+    <nav class="about-links" aria-label="About page links">
+      <a class="about-link about-link-primary" href="{{ "experience/" | relURL }}">Explore experience</a>
+      <span aria-hidden="true">·</span>
+      <a class="about-link" href="{{ "projects/" | relURL }}">View projects</a>
+      <span aria-hidden="true">·</span>
+      <a class="about-link" href="{{ "blog/" | relURL }}">Read the blog</a>
+      <span aria-hidden="true">·</span>
+      <a class="about-link" href="https://github.com/Med-Karim-Ben-Boubaker" target="_blank" rel="noreferrer">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a class="about-link" href="https://www.linkedin.com/in/med-karim-ben-boubaker/" target="_blank" rel="noreferrer">LinkedIn</a>
+    </nav>
+  </article>
 {{ end }}

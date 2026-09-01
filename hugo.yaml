@@ -9,7 +9,7 @@ disableKinds:
   - term
 
 params:
-  description: "A new Hugo site is taking shape."
+  description: "Karim Ben Boubaker is an AI Engineer building reliable agents and knowledge systems for knowledge work."
 
 markup:
   goldmark:

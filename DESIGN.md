@@ -4,19 +4,31 @@ name: Karim Ben Boubaker — Editorial Technical
 website: "https://karimbenboubaker.me"
 description: >
   A restrained personal website for an AI Engineer building reliable agents and
-  knowledge systems for knowledge work. The visual language combines a warm
-  editorial canvas, near-black technical surfaces, precise typography, and a
+  knowledge systems for knowledge work. The visual language combines Cursor's
+  observed near-black canvas, quiet technical surfaces, precise typography, and a
   single orange action accent. It is designed for a site-owned Hugo project, with
   long-form technical writing treated as a first-class experience.
 sourceReference:
   name: Cursor
   website: "https://cursor.com"
   role: Visual and compositional reference only; do not reproduce Cursor branding.
+  domAudit:
+    audited: "2026-09-01"
+    method: "Read-only browser DOM and computed-style inspection of the live dark homepage."
+    observedTokens:
+      background: "#14120b"
+      foreground: "#edecec"
+      foregroundSecondary: "#d7d6d5"
+      card: "#1b1913"
+      cardLevels: ["#1d1b15", "#201e18", "#26241e", "#2b2923"]
+      warmCard: "#1c1713"
+      accent: "#f54e00"
+      borderOpacity: ["2.5%", "10%", "20%", "60%"]
 seo:
   title: "Karim Ben Boubaker — Editorial Technical Design System"
   metaDescription: >
-    Design system for Karim Ben Boubaker's Hugo personal website: a warm
-    near-black canvas, readable warm text, restrained orange action color,
+    Design system for Karim Ben Boubaker's Hugo personal website: Cursor's
+    observed near-black canvas, readable neutral text, restrained orange action color,
     editorial typography, hairline depth, and readable technical writing
     surfaces.
   highlights:
@@ -39,8 +51,8 @@ opening: |
   restraint for the evidence to remain central.
 
   The system borrows the Cursor reference's calm editorial contrast, but makes
-  the site's primary mode dark: a warm near-black canvas (#171713), readable
-  warm text (#f7f7f4), distinct card and code surfaces, a single orange action
+  the site's primary mode dark: Cursor's observed near-black canvas (#14120b),
+  readable text (#edecec), distinct card and code surfaces, a single orange action
   color (#f54e00), hairline borders, compact radii, and generous section rhythm.
   It adapts those ideas to a personal site: project evidence, professional
   experience, capabilities, and technical writing are the primary components.
@@ -70,7 +82,8 @@ questions:
       decoration color. Signal Orange uses dark text; the pressed state is
       Signal Orange Active (#d04200) with light text so both states retain AA
       contrast. Most of the interface is warm canvas, warm text, muted text,
-      and hairlines.
+      and hairlines. The warm cast comes from the reference's brown-black
+      canvas and layered cards, not from a light editorial paper background.
   - id: "theme"
     title: "Is the site light-first or dark-first?"
     answer: >
@@ -87,6 +100,16 @@ questions:
       tracking. Use JetBrains Mono for code, technical labels, and interface
       fragments. If CursorGothic is unavailable, use Inter at weight 400 and
       tune tracking conservatively.
+  - id: "about-hierarchy-and-alignment"
+    title: "How should About-page identity and prose be aligned?"
+    answer: >
+      Keep the About H1 short and personal, then place the professional role
+      directly beneath it as a separate element. Do not use the full positioning
+      statement as the page title or repeat the role in metadata. Justify the
+      About page's narrative paragraphs with automatic hyphenation so both text
+      edges align cleanly. Keep headings, labels, role text, metadata,
+      institution names, and links start-aligned; never apply justification
+      globally to all text.
   - id: "timeline-pastels"
     title: "Where may the pastel timeline colors appear?"
     answer: >
@@ -110,25 +133,25 @@ questions:
 colors:
   primary: "#f54e00"
   primary-active: "#d04200"
-  ink: "#f7f7f4"
-  body: "#c9c6bb"
-  body-strong: "#f7f7f4"
-  muted: "#aaa79d"
-  muted-soft: "#8f8c82"
-  canvas: "#171713"
-  canvas-soft: "#1f1e19"
-  surface-card: "#26251e"
-  surface-code: "#0f0f0d"
-  surface-inverse: "#f7f7f4"
-  surface-strong: "#38372f"
-  hairline: "#434137"
-  hairline-soft: "#302f27"
-  hairline-strong: "#625e51"
-  on-primary: "#171713"
+  ink: "#edecec"
+  body: "#d7d6d5"
+  body-strong: "#edecec"
+  muted: "rgba(237, 236, 236, 0.6)"
+  muted-soft: "rgba(237, 236, 236, 0.42)"
+  canvas: "#14120b"
+  canvas-soft: "#1d1b15"
+  surface-card: "#1b1913"
+  surface-code: "#14120b"
+  surface-inverse: "#edecec"
+  surface-strong: "#2b2923"
+  hairline: "rgba(237, 236, 236, 0.1)"
+  hairline-soft: "rgba(237, 236, 236, 0.06)"
+  hairline-strong: "rgba(237, 236, 236, 0.2)"
+  on-primary: "#14120b"
   on-primary-active: "#ffffff"
-  on-code: "#f7f7f4"
-  on-inverse: "#171713"
-  focus: "#f7f7f4"
+  on-code: "#edecec"
+  on-inverse: "#14120b"
+  focus: "#edecec"
   semantic-error: "#cf2d56"
   semantic-success: "#1f8a65"
   semantic-warning: "#c08532"
@@ -462,6 +485,7 @@ contentRules:
   - "Use real, evidence-backed projects and experience; never fill cards with placeholder outcomes."
   - "When content is reintroduced, define and test its route, metadata, feed, image, code, math, and audio contracts before publishing it."
   - "Keep source facts, interpretation, and recommendation distinct in project and experience copy."
+  - "On About surfaces, keep the page title short, place the professional role directly beneath it, and justify narrative paragraphs with automatic hyphenation; keep non-prose elements start-aligned."
   - "Prefer one clear action per section; do not turn Signal Orange into a decoration system."
   - "Use semantic heading order and concise labels; do not style paragraphs as headings."
   - "Every meaningful image needs useful alt text; decorative images use empty alt text."

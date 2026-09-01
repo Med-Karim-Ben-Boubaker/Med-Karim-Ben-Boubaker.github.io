@@ -31,7 +31,9 @@ After the initial template/design work, adding, editing, or removing articles sh
 
 Read [`DESIGN.md`](../DESIGN.md) before implementation. It defines the current tokens, visual direction, content hierarchy, component rules, and accessibility boundaries.
 
-The current direction is a calm editorial/technical system: warm canvas, near-black technical surfaces, warm readable text, one restrained orange action color, hairline borders, compact radii, precise typography, generous spacing, and no decorative elevation. It is light-first, with no theme dependency or theme toggle in the reset shell.
+The current direction is a calm editorial/technical system grounded in the live Cursor DOM audit: near-black canvas `#14120b`, layered dark surfaces, neutral readable text, one restrained orange action color `#f54e00`, opacity-based hairline borders, compact radii, precise typography, generous spacing, and no decorative elevation. It is dark-first, with no theme dependency or theme toggle in the reset shell.
+
+The 2026-09-01 DOM audit recorded the reference's core surfaces as `#14120b`, `#1b1913`, `#1d1b15`, `#201e18`, `#26241e`, and `#2b2923`; foregrounds as `#edecec` and `#d7d6d5`; and border strengths at 2.5%, 10%, 20%, and 60% of the foreground. Recheck the live DOM before changing these values again.
 
 The Cursor and shadcn references are visual and compositional references only. Do not copy Cursor branding, wordmarks, product claims, or proprietary assets.
 
@@ -52,6 +54,7 @@ The former PaperMod UI is documented in [`docs/phase-1-discovery.md`](./phase-1-
 - Current `home-info` block with title, introduction, and GitHub/LinkedIn links.
 - Current vertical article cards with cover image, title, excerpt, date, reading time, word count, and author.
 - New composition should evolve this into a professional hero, selected work, and latest writing while preserving the underlying article content and links.
+- For the About entry page, keep the H1 short and personal, place the professional role immediately beneath it, and keep the role out of the metadata line. Narrative paragraphs use justified alignment with automatic hyphenation; headings, labels, role text, metadata, institution names, and links remain start-aligned.
 
 ### Article page
 
