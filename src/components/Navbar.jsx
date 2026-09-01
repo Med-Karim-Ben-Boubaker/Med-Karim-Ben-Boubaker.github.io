@@ -19,11 +19,14 @@ function Icon({ name }) {
 }
 
 export default function Navbar({ currentPath = window.location.pathname }) {
+  const normalizedPath = currentPath.replace(/\/+$/, '') || '/'
+
   return (
     <nav className="site-nav" aria-label="Primary navigation">
       <ul className="site-nav-list">
         {items.map((item) => {
-          const isCurrent = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
+          const normalizedHref = item.href.replace(/\/+$/, '') || '/'
+          const isCurrent = normalizedPath === normalizedHref || (normalizedHref !== '/' && normalizedPath.startsWith(`${normalizedHref}/`))
 
           return (
             <li className="site-nav-item" key={item.label}>

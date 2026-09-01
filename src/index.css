@@ -1,17 +1,20 @@
 :root {
   color-scheme: dark;
   --canvas: #14120b;
-  --canvas-soft: #1d1b15;
+  --canvas-soft: #1b1913;
   --surface-card: #1b1913;
-  --surface-strong: #2b2923;
+  --surface-hover: #201e18;
+  --surface-strong: #26241e;
   --surface-inverse: #edecec;
   --ink: #edecec;
   --body: #d7d6d5;
   --muted: rgba(237, 236, 236, 0.6);
-  --hairline-soft: rgba(237, 236, 236, 0.06);
-  --hairline-strong: rgba(237, 236, 236, 0.2);
+  --hairline-soft: rgba(237, 236, 236, 0.025);
+  --hairline: rgba(237, 236, 236, 0.10);
+  --hairline-strong: rgba(237, 236, 236, 0.60);
   --primary: #f54e00;
-  --focus: #edecec;
+  --accent-active: #d04200;
+  --focus: #f54e00;
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +26,7 @@ html {
 
 body {
   display: flow-root;
-  min-width: 320px;
+  min-width: 0;
   min-height: 100vh;
   margin: 0;
   background: var(--canvas);
@@ -37,7 +40,7 @@ a { color: inherit; }
 
 a:focus-visible {
   outline: 2px solid var(--focus);
-  outline-offset: 4px;
+  outline-offset: 2px;
 }
 
 .skip-link {
