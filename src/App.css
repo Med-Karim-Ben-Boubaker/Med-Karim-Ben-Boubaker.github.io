@@ -612,6 +612,22 @@ h1 {
 
 .experience-entry.is-current .experience-card { border-color: rgba(245, 78, 0, 0.35); }
 
+.experience-card-header {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.experience-logo {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 4px;
+}
+
 .experience-card h3 {
   margin: 8px 0 0;
   color: var(--ink);
@@ -651,6 +667,10 @@ h1 {
 .experience-highlights li::marker { color: var(--primary); }
 
 .experience-meta-list { margin-top: 20px; }
+
+.experience-card .project-technologies {
+  margin-top: 20px;
+}
 
 .experience-note { max-width: 720px; }
 
@@ -780,4 +800,6 @@ h1 {
   }
 
   .experience-card { padding: 18px; }
+
+  .experience-card-header { gap: 12px; }
 }

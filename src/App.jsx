@@ -4,6 +4,7 @@ import ArticlePage from './pages/ArticlePage'
 import BlogPage from './pages/BlogPage'
 import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
+import companyLogoPlaceholder from './assets/company-logo-placeholder.png'
 import './App.css'
 import './styles/blog.css'
 
@@ -219,7 +220,12 @@ const experienceEntries = [
       'Systems or methods to be documented.',
       'Outcomes and learnings to be documented.',
     ],
-    meta: ['Focus to be documented'],
+    meta: ['Focus to be documented', 'Domain to be documented', 'Outcome to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
     current: true,
   },
   {
@@ -234,7 +240,12 @@ const experienceEntries = [
       'Technical contribution to be documented.',
       'Result or learning to be documented.',
     ],
-    meta: ['Domain to be documented'],
+    meta: ['Domain to be documented', 'Scope to be documented', 'Outcome to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
   },
   {
     period: 'YYYY—YYYY',
@@ -248,7 +259,12 @@ const experienceEntries = [
       'Tools or systems to be documented.',
       'Key takeaway to be documented.',
     ],
-    meta: ['Area to be documented'],
+    meta: ['Area to be documented', 'Role to be documented', 'Learning to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
   },
 ]
 
@@ -258,11 +274,16 @@ function ExperienceEntry({ entry }) {
       <div className="experience-date">{entry.period}</div>
       <span className="experience-marker" aria-hidden="true" />
       <article className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
-        <p className="project-status">{entry.status}</p>
-        <h3>{entry.title}</h3>
-        <p className="experience-organization">
-          {entry.organization} <span aria-hidden="true">·</span> {entry.location}
-        </p>
+        <div className="experience-card-header">
+          <img className="experience-logo" src={companyLogoPlaceholder} width="48" height="48" alt="" />
+          <div>
+            <p className="project-status">{entry.status}</p>
+            <h3>{entry.title}</h3>
+            <p className="experience-organization">
+              {entry.organization} <span aria-hidden="true">·</span> {entry.location}
+            </p>
+          </div>
+        </div>
         <p className="experience-description">{entry.description}</p>
         <ul className="experience-highlights">
           {entry.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
@@ -270,6 +291,7 @@ function ExperienceEntry({ entry }) {
         <ul className="project-meta-list experience-meta-list" aria-label={`${entry.title} focus areas`}>
           {entry.meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
+        <ProjectTechnologies title={entry.title} items={entry.technologies} />
       </article>
     </li>
   )
