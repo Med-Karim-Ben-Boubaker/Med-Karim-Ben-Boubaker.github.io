@@ -1,7 +1,6 @@
 {{- $currentPath := .RelPermalink -}}
 {{- $items := slice
-  (dict "label" "Home" "href" ("" | relURL) "icon" "home")
-  (dict "label" "About" "href" ("about/" | relURL) "icon" "about")
+  (dict "label" "About" "href" ("" | relURL) "icon" "about")
   (dict "label" "Projects" "href" ("projects/" | relURL) "icon" "projects")
   (dict "label" "Experience" "href" ("experience/" | relURL) "icon" "experience")
   (dict "label" "Skills" "href" ("skills/" | relURL) "icon" "skills")
@@ -20,11 +19,7 @@
           {{ if $isCurrent }}aria-current="page"{{ end }}
         >
           <svg class="site-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            {{- if eq .icon "home" }}
-              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-              <path d="M3 10.5 12 3l9 7.5" />
-              <path d="M5 9v12h14V9" />
-            {{- else if eq .icon "about" }}
+            {{- if eq .icon "about" }}
               <circle cx="12" cy="8" r="5" />
               <path d="M20 21a8 8 0 0 0-16 0" />
             {{- else if eq .icon "projects" }}

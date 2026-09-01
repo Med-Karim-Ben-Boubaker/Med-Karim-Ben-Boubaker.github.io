@@ -144,15 +144,6 @@ a:focus-visible {
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none;
-  transition: background-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    color 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.site-nav-link:hover,
-.site-nav-link:focus-visible,
-.site-nav-link.is-current {
-  background: rgba(245, 78, 0, 0.12);
-  color: var(--primary);
 }
 
 .site-nav-link:focus-visible {
@@ -183,9 +174,9 @@ a:focus-visible {
   line-height: 12px;
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, -6px);
+  transform: translate(-50%, -30px);
   transition: opacity 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
   white-space: nowrap;
 }
 
