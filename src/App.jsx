@@ -4,36 +4,14 @@ import ArticlePage from './pages/ArticlePage'
 import BlogPage from './pages/BlogPage'
 import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
+import projectPlaceholder from './assets/project-placeholder.png'
 import './App.css'
 import './styles/blog.css'
 
-function ProjectVisual({ compact = false }) {
+function ProjectVisual() {
   return (
-    <div className={`project-visual${compact ? ' project-visual-compact' : ''}`} aria-hidden="true">
-      <div className="project-visual-bar">
-        <span className="project-visual-dot" />
-        <span className="project-visual-dot" />
-        <span className="project-visual-dot" />
-        <span className="project-visual-label">system map</span>
-      </div>
-
-      <div className="project-visual-body">
-        <div className="project-visual-rail">
-          <span className="project-visual-rail-line is-active" />
-          <span className="project-visual-rail-line" />
-          <span className="project-visual-rail-line" />
-          <span className="project-visual-rail-line" />
-        </div>
-
-        <div className="project-visual-canvas">
-          <span className="project-visual-caption">knowledge flow</span>
-          <div className="project-visual-node node-source">source</div>
-          <div className="project-visual-connector connector-one" />
-          <div className="project-visual-node node-context">context</div>
-          <div className="project-visual-connector connector-two" />
-          <div className="project-visual-node node-answer">answer</div>
-        </div>
-      </div>
+    <div className="project-visual" aria-hidden="true">
+      <img src={projectPlaceholder} alt="" />
     </div>
   )
 }
@@ -42,10 +20,10 @@ function ProjectMeta({ children }) {
   return <li className="project-meta">{children}</li>
 }
 
-function ProjectCard({ title, description, status, meta, technologies, compact = false }) {
+function ProjectCard({ title, description, status, meta, technologies }) {
   return (
     <article className="project-card" aria-label={title}>
-      <ProjectVisual compact={compact} />
+      <ProjectVisual />
       <div className="project-card-content">
         <div className="project-card-heading">
           <p className="project-status">{status}</p>
@@ -158,7 +136,6 @@ function ProjectsPage() {
 
             <div className="project-card-list">
               <ProjectCard
-                compact
                 status="Placeholder · applied AI"
                 title="Clinical AI workflow"
                 description="A research direction for combining structured clinical models with language-model assistance while keeping the workflow inspectable."
@@ -170,7 +147,6 @@ function ProjectsPage() {
                 ]}
               />
               <ProjectCard
-                compact
                 status="Placeholder · knowledge tooling"
                 title="Provenance-aware knowledge work"
                 description="A system concept for keeping notes, sources, and decisions connected as knowledge moves through a working process."
@@ -182,7 +158,6 @@ function ProjectsPage() {
                 ]}
               />
               <ProjectCard
-                compact
                 status="Placeholder · ongoing"
                 title="Human–agent collaboration"
                 description="Experiments around interfaces that make an agent’s context, uncertainty, and next useful action easier to understand."
