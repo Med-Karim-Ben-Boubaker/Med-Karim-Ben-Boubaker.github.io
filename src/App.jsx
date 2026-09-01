@@ -34,7 +34,6 @@ function ProjectCard({ title, description, status, meta, technologies }) {
           {meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
         <ProjectTechnologies title={title} items={technologies} />
-        <span className="project-card-placeholder">Case study in preparation</span>
       </div>
     </article>
   )
@@ -120,7 +119,6 @@ function ProjectsPage() {
                     { name: 'GitHub', icon: 'github' },
                   ]}
                 />
-                <span className="project-card-placeholder">Case study in preparation</span>
               </div>
             </article>
           </section>

@@ -317,14 +317,6 @@ h1 {
   color: var(--ink);
 }
 
-.project-card-placeholder {
-  display: block;
-  margin-top: 24px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
-}
-
 .project-visual {
   height: 300px;
   overflow: hidden;
@@ -395,7 +387,6 @@ h1 {
 .project-card .project-technologies-list { margin-top: 8px; gap: 7px 11px; }
 .project-card .project-technology { min-height: 20px; font-size: 11px; }
 .project-card .project-technology-icon { width: 14px; height: 14px; }
-.project-card .project-card-placeholder { margin-top: 20px; }
 
 .projects-note {
   display: flex;
