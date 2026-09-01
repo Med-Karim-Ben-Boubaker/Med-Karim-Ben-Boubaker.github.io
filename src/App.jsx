@@ -5,6 +5,7 @@ import BlogPage from './pages/BlogPage'
 import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
 import projectPlaceholder from './assets/project-placeholder.png'
+import companyLogoPlaceholder from './assets/company-logo-placeholder.png'
 import './App.css'
 import './styles/blog.css'
 
@@ -39,11 +40,11 @@ function ProjectCard({ title, description, status, meta, technologies }) {
   )
 }
 
-function AboutPage() {
+function AboutPage({ currentPath }) {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar />
+      <Navbar currentPath={currentPath} />
 
       <main id="main-content">
         <article className="about-page" aria-labelledby="about-title">
@@ -76,11 +77,11 @@ function AboutPage() {
   )
 }
 
-function ProjectsPage() {
+function ProjectsPage({ currentPath }) {
   return (
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar />
+      <Navbar currentPath={currentPath} />
 
       <main id="main-content">
         <article className="projects-page" aria-labelledby="projects-title">
@@ -179,6 +180,131 @@ function ProjectsPage() {
   )
 }
 
+const experienceEntries = [
+  {
+    period: 'YYYY—Now',
+    status: 'Placeholder · current experience',
+    title: 'Current role',
+    organization: 'Organisation to be documented',
+    location: 'Location / remote',
+    description: 'A concise summary of the current role will be added here.',
+    highlights: [
+      'Scope and ownership to be documented.',
+      'Systems or methods to be documented.',
+      'Outcomes and learnings to be documented.',
+    ],
+    meta: ['Focus to be documented', 'Domain to be documented', 'Outcome to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
+    current: true,
+  },
+  {
+    period: 'YYYY—YYYY',
+    status: 'Placeholder · previous experience',
+    title: 'Previous role',
+    organization: 'Organisation to be documented',
+    location: 'Location to be documented',
+    description: 'The role context and contribution will be documented here.',
+    highlights: [
+      'Responsibilities to be documented.',
+      'Technical contribution to be documented.',
+      'Result or learning to be documented.',
+    ],
+    meta: ['Domain to be documented', 'Scope to be documented', 'Outcome to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
+  },
+  {
+    period: 'YYYY—YYYY',
+    status: 'Placeholder · earlier experience',
+    title: 'Earlier role',
+    organization: 'Organisation to be documented',
+    location: 'Location to be documented',
+    description: 'The earlier experience and its place in the broader trajectory will be documented here.',
+    highlights: [
+      'Role scope to be documented.',
+      'Tools or systems to be documented.',
+      'Key takeaway to be documented.',
+    ],
+    meta: ['Area to be documented', 'Role to be documented', 'Learning to be documented'],
+    technologies: [
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Technology to be documented', icon: 'placeholder' },
+    ],
+  },
+]
+
+function ExperienceEntry({ entry }) {
+  return (
+    <li className={`experience-entry${entry.current ? ' is-current' : ''}`}>
+      <div className="experience-date">{entry.period}</div>
+      <span className="experience-marker" aria-hidden="true" />
+      <article className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
+        <div className="experience-card-header">
+          <img className="experience-logo" src={companyLogoPlaceholder} width="48" height="48" alt="" />
+          <div>
+            <p className="project-status">{entry.status}</p>
+            <h3>{entry.title}</h3>
+            <p className="experience-organization">
+              {entry.organization} <span aria-hidden="true">·</span> {entry.location}
+            </p>
+          </div>
+        </div>
+        <p className="experience-description">{entry.description}</p>
+        <ul className="experience-highlights">
+          {entry.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+        </ul>
+        <ul className="project-meta-list experience-meta-list" aria-label={`${entry.title} focus areas`}>
+          {entry.meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
+        </ul>
+        <ProjectTechnologies title={entry.title} items={entry.technologies} />
+      </article>
+    </li>
+  )
+}
+
+function ExperiencePage({ currentPath }) {
+  return (
+    <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <Navbar currentPath={currentPath} />
+
+      <main id="main-content">
+        <article className="experience-page" aria-labelledby="experience-title">
+          <section className="experience-intro">
+            <p className="eyebrow">Experience</p>
+            <h1 id="experience-title">Experience timeline.</h1>
+            <p className="experience-lead">A chronological record of roles, systems, and professional growth.</p>
+          </section>
+
+          <section className="experience-history" aria-labelledby="work-history-title">
+            <div className="projects-section-heading">
+              <p className="section-label" id="work-history-title">Work history</p>
+              <span className="section-count">01—03</span>
+            </div>
+
+            <ol className="experience-timeline">
+              {experienceEntries.map((entry) => <ExperienceEntry key={`${entry.period}-${entry.title}`} entry={entry} />)}
+            </ol>
+          </section>
+
+          <aside className="projects-note experience-note" aria-label="Experience documentation note">
+            <span className="projects-note-mark" aria-hidden="true">+</span>
+            <p>Role details, dates, and selected outcomes will be added as the experience record is documented.</p>
+          </aside>
+        </article>
+      </main>
+    </>
+  )
+}
+
 function NotFoundPage() {
   return (
     <>
@@ -199,7 +325,8 @@ function NotFoundPage() {
 export default function App({ pathname = typeof window !== 'undefined' ? window.location.pathname : '/', articles = [] }) {
   const currentPath = normalizePath(pathname)
 
-  if (currentPath === '/projects') return <ProjectsPage />
+  if (currentPath === '/projects') return <ProjectsPage currentPath={currentPath} />
+  if (currentPath === '/experience') return <ExperiencePage currentPath={currentPath} />
   if (currentPath === '/blog') return <BlogPage articles={articles} currentPath={currentPath} />
 
   if (currentPath.startsWith('/blog/')) {
@@ -208,6 +335,6 @@ export default function App({ pathname = typeof window !== 'undefined' ? window.
     return article ? <ArticlePage article={article} currentPath={currentPath} /> : <NotFoundPage />
   }
 
-  if (currentPath === '/') return <AboutPage />
+  if (currentPath === '/') return <AboutPage currentPath={currentPath} />
   return <NotFoundPage />
 }
