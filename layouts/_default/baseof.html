@@ -14,15 +14,7 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="site-header">
-      <div class="site-header-meta">
-        <a class="wordmark" href="{{ "" | relURL }}" aria-label="About {{ site.Title }}">
-          <span>Karim</span> <span class="wordmark-accent">Ben Boubaker</span>
-        </a>
-        <span class="site-status" aria-label="Site status">alpha / reset</span>
-      </div>
-      {{ partial "site-nav.html" . }}
-    </header>
+    {{ partial "site-nav.html" . }}
 
     <main id="main-content">
       {{ block "main" . }}{{ end }}
