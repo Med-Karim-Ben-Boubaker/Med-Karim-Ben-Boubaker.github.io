@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar'
+import ProjectTechnologies from './components/ProjectTechnologies'
 import portrait from './assets/karim-portrait.png'
 import './App.css'
 
@@ -37,7 +38,7 @@ function ProjectMeta({ children }) {
   return <li className="project-meta">{children}</li>
 }
 
-function ProjectCard({ title, description, status, meta, compact = false }) {
+function ProjectCard({ title, description, status, meta, technologies, compact = false }) {
   return (
     <article className="project-card" aria-label={title}>
       <ProjectVisual compact={compact} />
@@ -50,6 +51,7 @@ function ProjectCard({ title, description, status, meta, compact = false }) {
         <ul className="project-meta-list" aria-label={`${title} details`}>
           {meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
+        <ProjectTechnologies title={title} items={technologies} />
         <span className="project-card-placeholder">Case study in preparation</span>
       </div>
     </article>
@@ -128,6 +130,14 @@ function ProjectsPage() {
                   <ProjectMeta>Retrieval</ProjectMeta>
                   <ProjectMeta>Provenance</ProjectMeta>
                 </ul>
+                <ProjectTechnologies
+                  title="Reliable knowledge systems"
+                  items={[
+                    { name: 'Python', icon: 'python' },
+                    { name: 'Jupyter', icon: 'jupyter' },
+                    { name: 'GitHub', icon: 'github' },
+                  ]}
+                />
                 <span className="project-card-placeholder">Case study in preparation</span>
               </div>
             </article>
@@ -149,6 +159,11 @@ function ProjectsPage() {
                 title="Clinical AI workflow"
                 description="A research direction for combining structured clinical models with language-model assistance while keeping the workflow inspectable."
                 meta={['Healthcare', 'Symbolic AI', 'Evaluation']}
+                technologies={[
+                  { name: 'Python', icon: 'python' },
+                  { name: 'Jupyter', icon: 'jupyter' },
+                  { name: 'GitHub', icon: 'github' },
+                ]}
               />
               <ProjectCard
                 compact
@@ -156,6 +171,11 @@ function ProjectsPage() {
                 title="Provenance-aware knowledge work"
                 description="A system concept for keeping notes, sources, and decisions connected as knowledge moves through a working process."
                 meta={['Knowledge graphs', 'Sources', 'Workflows']}
+                technologies={[
+                  { name: 'Obsidian', icon: 'obsidian' },
+                  { name: 'Python', icon: 'python' },
+                  { name: 'GitHub', icon: 'github' },
+                ]}
               />
               <ProjectCard
                 compact
@@ -163,6 +183,11 @@ function ProjectsPage() {
                 title="Human–agent collaboration"
                 description="Experiments around interfaces that make an agent’s context, uncertainty, and next useful action easier to understand."
                 meta={['Interfaces', 'Agents', 'Transparency']}
+                technologies={[
+                  { name: 'React', icon: 'react' },
+                  { name: 'JavaScript', icon: 'javascript' },
+                  { name: 'Vite', icon: 'vite' },
+                ]}
               />
             </div>
           </section>
