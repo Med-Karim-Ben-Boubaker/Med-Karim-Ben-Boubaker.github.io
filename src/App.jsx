@@ -1,7 +1,11 @@
 import Navbar from './components/Navbar'
 import ProjectTechnologies from './components/ProjectTechnologies'
+import ArticlePage from './pages/ArticlePage'
+import BlogPage from './pages/BlogPage'
+import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
 import './App.css'
+import './styles/blog.css'
 
 function ProjectVisual({ compact = false }) {
   return (
@@ -202,10 +206,35 @@ function ProjectsPage() {
   )
 }
 
-function App() {
-  const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-
-  return currentPath === '/projects' ? <ProjectsPage /> : <AboutPage />
+function NotFoundPage() {
+  return (
+    <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <Navbar />
+      <main id="main-content">
+        <article className="not-found-page" aria-labelledby="not-found-title">
+          <p className="eyebrow">Not found</p>
+          <h1 id="not-found-title">This page does not exist.</h1>
+          <p>The article or page you requested could not be found.</p>
+          <a className="article-back-link" href={withBasePath('/blog/')}>Back to articles</a>
+        </article>
+      </main>
+    </>
+  )
 }
 
-export default App
+export default function App({ pathname = typeof window !== 'undefined' ? window.location.pathname : '/', articles = [] }) {
+  const currentPath = normalizePath(pathname)
+
+  if (currentPath === '/projects') return <ProjectsPage />
+  if (currentPath === '/blog') return <BlogPage articles={articles} currentPath={currentPath} />
+
+  if (currentPath.startsWith('/blog/')) {
+    const slug = currentPath.slice('/blog/'.length)
+    const article = articles.find((candidate) => candidate.slug === slug)
+    return article ? <ArticlePage article={article} currentPath={currentPath} /> : <NotFoundPage />
+  }
+
+  if (currentPath === '/') return <AboutPage />
+  return <NotFoundPage />
+}

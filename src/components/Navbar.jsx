@@ -18,7 +18,7 @@ function Icon({ name }) {
   return <svg className="site-nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">{paths[name]}</svg>
 }
 
-export default function Navbar({ currentPath = window.location.pathname }) {
+export default function Navbar({ currentPath = typeof window !== 'undefined' ? window.location.pathname : '/' }) {
   const normalizedPath = currentPath.replace(/\/+$/, '') || '/'
 
   return (

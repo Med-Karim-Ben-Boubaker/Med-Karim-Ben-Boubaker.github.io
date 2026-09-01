@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Article prerender bundle
+.prerender
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

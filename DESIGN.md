@@ -542,6 +542,19 @@ The defining contrast is square-ish 4px content framing against fully rounded ac
 
 **`footer-link`** is transparent, uses `{colors.text-secondary}`, and stays visually subordinate to the main page navigation.
 
+### Article content
+
+Articles use a centered editorial column capped at approximately 720px, with `{typography.body-md}` for body text and the documented display and title styles for the article title and headings. Keep the article rhythm aligned to the spacing tokens and use `{colors.text-secondary}` and `{colors.text-muted}` for supporting metadata.
+
+- Treat Markdown as presentation-neutral. The article renderer owns semantic markup and applies these design-system tokens.
+- Preserve the dark editorial palette: `{colors.canvas}` for the page floor, `{colors.surface-card}` or `{colors.canvas-soft}` for flat content surfaces, `{colors.text-primary}` for main text, and `{colors.accent}` for links and directional emphasis.
+- Use flat hairline surfaces for code blocks, figures, tables, and quotes; do not add default shadows, gradients, or new saturated colors.
+- Keep fenced code in `{typography.code}` with readable padding and horizontal scrolling when needed.
+- Make images responsive, preserve meaningful alternative text, and pair captions with semantic figures where captions are present.
+- Wrap wide tables for horizontal scrolling on narrow screens without reducing body text below a readable size.
+- Give inline and display LaTeX enough vertical spacing and prevent KaTeX output from causing page-level horizontal overflow.
+- Preserve visible keyboard focus, semantic heading order, sufficient contrast, reduced-motion behavior, and 44px touch targets where controls are present.
+
 ## Interaction and accessibility
 
 - Keep focus states visible with a 2px `{colors.accent}` outline and a 2px offset.
