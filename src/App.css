@@ -1,7 +1,7 @@
 .site-nav {
   width: max-content;
   margin: 20px auto 0;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: 1px solid var(--hairline-soft);
   border-radius: 8px;
   background: var(--canvas-soft);
@@ -10,7 +10,7 @@
 .site-nav-list {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -23,8 +23,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none;
@@ -161,10 +161,15 @@ h1 {
 @media (max-width: 860px) {
   .site-nav {
     margin-top: 16px;
-    padding-inline: 12px;
+    padding: 8px 12px;
   }
 
-  .site-nav-list { gap: 6px; }
+  .site-nav-list { gap: 8px; }
+
+  .site-nav-link {
+    width: 44px;
+    height: 44px;
+  }
 
   .about-page { padding: 40px 0 64px; }
 
