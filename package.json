@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconify-icons/simple-icons": "^2.0.1",
+    "@iconify-icons/thesvg": "^2.0.3",
+    "@iconify/react": "^6.0.2",
     "katex": "^0.18.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

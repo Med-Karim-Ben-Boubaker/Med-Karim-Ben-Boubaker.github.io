@@ -152,12 +152,16 @@ If the change affects the renderer or prerender script, inspect both the rendere
 - Keep project context in descriptions or plain text where necessary.
 - Each project may show a compact `Technologies & tools` row with small icons and visible names.
 - Icons must support the label and must never be the only way to identify a technology.
-- Use Simple Icons for recognizable technology brands.
+- Use theSVG as the primary source for technology and framework marks. Read `docs/research/technology-logo-provider-research.md` when adding or changing a provider, slug, variant, or licensing decision.
+- Deliver technology marks locally through Iconify's offline React path with individual `@iconify-icons/thesvg/<slug>` imports. Keep the provider registry explicit and reviewed; do not derive provider slugs from display names at render time.
+- Use the provider's `mono` variant so the inline SVG inherits `currentColor`. Check variant availability per slug and use an approved fallback or text-only label when a monochrome variant is unavailable.
+- Keep a small provenance record for each non-obvious mark: provider, slug, variant, source URL, and reported license. Treat library licenses and trademark permissions as separate concerns and follow the brand's usage guidance.
+- Keep verified employer logos in the experience-card header separate from technology marks. Do not substitute a technology catalog icon for an organization logo.
+- Keep Simple Icons as the reviewed fallback for recognizable brands that the primary catalog does not cover.
 - Use Lucide only for generic interface or system icons, not as improvised technology logos.
-- Discover selected icons through shadcn.io, but keep the chosen SVG/React components local and statically included.
 - Use monochrome icons with `currentColor`, approximately 14–16px in size.
 - Avoid brand-color logo collections, gradients, shadows, and decorative icon overload.
-- Show no more than three or four technologies per card.
+- Show no more than three or four technologies per card by default. When the content owner supplies a longer verified role-specific inventory, include the full inventory and let the row wrap cleanly.
 - Only display technologies that have actually been used or verified. Unknown technologies should remain text-only.
 - Placeholder cards may use “Technologies to be documented” instead of inventing a stack.
 - Technology rows must wrap cleanly on mobile and must not create horizontal overflow.

@@ -188,8 +188,9 @@ const experienceEntries = [
     meta: ['Healthcare', 'Bayesian networks', 'Agent evaluation'],
     technologies: [
       { name: 'Python', icon: 'python' },
-      { name: 'PydanticAI' },
-      { name: 'LangGraph' },
+      { name: 'PydanticAI', icon: 'pydanticai' },
+      { name: 'Qdrant', icon: 'qdrant' },
+      { name: 'OpenRouter', icon: 'openrouter' },
     ],
     current: true,
   },
@@ -209,9 +210,11 @@ const experienceEntries = [
     meta: ['Regulatory compliance', 'Knowledge graphs', 'Agent infrastructure'],
     technologies: [
       { name: 'Python', icon: 'python' },
-      { name: 'LangGraph' },
-      { name: 'Neo4j' },
-      { name: 'AWS' },
+      { name: 'LangChain', icon: 'langchain' },
+      { name: 'LangGraph', icon: 'langgraph' },
+      { name: 'Neo4j', icon: 'neo4j' },
+      { name: 'AWS', icon: 'aws' },
+      { name: 'Langfuse', icon: 'langfuse' },
     ],
   },
   {
@@ -230,9 +233,11 @@ const experienceEntries = [
     meta: ['Legal technology', 'RAG performance', 'Data platforms'],
     technologies: [
       { name: 'Python', icon: 'python' },
-      { name: 'Terraform' },
       { name: 'Azure' },
-      { name: 'MongoDB' },
+      { name: 'Terraform', icon: 'terraform' },
+      { name: 'MongoDB', icon: 'mongodb' },
+      { name: 'FastAPI', icon: 'fastapi' },
+      { name: 'RAGAS' },
     ],
   },
   {
@@ -248,8 +253,9 @@ const experienceEntries = [
     ],
     meta: ['Embedded ML', 'Automotive systems', 'Low-latency inference'],
     technologies: [
-      { name: 'TensorFlow' },
-      { name: 'C / C++' },
+      { name: 'Python', icon: 'python' },
+      { name: 'C/C++', icon: 'cpp' },
+      { name: 'TensorFlow', icon: 'tensorflow' },
     ],
   },
 ]
