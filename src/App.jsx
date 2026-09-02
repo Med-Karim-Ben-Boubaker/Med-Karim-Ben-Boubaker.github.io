@@ -174,7 +174,8 @@ function ProjectsPage({ currentPath }) {
 
 const experienceEntries = [
   {
-    period: 'March 2026 — Present',
+    period: '03/2026 — Present',
+    duration: '6 mos',
     status: 'Current · research engineering',
     title: 'AI Research Engineer',
     organization: 'Hochschule Offenburg & Hahn-Schickard',
@@ -195,7 +196,8 @@ const experienceEntries = [
     current: true,
   },
   {
-    period: 'November 2025 — March 2026',
+    period: '11/2025 — 03/2026',
+    duration: '4 mos',
     status: 'Industry · AI engineering',
     title: 'AI Engineer',
     organization: 'GreenEarthX',
@@ -216,7 +218,8 @@ const experienceEntries = [
     ],
   },
   {
-    period: 'June 2025 — November 2025',
+    period: '06/2025 — 11/2025',
+    duration: '5 mos',
     status: 'Industry · AI engineering',
     title: 'AI Engineer',
     organization: 'Oratio Technologies',
@@ -237,7 +240,8 @@ const experienceEntries = [
     ],
   },
   {
-    period: 'June 2024 — September 2024',
+    period: '06/2024 — 09/2024',
+    duration: '3 mos',
     status: 'Industry · machine learning',
     title: 'ML Engineering Intern',
     organization: 'ACTIA Engineering Services',
@@ -257,19 +261,22 @@ const experienceEntries = [
 
 const additionalExperience = [
   {
-    period: 'January 2025 — February 2025',
+    period: '01/2025 — 02/2025',
+    duration: '1 mo',
     title: 'Machine Learning Instructor',
     organization: 'Data Overflow',
     description: 'Conducted an in-depth session on LLMs for 20+ attendees, covering sequence models, transformers, and prompt engineering; co-hosted a computer vision session on convolutional neural networks.',
   },
   {
-    period: 'September 2024 — Present',
+    period: '09/2024 — Present',
+    duration: '2 yrs',
     title: 'Technical Team Member',
     organization: 'IEEE INSAT Robotics and Automation Society Chapter',
     description: 'Delivered interactive AI/ML workshops covering neural networks, computer vision, and TinyML for beginner learners.',
   },
   {
-    period: 'August 2022 — Present',
+    period: '08/2022 — Present',
+    duration: '4 yrs 1 mo',
     title: 'Vice Chairman',
     organization: 'INSAT ACM Student Chapter',
     description: 'Helped organize the Tunisian Collegiate Programming Contest 2022, where students competed for qualification to the Africa and Arab Collegiate Programming Contest.',
@@ -279,7 +286,10 @@ const additionalExperience = [
 function ExperienceEntry({ entry }) {
   return (
     <li className={`experience-entry${entry.current ? ' is-current' : ''}`}>
-      <div className="experience-date">{entry.period}</div>
+      <div className="experience-date">
+        <span>{entry.period}</span>
+        <span className="experience-duration">{entry.duration}</span>
+      </div>
       <span className="experience-marker" aria-hidden="true" />
       <article className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
         <div className="experience-card-header">
@@ -319,7 +329,10 @@ function AdditionalExperienceSection() {
       <div className="additional-experience-list">
         {additionalExperience.map((entry) => (
           <article className="additional-experience-entry" key={`${entry.period}-${entry.title}`}>
-            <p className="additional-experience-date">{entry.period}</p>
+            <p className="additional-experience-date">
+              <span>{entry.period}</span>
+              <span className="experience-duration">{entry.duration}</span>
+            </p>
             <div>
               <h3>{entry.title}</h3>
               <p className="additional-experience-organization">{entry.organization}</p>

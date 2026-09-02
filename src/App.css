@@ -541,6 +541,7 @@ h1 {
 .experience-history { margin-top: 67.2px; }
 
 .experience-timeline {
+  --experience-date-column: 190px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -551,7 +552,7 @@ h1 {
   position: absolute;
   top: 28px;
   bottom: 28px;
-  left: 173px;
+  left: calc(var(--experience-date-column) + 13px);
   width: 1px;
   background: var(--hairline);
   content: "";
@@ -560,12 +561,14 @@ h1 {
 .experience-entry {
   position: relative;
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
+  grid-template-columns: var(--experience-date-column) minmax(0, 1fr);
   gap: 26px;
   padding-bottom: 15px;
 }
 
 .experience-date {
+  display: flex;
+  flex-direction: column;
   padding-top: 21px;
   color: var(--muted);
   font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
@@ -575,10 +578,18 @@ h1 {
   white-space: nowrap;
 }
 
+.experience-duration {
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
 .experience-marker {
   position: absolute;
   top: 24px;
-  left: 167px;
+  left: calc(var(--experience-date-column) + 7px);
   width: 13px;
   height: 13px;
   border: 1px solid var(--hairline-strong);
@@ -690,11 +701,17 @@ h1 {
 }
 
 .additional-experience-date {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   color: var(--muted);
   font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   font-size: 12px;
   line-height: 1.35;
+}
+
+.additional-experience-date .experience-duration {
+  margin-top: 4px;
 }
 
 .additional-experience-entry h3 {
