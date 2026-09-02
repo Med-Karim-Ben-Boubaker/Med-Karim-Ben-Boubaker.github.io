@@ -59,7 +59,12 @@ function resolveArticleImageUrl(source, { slug, baseUrl = '/' } = {}) {
 }
 
 function hasOnlyImageChild(node) {
-  return node?.children?.length === 1 && node.children[0]?.type === 'image'
+  const child = node?.children?.[0]
+
+  return node?.children?.length === 1 && (
+    child?.type === 'image'
+    || (child?.type === 'element' && child?.tagName === 'img')
+  )
 }
 
 function createComponents({ slug, baseUrl }) {

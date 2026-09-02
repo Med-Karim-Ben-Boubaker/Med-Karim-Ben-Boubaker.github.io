@@ -32,6 +32,11 @@ function requiredText(value, fieldName, filePath) {
   return value.trim()
 }
 
+function optionalText(value, fieldName, filePath) {
+  if (value === undefined || value === null) return null
+  return requiredText(value, fieldName, filePath)
+}
+
 function parseScalar(value) {
   const normalizedValue = value.trim()
 
@@ -132,6 +137,9 @@ function parseArticle(filePath, source) {
     title: requiredText(data.title, 'title', filePath),
     date: normalizeDate(data.date, filePath),
     summary: requiredText(data.summary, 'summary', filePath),
+    author: optionalText(data.author, 'author', filePath),
+    cover: optionalText(data.cover, 'cover', filePath),
+    coverCaption: optionalText(data.coverCaption, 'coverCaption', filePath),
     draft: data.draft ?? false,
     content: parsed.content.trim(),
   }
@@ -150,7 +158,7 @@ function compareArticles(first, second) {
  * Load Markdown articles from the Vite content glob.
  *
  * @param {{includeDrafts?: boolean}} options
- * @returns {Array<{slug: string, title: string, date: string, summary: string, draft: boolean, content: string}>}
+ * @returns {Array<{slug: string, title: string, date: string, summary: string, author: string|null, cover: string|null, coverCaption: string|null, draft: boolean, content: string}>}
  */
 export function loadArticles({ includeDrafts = false } = {}) {
   const articles = Object.entries(articleModules).map(([filePath, source]) => {

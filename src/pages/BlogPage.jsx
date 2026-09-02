@@ -1,15 +1,28 @@
 import PageShell from '../components/PageShell'
-import { withBasePath } from '../site-url'
+import { withArticleAssetPath, withBasePath } from '../site-url'
 
 function ArticleListItem({ article }) {
   return (
     <li className="article-list-item">
       <a className="article-list-link" href={withBasePath(`/blog/${article.slug}/`)}>
-        <div className="article-list-heading">
-          <h2>{article.title}</h2>
-          <time dateTime={article.date}>{article.date}</time>
+        <div className="article-list-layout">
+          {article.cover && (
+            <img
+              className="article-list-cover"
+              src={withArticleAssetPath(article.slug, article.cover)}
+              alt=""
+              loading="lazy"
+            />
+          )}
+          <div className="article-list-copy">
+            <div className="article-list-heading">
+              <h2>{article.title}</h2>
+              <time dateTime={article.date}>{article.date}</time>
+            </div>
+            <p>{article.summary}</p>
+            {article.author && <p className="article-list-author">By {article.author}</p>}
+          </div>
         </div>
-        <p>{article.summary}</p>
       </a>
     </li>
   )

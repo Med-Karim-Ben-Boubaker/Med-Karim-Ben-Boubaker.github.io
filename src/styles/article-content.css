@@ -116,6 +116,11 @@
   border-radius: 4px;
 }
 
+.article-content img {
+  max-width: 100%;
+  height: auto;
+}
+
 .article-content figcaption {
   margin-top: 10px;
   color: var(--muted);
