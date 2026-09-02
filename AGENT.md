@@ -2,13 +2,16 @@
 
 ## Scope
 
-- Recreate the About page with React and Vite.
-- Preserve the main content, navbar, and important assets from the existing reference implementation.
+- Maintain the personal site with React and Vite across the About, Projects, Experience, Blog, and article routes.
+- Preserve the main content, navbar, and important assets from the current implementation.
 - Keep the page personal, direct, and authentic rather than making it look like a generic portfolio template.
 
 ## Architecture
 
 - This is a frontend-only React/Vite site. There is no runtime backend, database, CMS, or article API.
+- `src/components/PageShell.jsx` is the shared outer frame for every route. Keep the skip link, navbar, main landmark, page centering, and page-level spacing there.
+- PageShell variants provide the shared width contract: `standard` (960px) for About and Experience, `wide` (1100px) for Projects, `reading` (720px) for the Blog and fallback pages, and `article` (760px) for article content.
+- Shared layout behavior belongs in `src/index.css` and its custom properties (`--page-gutter`, `--page-top`, `--page-bottom`, the page-width tokens, `--font-sans`, and stable scrollbar gutters). Page-specific styles should describe content structure, not recreate the outer shell.
 - Markdown files in `src/content/articles/` are the source of truth for article metadata and body content.
 - Vite's eager raw content glob loads the same Markdown module in the browser and in the SSR/prerender entry. Keep the loader browser-safe; do not add Node-only parsing dependencies to it.
 - `npm run dev` uses the normal Vite development server and client hydration. It includes drafts so an article can be previewed at `/blog/<slug>/` before publication.
@@ -49,6 +52,8 @@ npm run preview
 ```
 
 During browser verification, check at least the blog index and one article at desktop and narrow mobile widths. Confirm the article title, date, summary, navigation state, Markdown features, image loading, keyboard focus, and absence of page-level horizontal overflow. When a draft fixture is available, confirm it appears in development and is absent from the production build.
+
+For layout changes, compare the About, Projects, Experience, Blog, and article routes at the same viewport sizes. Confirm that the navbar and each PageShell variant share the same center line, that common gutters and vertical rhythm are stable, and that intentional width differences remain limited to the documented variants.
 
 If the change affects the renderer or prerender script, inspect both the rendered browser DOM and the raw generated `dist/blog/**/index.html`; a successful JavaScript render alone is not proof that static hosting will work.
 
@@ -108,21 +113,14 @@ If the change affects the renderer or prerender script, inspect both the rendere
 
 - `DESIGN.md` is the visual source of truth. Read it before changing article, navigation, or page layout styles.
 - Reuse the existing CSS custom properties from `src/index.css` (`--canvas`, `--ink`, `--body`, `--muted`, `--hairline`, `--primary`, and related tokens). Add a token to `DESIGN.md` and `src/index.css` together if a genuinely new semantic value is necessary.
+- Treat the PageShell variants and layout tokens documented in `DESIGN.md` as the shared configuration across pages. Update the shared primitive or token when a cross-page inconsistency is found; add a page-specific rule only when the content genuinely needs different behavior.
 - Preserve the dark editorial direction: warm near-black canvas, off-white hierarchy, restrained orange accent, hairline borders, flat surfaces, compact controls, and generous whitespace.
-- Blog and article layouts use centered editorial columns: approximately 720px for the list and 760px for reading content, with responsive horizontal padding.
+- Keep the documented PageShell widths: 960px standard, 1100px wide, 720px reading, and 760px article. The shared gutter and responsive spacing rules apply to all variants.
 - Article styles must remain independent of individual Markdown files. Add semantic renderer classes and shared CSS rules instead of one-off content-specific selectors.
 - Tables and long code/math expressions must be horizontally contained within the article surface. They must not create page-level horizontal overflow on mobile.
 - Keep links visibly distinguishable, headings hierarchical, images supplied with meaningful alt text, and interactive controls keyboard-accessible. Preserve the skip link and visible `:focus-visible` treatment.
 - Avoid gradients, decorative shadows, brand-color icon collections, arbitrary rounded cards, and new page chrome unless `DESIGN.md` is updated first.
 - Verify visual changes in a real browser at representative desktop and mobile widths. A build passing is not sufficient for layout or accessibility changes.
-
-## Content and structure
-
-- Remove the AI Research Intern experience entry.
-- Remove the Offenburg University and INSAT education lines.
-- Remove the experience, projects, blog, GitHub, and LinkedIn links.
-- Remove the section divider/fineline.
-- Remove the footer.
 
 ## Navbar
 
@@ -130,14 +128,13 @@ If the change affects the renderer or prerender script, inspect both the rendere
 - Do not modify the existing icon artwork or SVG paths.
 - Spacing, padding, dimensions, and alignment may be adjusted.
 - Keep the navbar horizontally centered.
-- Use 40px square controls on desktop with increased horizontal spacing.
-- Use 44px square controls on mobile for comfortable touch interaction.
+- Use 40px square controls on desktop and 44px square controls on mobile for comfortable touch interaction. At the narrowest supported width, use the compact fallback defined in the shared navbar styles.
 - Keep the navbar responsive and prevent horizontal overflow at narrow phone widths.
 
 ## Layout and visual direction
 
-- Use balanced whitespace and a clear vertical rhythm between the navbar, introduction, portrait, and content sections.
-- Calibrate the navbar against the page content so it does not feel visually undersized or disconnected.
+- Use the shared PageShell for balanced whitespace and a clear vertical rhythm between the navbar and page content.
+- Keep the navbar centered in the same global reference frame as every page shell; calibrate cross-page alignment through shared styles rather than route-specific offsets.
 - Treat the personal image as part of the page’s overall visual balance and calibrate its size and placement accordingly.
 - Maintain a minimal, quiet dark interface with clear typography hierarchy and no unnecessary page chrome.
 
@@ -165,4 +162,3 @@ If the change affects the renderer or prerender script, inspect both the rendere
 - Placeholder cards may use “Technologies to be documented” instead of inventing a stack.
 - Technology rows must wrap cleanly on mobile and must not create horizontal overflow.
 - Decorative icons should use `aria-hidden="true"` when the adjacent text provides the accessible name.
-- If the Skills navigation item is replaced, preserve `/skills/` as an alias or redirect where necessary.
