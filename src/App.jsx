@@ -6,7 +6,11 @@ import BlogPage from './pages/BlogPage'
 import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
 import projectPlaceholder from './assets/project-placeholder.png'
-import companyLogoPlaceholder from './assets/company-logo-placeholder.png'
+import hochschuleOffenburgLogo from './assets/experience/hochschule-offenburg.png'
+import hahnSchickardLogo from './assets/experience/hahn-schickard.png'
+import greenEarthXLogo from './assets/experience/greenearthx.jpg'
+import oratioLogo from './assets/experience/oratio.jpg'
+import actiaLogo from './assets/experience/actia.jpg'
 import './App.css'
 import './styles/blog.css'
 
@@ -170,62 +174,105 @@ function ProjectsPage({ currentPath }) {
 
 const experienceEntries = [
   {
-    period: 'YYYY—Now',
-    status: 'Placeholder · current experience',
-    title: 'Current role',
-    organization: 'Organisation to be documented',
-    location: 'Location / remote',
-    description: 'A concise summary of the current role will be added here.',
+    period: 'March 2026 — Present',
+    status: 'Current · research engineering',
+    title: 'AI Research Engineer',
+    organization: 'Hochschule Offenburg & Hahn-Schickard',
+    location: 'Offenburg, Germany',
+    logos: [hochschuleOffenburgLogo, hahnSchickardLogo],
+    description: 'Building evidence-grounded AI systems that turn medical literature into validated probability distributions for clinical Bayesian networks.',
     highlights: [
-      'Scope and ownership to be documented.',
-      'Systems or methods to be documented.',
-      'Outcomes and learnings to be documented.',
+      'Built a PydanticAI ReAct agent that searches medical literature, reasons over retrieved evidence, and generates validated probability distributions for clinical Bayesian networks.',
+      'Designed a context-tree compression method for large Bayesian CPTs, reducing LLM elicitation calls by 79.4% on average.',
+      'Built a concurrent agent evaluation runtime for benchmarking models and agent variants, with configuration-driven experiments, failure handling, tracing, and automated metrics.',
     ],
-    meta: ['Focus to be documented', 'Domain to be documented', 'Outcome to be documented'],
+    meta: ['Healthcare', 'Bayesian networks', 'Agent evaluation'],
     technologies: [
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Python', icon: 'python' },
+      { name: 'PydanticAI' },
+      { name: 'LangGraph' },
     ],
     current: true,
   },
   {
-    period: 'YYYY—YYYY',
-    status: 'Placeholder · previous experience',
-    title: 'Previous role',
-    organization: 'Organisation to be documented',
-    location: 'Location to be documented',
-    description: 'The role context and contribution will be documented here.',
+    period: 'November 2025 — March 2026',
+    status: 'Industry · AI engineering',
+    title: 'AI Engineer',
+    organization: 'GreenEarthX',
+    location: 'Palo Alto, CA · Remote',
+    logos: [greenEarthXLogo],
+    description: 'Built agentic compliance and regulatory-reasoning systems for EU renewable-energy regulations.',
     highlights: [
-      'Responsibilities to be documented.',
-      'Technical contribution to be documented.',
-      'Result or learning to be documented.',
+      'Built a LangGraph compliance agent combining multi-step reasoning, RAG, and expert validation, achieving 88% accuracy across 100 compliance scenarios.',
+      'Built a Neo4j knowledge graph from EU regulations, modeling amendments, citations, and cross-document dependencies for multi-hop reasoning.',
+      'Deployed containerized FastAPI services on AWS ECS with Langfuse observability for LLM tracing, token usage, and production debugging.',
     ],
-    meta: ['Domain to be documented', 'Scope to be documented', 'Outcome to be documented'],
+    meta: ['Regulatory compliance', 'Knowledge graphs', 'Agent infrastructure'],
     technologies: [
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Python', icon: 'python' },
+      { name: 'LangGraph' },
+      { name: 'Neo4j' },
+      { name: 'AWS' },
     ],
   },
   {
-    period: 'YYYY—YYYY',
-    status: 'Placeholder · earlier experience',
-    title: 'Earlier role',
-    organization: 'Organisation to be documented',
-    location: 'Location to be documented',
-    description: 'The earlier experience and its place in the broader trajectory will be documented here.',
+    period: 'June 2025 — November 2025',
+    status: 'Industry · AI engineering',
+    title: 'AI Engineer',
+    organization: 'Oratio Technologies',
+    location: 'Tunis, Tunisia',
+    logos: [oratioLogo],
+    description: 'Built legal-information systems that made regulatory documents faster to ingest, retrieve, and evaluate.',
     highlights: [
-      'Role scope to be documented.',
-      'Tools or systems to be documented.',
-      'Key takeaway to be documented.',
+      'Reduced average TTFT for a legal RAG system by 67%, from 15s to 5s, by optimizing async execution and introducing pooled, shared clients for MongoDB and Azure Cosmos DB Gremlin API.',
+      'Designed and implemented a CDC and ETL platform provisioned with Terraform on Azure, synchronizing 30,000+ legal documents across MongoDB and Azure Cosmos DB Gremlin API.',
+      'Built synthetic evaluation datasets and an LLM-as-judge framework integrated into CI/CD to detect RAG quality regressions before deployment.',
     ],
-    meta: ['Area to be documented', 'Role to be documented', 'Learning to be documented'],
+    meta: ['Legal technology', 'RAG performance', 'Data platforms'],
     technologies: [
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
-      { name: 'Technology to be documented', icon: 'placeholder' },
+      { name: 'Python', icon: 'python' },
+      { name: 'Terraform' },
+      { name: 'Azure' },
+      { name: 'MongoDB' },
     ],
+  },
+  {
+    period: 'June 2024 — September 2024',
+    status: 'Industry · machine learning',
+    title: 'ML Engineering Intern',
+    organization: 'ACTIA Engineering Services',
+    location: 'Ariana, Tunisia',
+    logos: [actiaLogo],
+    description: 'Worked on low-latency speech-command recognition for automotive systems on resource-constrained microcontrollers.',
+    highlights: [
+      'Designed, trained, and optimized a CNN speech-command recognition model using TensorFlow for automotive applications.',
+    ],
+    meta: ['Embedded ML', 'Automotive systems', 'Low-latency inference'],
+    technologies: [
+      { name: 'TensorFlow' },
+      { name: 'C / C++' },
+    ],
+  },
+]
+
+const additionalExperience = [
+  {
+    period: 'January 2025 — February 2025',
+    title: 'Machine Learning Instructor',
+    organization: 'Data Overflow',
+    description: 'Conducted an in-depth session on LLMs for 20+ attendees, covering sequence models, transformers, and prompt engineering; co-hosted a computer vision session on convolutional neural networks.',
+  },
+  {
+    period: 'September 2024 — Present',
+    title: 'Technical Team Member',
+    organization: 'IEEE INSAT Robotics and Automation Society Chapter',
+    description: 'Delivered interactive AI/ML workshops covering neural networks, computer vision, and TinyML for beginner learners.',
+  },
+  {
+    period: 'August 2022 — Present',
+    title: 'Vice Chairman',
+    organization: 'INSAT ACM Student Chapter',
+    description: 'Helped organize the Tunisian Collegiate Programming Contest 2022, where students competed for qualification to the Africa and Arab Collegiate Programming Contest.',
   },
 ]
 
@@ -236,7 +283,11 @@ function ExperienceEntry({ entry }) {
       <span className="experience-marker" aria-hidden="true" />
       <article className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
         <div className="experience-card-header">
-          <img className="experience-logo" src={companyLogoPlaceholder} width="48" height="48" alt="" />
+          <div className="experience-logos" aria-hidden="true">
+            {entry.logos.map((logo, index) => (
+              <img className="experience-logo" key={`${entry.organization}-${index}`} src={logo} width="48" height="48" alt="" />
+            ))}
+          </div>
           <div>
             <p className="project-status">{entry.status}</p>
             <h3>{entry.title}</h3>
@@ -253,8 +304,31 @@ function ExperienceEntry({ entry }) {
           {entry.meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
         <ProjectTechnologies title={entry.title} items={entry.technologies} />
-      </article>
+          </article>
     </li>
+  )
+}
+
+function AdditionalExperienceSection() {
+  return (
+    <section className="additional-experience" aria-labelledby="additional-experience-title">
+      <div className="projects-section-heading">
+        <p className="section-label" id="additional-experience-title">Community &amp; teaching</p>
+        <span className="section-count">05—07</span>
+      </div>
+      <div className="additional-experience-list">
+        {additionalExperience.map((entry) => (
+          <article className="additional-experience-entry" key={`${entry.period}-${entry.title}`}>
+            <p className="additional-experience-date">{entry.period}</p>
+            <div>
+              <h3>{entry.title}</h3>
+              <p className="additional-experience-organization">{entry.organization}</p>
+              <p className="additional-experience-description">{entry.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -270,7 +344,7 @@ function ExperiencePage({ currentPath }) {
           <section className="experience-history" aria-labelledby="work-history-title">
             <div className="projects-section-heading">
               <p className="section-label" id="work-history-title">Work history</p>
-              <span className="section-count">01—03</span>
+              <span className="section-count">01—04</span>
             </div>
 
             <ol className="experience-timeline">
@@ -278,9 +352,11 @@ function ExperiencePage({ currentPath }) {
             </ol>
           </section>
 
+          <AdditionalExperienceSection />
+
           <aside className="projects-note experience-note" aria-label="Experience documentation note">
             <span className="projects-note-mark" aria-hidden="true">+</span>
-            <p>Role details, dates, and selected outcomes will be added as the experience record is documented.</p>
+            <p>The work timeline follows the current resume; teaching and student-leadership roles are listed separately from professional employment.</p>
           </aside>
     </PageShell>
   )

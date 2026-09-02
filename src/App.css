@@ -551,7 +551,7 @@ h1 {
   position: absolute;
   top: 28px;
   bottom: 28px;
-  left: 138px;
+  left: 173px;
   width: 1px;
   background: var(--hairline);
   content: "";
@@ -560,8 +560,8 @@ h1 {
 .experience-entry {
   position: relative;
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  gap: 36px;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 26px;
   padding-bottom: 15px;
 }
 
@@ -578,7 +578,7 @@ h1 {
 .experience-marker {
   position: absolute;
   top: 24px;
-  left: 132px;
+  left: 167px;
   width: 13px;
   height: 13px;
   border: 1px solid var(--hairline-strong);
@@ -603,18 +603,29 @@ h1 {
 
 .experience-card-header {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 14px;
   align-items: start;
 }
 
+.experience-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+}
+
 .experience-logo {
   display: block;
+  flex: 0 0 48px;
   width: 48px;
   height: 48px;
-  object-fit: cover;
+  padding: 4px;
+  object-fit: contain;
   border: 1px solid var(--hairline-strong);
   border-radius: 4px;
+  background: #ffffff;
 }
 
 .experience-card h3 {
@@ -661,6 +672,55 @@ h1 {
   margin-top: 20px;
 }
 
+.additional-experience {
+  margin-top: 67.2px;
+}
+
+.additional-experience-list {
+  display: grid;
+  gap: 0;
+}
+
+.additional-experience-entry {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 26px;
+  padding: 20px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.additional-experience-date {
+  margin: 0;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.additional-experience-entry h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.additional-experience-organization {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.additional-experience-description {
+  max-width: 640px;
+  margin: 10px 0 0;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 .experience-note { max-width: 720px; }
 
 @media (max-width: 860px) {
@@ -690,7 +750,8 @@ h1 {
 
   .projects-featured,
   .projects-selection,
-  .experience-history { margin-top: 56px; }
+  .experience-history,
+  .additional-experience { margin-top: 56px; }
 
   .project-feature-card {
     grid-template-columns: 1fr;
@@ -761,6 +822,7 @@ h1 {
     padding-top: 0;
     padding-bottom: 11px;
     text-align: left;
+    white-space: normal;
   }
 
   .experience-marker {
@@ -773,6 +835,14 @@ h1 {
   .experience-card { padding: 18px; }
 
   .experience-card-header { gap: 12px; }
+
+  .additional-experience-entry {
+    display: block;
+  }
+
+  .additional-experience-date {
+    margin-bottom: 10px;
+  }
 
   .site-footer-inner { grid-template-columns: 1fr; }
 
