@@ -1,16 +1,24 @@
 .site-nav {
-  width: max-content;
-  margin: 20px auto 0;
-  padding: 8px 16px;
-  border: 1px solid var(--hairline-soft);
-  border-radius: 8px;
-  background: var(--canvas-soft);
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding-block: var(--nav-top-padding) var(--nav-bottom-padding);
+  padding-inline: max(var(--page-gutter), env(safe-area-inset-left)) max(var(--page-gutter), env(safe-area-inset-right));
+  border-block-end: 1px solid var(--hairline-soft);
+  background: var(--nav-surface);
+  -webkit-backdrop-filter: blur(16px) saturate(115%);
+  backdrop-filter: blur(16px) saturate(115%);
 }
 
 .site-nav-list {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--nav-gap);
+  width: max-content;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -23,8 +31,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: var(--nav-control-size);
+  height: var(--nav-control-size);
   border-radius: 8px;
   color: var(--ink);
   text-decoration: none;
@@ -67,6 +75,18 @@
 .site-nav-link:focus-visible .site-nav-tooltip {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+@supports not ((backdrop-filter: blur(1px))) {
+  .site-nav { background: var(--canvas); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-nav {
+    background: var(--canvas);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 .eyebrow {
@@ -545,15 +565,7 @@ h1 {
 
 @media (max-width: 860px) {
   .site-nav {
-    margin-top: 16px;
-    padding: 8px 12px;
-  }
-
-  .site-nav-list { gap: 8px; }
-
-  .site-nav-link {
-    width: 44px;
-    height: 44px;
+    padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
   }
 
   .about-hero {
@@ -654,13 +666,8 @@ h1 {
 
 @media (max-width: 280px) {
   .site-nav {
-    padding-inline: 8px;
+    padding-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right));
   }
 
-  .site-nav-list { gap: 4px; }
-
-  .site-nav-link {
-    width: 40px;
-    height: 40px;
-  }
+  :root { --nav-control-size: 40px; --nav-gap: 6px; }
 }

@@ -6,6 +6,7 @@
   --surface-hover: #201e18;
   --surface-strong: #26241e;
   --surface-inverse: #edecec;
+  --nav-surface: rgb(20 18 11 / 0.78);
   --ink: #edecec;
   --body: #d7d6d5;
   --muted: rgba(237, 236, 236, 0.6);
@@ -22,6 +23,11 @@
   --page-width-wide: 1100px;
   --page-width-reading: 720px;
   --page-width-article: 760px;
+  --nav-control-size: 40px;
+  --nav-gap: 16px;
+  --nav-top-padding: max(6px, env(safe-area-inset-top));
+  --nav-bottom-padding: 6px;
+  --nav-height: calc(var(--nav-control-size) + var(--nav-top-padding) + var(--nav-bottom-padding) + 1px);
   --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
@@ -30,6 +36,7 @@
 html {
   background: var(--canvas);
   color: var(--ink);
+  scroll-padding-block-start: var(--nav-height);
   scrollbar-gutter: stable both-edges;
 }
 
@@ -56,7 +63,7 @@ a:focus-visible {
   /* Both-edge scrollbar gutters already reserve one viewport gutter on each side. */
   width: min(var(--page-width), calc(100% - (var(--page-gutter) / 2)));
   margin-inline: auto;
-  padding-block: var(--page-top) var(--page-bottom);
+  padding-block: calc(var(--page-top) + var(--nav-height)) var(--page-bottom);
 }
 
 .page-shell--standard { --page-width: var(--page-width-standard); }
@@ -68,7 +75,7 @@ a:focus-visible {
   position: absolute;
   top: 12px;
   left: 12px;
-  z-index: 3;
+  z-index: 30;
   padding: 8px 12px;
   border-radius: 8px;
   background: var(--surface-inverse);
@@ -89,5 +96,7 @@ a:focus-visible {
   :root {
     --page-top: 40px;
     --page-bottom: 80px;
+    --nav-control-size: 44px;
+    --nav-gap: 12px;
   }
 }

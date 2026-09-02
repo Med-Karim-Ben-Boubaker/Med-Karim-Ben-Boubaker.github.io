@@ -10,6 +10,7 @@ colors:
   surface-hover: "#201e18"
   surface-strong: "#26241e"
   control: "#2b2923"
+  nav-surface: "rgba(20, 18, 11, 0.78)"
   text-primary: "#edecec"
   text-secondary: "rgba(237, 236, 236, 0.60)"
   text-muted: "rgba(237, 236, 236, 0.40)"
@@ -158,12 +159,13 @@ layout:
 
 components:
   top-nav:
-    backgroundColor: "{colors.canvas}"
+    backgroundColor: "{colors.nav-surface}"
     textColor: "{colors.text-primary}"
     typography: "{typography.nav-link}"
-    height: 52px
-    outerPadding: 0 20px
+    height: 53px desktop / 57px mobile
+    outerPadding: 6px 20px 6px
     contentMaxWidth: 1300px
+    material: translucent canvas with 16px backdrop blur, hairline bottom border, no shadow
   button-primary:
     backgroundColor: "{colors.action-surface}"
     textColor: "{colors.action-ink}"
@@ -341,6 +343,7 @@ The composition is intentionally quiet: a fixed compact header, centered navigat
 - **Surface hover** (`{colors.surface-hover}` — `#201e18`): Optional interactive surface state.
 - **Surface strong** (`{colors.surface-strong}` — `#26241e`): Secondary controls, compact panels, and tags.
 - **Control** (`{colors.control}` — `#2b2923`): Small circular controls and dense input affordances.
+- **Navigation surface** (`{colors.nav-surface}` — `rgba(20, 18, 11, 0.78)`): Translucent fixed navigation layer; use with backdrop blur and an opaque canvas fallback.
 
 ### Text and borders
 
@@ -473,7 +476,7 @@ Depth is tonal and structural rather than shadow-based.
 | Hairline | 1px `{colors.hairline}` | Card outlines and dividers |
 | Soft hairline | 1px `{colors.hairline-soft}` | Low-emphasis outlines |
 
-Do not use drop shadows, glow effects, glass blur, or floating elevation tiers as default decoration. A large product demonstration may use an internal image, texture, or panel stack, but the outer container remains flat and hairline-defined.
+Do not use drop shadows, glow effects, glass blur, or floating elevation tiers as default decoration. The fixed top navigation is the documented exception: its restrained translucent canvas and backdrop blur establish a functional layer without adding shadow or glow. A large product demonstration may use an internal image, texture, or panel stack, but the outer container remains flat and hairline-defined.
 
 ## Shapes
 
@@ -496,7 +499,9 @@ The defining contrast is square-ish 4px content framing against fully rounded ac
 
 ### Top navigation
 
-**`top-nav`** uses `{colors.canvas}`, a 52px height, and a centered 1300px container. The layout is a three-part grid: identity area on the left, primary navigation centered, and account/action controls on the right. Navigation links use 14px text, 21px line height, and 0.14px tracking. Keep the menu compact and avoid heavy separators.
+**`top-nav`** uses `{colors.nav-surface}`, a 53px desktop / 57px mobile height, and a centered navigation group within a full-width viewport layer. Navigation links use 14px text, 21px line height, and 0.14px tracking. Keep the menu compact and avoid heavy separators.
+
+The site implementation uses a full-width, fixed viewport layer with the centered navigation group inside it. Use `{colors.nav-surface}` with a modest backdrop blur, a bottom hairline, and no shadow. Reserve the navigation height in the page shell so the layer does not obscure the first content. Keep the controls at 40px on desktop and 44px on mobile, with safe-area-aware viewport padding.
 
 ### Buttons
 
