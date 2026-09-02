@@ -1,11 +1,3 @@
-.blog-page,
-.article-page,
-.not-found-page {
-  width: min(720px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 67.2px 0 112px;
-}
-
 .blog-intro,
 .article-header {
   max-width: 680px;
@@ -115,10 +107,6 @@
   line-height: 1.55;
 }
 
-.article-page {
-  width: min(760px, calc(100% - 40px));
-}
-
 .article-back-link {
   display: inline-flex;
   margin-bottom: 40px;
@@ -160,12 +148,6 @@
 }
 
 @media (max-width: 860px) {
-  .blog-page,
-  .article-page,
-  .not-found-page {
-    padding: 40px 0 80px;
-  }
-
   .blog-list-section {
     margin-top: 56px;
   }
@@ -191,7 +173,4 @@
     margin-top: 8px;
   }
 
-  .article-page {
-    width: min(100% - 40px, 720px);
-  }
 }

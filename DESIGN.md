@@ -146,6 +146,16 @@ spacing:
   section: 67.2px
   section-large: 112px
 
+layout:
+  page-gutter: 20px
+  page-top: 67.2px
+  page-bottom: 112px
+  page-width-standard: 960px
+  page-width-wide: 1100px
+  page-width-reading: 720px
+  page-width-article: 760px
+  font-sans: "system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+
 components:
   top-nav:
     backgroundColor: "{colors.canvas}"

@@ -1,7 +1,7 @@
 .article-content {
   min-width: 0;
   color: var(--body);
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
   overflow-wrap: break-word;

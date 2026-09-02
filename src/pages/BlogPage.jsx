@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar'
+import PageShell from '../components/PageShell'
 import { withBasePath } from '../site-url'
 
 function ArticleListItem({ article }) {
@@ -17,12 +17,7 @@ function ArticleListItem({ article }) {
 
 export default function BlogPage({ articles, currentPath = '/blog/' }) {
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar currentPath={currentPath} />
-
-      <main id="main-content">
-        <article className="blog-page" aria-labelledby="blog-title">
+    <PageShell currentPath={currentPath} variant="reading" className="blog-page" labelledBy="blog-title">
           <header className="blog-intro">
             <p className="eyebrow">Blog</p>
             <h1 id="blog-title">Notes on building reliable systems.</h1>
@@ -51,8 +46,6 @@ export default function BlogPage({ articles, currentPath = '/blog/' }) {
               </div>
             )}
           </section>
-        </article>
-      </main>
-    </>
+    </PageShell>
   )
 }

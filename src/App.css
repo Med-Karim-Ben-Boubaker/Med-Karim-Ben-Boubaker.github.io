@@ -88,9 +88,7 @@ h1 {
 }
 
 .about-page {
-  width: min(960px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 48px 0 80px;
+  --page-bottom: 80px;
 }
 
 .about-hero {
@@ -158,12 +156,6 @@ h1 {
   text-align: left;
 }
 
-.projects-page {
-  width: min(1100px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 67.2px 0 112px;
-}
-
 .projects-intro { max-width: 720px; }
 
 .projects-intro h1 {
@@ -192,7 +184,7 @@ h1 {
 .section-label,
 .section-count,
 .project-status {
-  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.72px;
@@ -411,12 +403,6 @@ h1 {
   line-height: 1.55;
 }
 
-.experience-page {
-  width: min(960px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 67.2px 0 112px;
-}
-
 .experience-intro { max-width: 720px; }
 
 .experience-intro h1 {
@@ -570,8 +556,6 @@ h1 {
     height: 44px;
   }
 
-  .about-page { padding: 40px 0 64px; }
-
   .about-hero {
     display: flex;
     flex-direction: column;
@@ -587,10 +571,6 @@ h1 {
 
   .about-intro { font-size: 16px; }
   .about-trajectory { margin-top: 56px; }
-
-  .projects-page { padding: 40px 0 80px; }
-
-  .experience-page { padding: 40px 0 80px; }
 
   .projects-lead { font-size: 16px; }
 
@@ -670,4 +650,17 @@ h1 {
   .experience-card { padding: 18px; }
 
   .experience-card-header { gap: 12px; }
+}
+
+@media (max-width: 280px) {
+  .site-nav {
+    padding-inline: 8px;
+  }
+
+  .site-nav-list { gap: 4px; }
+
+  .site-nav-link {
+    width: 40px;
+    height: 40px;
+  }
 }

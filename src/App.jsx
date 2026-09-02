@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar'
+import PageShell from './components/PageShell'
 import ProjectTechnologies from './components/ProjectTechnologies'
 import ArticlePage from './pages/ArticlePage'
 import BlogPage from './pages/BlogPage'
@@ -42,12 +42,7 @@ function ProjectCard({ title, description, status, meta, technologies }) {
 
 function AboutPage({ currentPath }) {
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar currentPath={currentPath} />
-
-      <main id="main-content">
-        <article className="about-page" aria-labelledby="about-title">
+    <PageShell currentPath={currentPath} variant="standard" className="about-page" labelledBy="about-title">
           <section className="about-hero">
             <div className="about-hero-copy">
               <p className="eyebrow">About</p>
@@ -71,20 +66,13 @@ function AboutPage({ currentPath }) {
               </p>
             </div>
           </section>
-        </article>
-      </main>
-    </>
+    </PageShell>
   )
 }
 
 function ProjectsPage({ currentPath }) {
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar currentPath={currentPath} />
-
-      <main id="main-content">
-        <article className="projects-page" aria-labelledby="projects-title">
+    <PageShell currentPath={currentPath} variant="wide" className="projects-page" labelledBy="projects-title">
           <section className="projects-intro">
             <p className="eyebrow">Projects</p>
             <h1 id="projects-title">A few systems I’m building.</h1>
@@ -174,9 +162,7 @@ function ProjectsPage({ currentPath }) {
             <span className="projects-note-mark" aria-hidden="true">+</span>
             <p>Each project will eventually include the problem, my role, the system or method, evidence, and what I learned.</p>
           </aside>
-        </article>
-      </main>
-    </>
+    </PageShell>
   )
 }
 
@@ -272,12 +258,7 @@ function ExperienceEntry({ entry }) {
 
 function ExperiencePage({ currentPath }) {
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar currentPath={currentPath} />
-
-      <main id="main-content">
-        <article className="experience-page" aria-labelledby="experience-title">
+    <PageShell currentPath={currentPath} variant="standard" className="experience-page" labelledBy="experience-title">
           <section className="experience-intro">
             <p className="eyebrow">Experience</p>
             <h1 id="experience-title">Experience timeline.</h1>
@@ -299,26 +280,18 @@ function ExperiencePage({ currentPath }) {
             <span className="projects-note-mark" aria-hidden="true">+</span>
             <p>Role details, dates, and selected outcomes will be added as the experience record is documented.</p>
           </aside>
-        </article>
-      </main>
-    </>
+    </PageShell>
   )
 }
 
-function NotFoundPage() {
+function NotFoundPage({ currentPath }) {
   return (
-    <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <Navbar />
-      <main id="main-content">
-        <article className="not-found-page" aria-labelledby="not-found-title">
+    <PageShell currentPath={currentPath} variant="reading" className="not-found-page" labelledBy="not-found-title">
           <p className="eyebrow">Not found</p>
           <h1 id="not-found-title">This page does not exist.</h1>
           <p>The article or page you requested could not be found.</p>
           <a className="article-back-link" href={withBasePath('/blog/')}>Back to articles</a>
-        </article>
-      </main>
-    </>
+    </PageShell>
   )
 }
 
@@ -332,9 +305,9 @@ export default function App({ pathname = typeof window !== 'undefined' ? window.
   if (currentPath.startsWith('/blog/')) {
     const slug = currentPath.slice('/blog/'.length)
     const article = articles.find((candidate) => candidate.slug === slug)
-    return article ? <ArticlePage article={article} currentPath={currentPath} /> : <NotFoundPage />
+    return article ? <ArticlePage article={article} currentPath={currentPath} /> : <NotFoundPage currentPath={currentPath} />
   }
 
   if (currentPath === '/') return <AboutPage currentPath={currentPath} />
-  return <NotFoundPage />
+  return <NotFoundPage currentPath={currentPath} />
 }

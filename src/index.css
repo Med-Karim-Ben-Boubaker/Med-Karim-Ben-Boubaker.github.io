@@ -15,6 +15,14 @@
   --primary: #f54e00;
   --accent-active: #d04200;
   --focus: #f54e00;
+  --page-gutter: 20px;
+  --page-top: 67.2px;
+  --page-bottom: 112px;
+  --page-width-standard: 960px;
+  --page-width-wide: 1100px;
+  --page-width-reading: 720px;
+  --page-width-article: 760px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -22,6 +30,7 @@
 html {
   background: var(--canvas);
   color: var(--ink);
+  scrollbar-gutter: stable both-edges;
 }
 
 body {
@@ -31,7 +40,7 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--body);
-  font-family: Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -42,6 +51,18 @@ a:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
+
+.page-shell {
+  /* Both-edge scrollbar gutters already reserve one viewport gutter on each side. */
+  width: min(var(--page-width), calc(100% - (var(--page-gutter) / 2)));
+  margin-inline: auto;
+  padding-block: var(--page-top) var(--page-bottom);
+}
+
+.page-shell--standard { --page-width: var(--page-width-standard); }
+.page-shell--wide { --page-width: var(--page-width-wide); }
+.page-shell--reading { --page-width: var(--page-width-reading); }
+.page-shell--article { --page-width: var(--page-width-article); }
 
 .skip-link {
   position: absolute;
@@ -61,5 +82,12 @@ a:focus-visible {
   *, *::before, *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --page-top: 40px;
+    --page-bottom: 80px;
   }
 }
