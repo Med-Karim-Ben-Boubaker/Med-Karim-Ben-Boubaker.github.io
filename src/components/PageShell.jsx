@@ -1,4 +1,5 @@
 import Navbar from './Navbar'
+import Footer from './Footer'
 
 const variantClasses = {
   standard: 'page-shell--standard',
@@ -20,6 +21,7 @@ export default function PageShell({ currentPath, variant = 'standard', className
           {children}
         </article>
       </main>
+      <Footer />
     </>
   )
 }

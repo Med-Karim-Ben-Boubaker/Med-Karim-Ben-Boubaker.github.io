@@ -77,6 +77,71 @@
   transform: translate(-50%, 0);
 }
 
+.site-footer {
+  flex: 0 0 auto;
+  width: 100%;
+  border-block-start: 1px solid var(--hairline);
+  background: var(--surface-card);
+  color: var(--muted);
+}
+
+.site-footer-inner {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 1300px);
+  margin-inline: auto;
+  padding: 40px 20px 20px;
+}
+
+.site-footer-credit {
+  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.14px;
+  line-height: 1.5;
+}
+
+.site-footer-credit span { color: var(--primary); }
+
+.site-footer-social {
+  grid-column: span 2;
+  justify-self: end;
+}
+
+.site-footer-social ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.14px;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.site-footer-social a:hover { color: var(--primary); }
+
+.site-footer-social a:focus-visible {
+  color: var(--ink);
+  outline-offset: 4px;
+}
+
 @supports not ((backdrop-filter: blur(1px))) {
   .site-nav { background: var(--canvas); }
 }
@@ -651,6 +716,17 @@ h1 {
   .projects-note { margin-top: 56px; }
 
   .experience-note { margin-top: 56px; }
+
+  .site-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .site-footer-inner { align-items: start; }
+
+  .site-footer-credit,
+  .site-footer-social { grid-column: span 2; }
+
+  .site-footer-social { justify-self: start; }
+
+  .site-footer-social ul { justify-content: flex-start; }
 }
 
 @media (max-width: 520px) {
@@ -697,6 +773,13 @@ h1 {
   .experience-card { padding: 18px; }
 
   .experience-card-header { gap: 12px; }
+
+  .site-footer-inner { grid-template-columns: 1fr; }
+
+  .site-footer-credit,
+  .site-footer-social { grid-column: auto; }
+
+  .site-footer-social ul { column-gap: 10px; }
 }
 
 @media (max-width: 280px) {

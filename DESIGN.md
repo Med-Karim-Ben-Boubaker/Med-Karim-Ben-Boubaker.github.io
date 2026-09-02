@@ -307,7 +307,7 @@ components:
     backgroundColor: "{colors.surface-card}"
     textColor: "{colors.text-secondary}"
     typography: "{typography.body-sm}"
-    padding: 67.2px 20px 30px
+    padding: 40px 20px 20px
   footer-link:
     backgroundColor: transparent
     textColor: "{colors.text-secondary}"
@@ -553,7 +553,7 @@ The site implementation uses a full-width, fixed viewport layer with the centere
 
 **`cta-band`** uses the canvas as a quiet closing band. Apply 67.2px top and 134.4px bottom padding, center the headline, and use one primary pill. The large closing headline uses `{typography.display-mega}`.
 
-**`footer`** uses `{colors.surface-card}`, 67.2px top padding, 20px horizontal padding, and 30px bottom padding. Constrain its contents to 1300px. Use five link columns on desktop, two on mobile, and 10px column gaps with approximately 44.8px row spacing.
+**`footer`** uses `{colors.surface-card}`, 40px top padding, 20px horizontal padding, and 20px bottom padding. Constrain its contents to 1300px. Use the five-track desktop scaffold for compact content, two columns on mobile, and 10px column gaps. Keep the footer in normal document flow so it can settle at the viewport bottom on short pages without becoming fixed or sticky.
 
 **`footer-link`** is transparent, uses `{colors.text-secondary}`, and stays visually subordinate to the main page navigation.
 
