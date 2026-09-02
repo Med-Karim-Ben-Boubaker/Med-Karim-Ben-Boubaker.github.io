@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react/dist/offline'
 import awsIcon from '@iconify-icons/thesvg/aws'
 import cplusplusIcon from '@iconify-icons/thesvg/cplusplus'
 import fastapiIcon from '@iconify-icons/thesvg/fastapi'
+import gnuBashIcon from '@iconify-icons/thesvg/gnu-bash'
 import githubIcon from '@iconify-icons/thesvg/github'
 import jupyterIcon from '@iconify-icons/thesvg/jupyter'
 import langchainIcon from '@iconify-icons/thesvg/langchain'
@@ -14,9 +15,12 @@ import openrouterIcon from '@iconify-icons/thesvg/openrouter'
 import pydanticaiIcon from '@iconify-icons/thesvg/pydanticai'
 import pythonIcon from '@iconify-icons/thesvg/python'
 import qdrantIcon from '@iconify-icons/simple-icons/qdrant'
+import raspberryPiIcon from '@iconify-icons/thesvg/raspberry-pi'
 import reactIcon from '@iconify-icons/thesvg/react'
+import rosIcon from '@iconify-icons/thesvg/ros'
 import tensorflowIcon from '@iconify-icons/thesvg/tensorflow'
 import terraformIcon from '@iconify-icons/thesvg/terraform'
+import ubuntuIcon from '@iconify-icons/thesvg/ubuntu'
 import viteIcon from '@iconify-icons/thesvg/vite'
 
 // Keep this registry explicit: display names are not converted to provider slugs at runtime.
@@ -36,10 +40,14 @@ const technologyIcons = {
   pydanticai: pydanticaiIcon,
   python: pythonIcon,
   qdrant: qdrantIcon,
+  raspberryPi: raspberryPiIcon,
   react: reactIcon,
+  ros: rosIcon,
   tensorflow: tensorflowIcon,
   terraform: terraformIcon,
+  ubuntu: ubuntuIcon,
   vite: viteIcon,
+  bash: gnuBashIcon,
 }
 
 function TechnologyIcon({ icon }) {

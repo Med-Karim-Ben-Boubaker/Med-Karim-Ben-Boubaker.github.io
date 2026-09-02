@@ -10,6 +10,7 @@ import hochschuleOffenburgLogo from './assets/experience/hochschule-offenburg.pn
 import greenEarthXLogo from './assets/experience/greenearthx.jpg'
 import oratioLogo from './assets/experience/oratio.jpg'
 import actiaLogo from './assets/experience/actia.jpg'
+import ieeeInsatRoboticsLogo from './assets/experience/ieee-insat-robotics.png'
 import './App.css'
 import './styles/blog.css'
 
@@ -230,7 +231,7 @@ const experienceEntries = [
       'Designed and implemented a CDC and ETL platform provisioned with Terraform on Azure, synchronizing 30,000+ legal documents across MongoDB and Azure Cosmos DB Gremlin API.',
       'Built synthetic evaluation datasets and an LLM-as-judge framework integrated into CI/CD to detect RAG quality regressions before deployment.',
     ],
-    meta: ['Legal technology', 'RAG performance', 'Data platforms'],
+    meta: ['Legal chatbot', 'RAG performance', 'Document Processing'],
     technologies: [
       { name: 'Python', icon: 'python' },
       { name: 'Azure' },
@@ -256,6 +257,30 @@ const experienceEntries = [
       { name: 'Python', icon: 'python' },
       { name: 'C/C++', icon: 'cpp' },
       { name: 'TensorFlow', icon: 'tensorflow' },
+    ],
+  },
+  {
+    period: '09/2023 — 07/2024',
+    duration: '11 mos',
+    title: 'Software Developer',
+    organization: 'IEEE INSAT Robotics and Automation Society Chapter',
+    employmentType: 'Part-time',
+    location: 'Tunis, Tunisia · On-site',
+    logos: [ieeeInsatRoboticsLogo],
+    description: 'Led development of core software for an autonomous robot that qualified for the Eurobot 2024 international competition in France.',
+    highlights: [
+      'Designed a decision-making engine with a path planning algorithm fusing LiDAR, computer vision, and odometry for autonomous navigation.',
+      'Engineered a task scheduler optimizing priorities by distance, resource availability, and multi-factor criteria.',
+      'Architected a ROS system with service interfaces uniting LiDAR, camera, navigation, and task scheduling for seamless autonomous operation.',
+      'Established reliable CAN Bus communication via SocketCAN and RS485/CAN HAT between Raspberry Pi 4 and STM32F407.',
+    ],
+    meta: ['Autonomous robotics', 'ROS', 'Embedded systems'],
+    technologies: [
+      { name: 'ROS1', icon: 'ros' },
+      { name: 'Ubuntu', icon: 'ubuntu' },
+      { name: 'Python', icon: 'python' },
+      { name: 'Raspberry Pi', icon: 'raspberryPi' },
+      { name: 'Bash', icon: 'bash' },
     ],
   },
 ]
@@ -302,7 +327,9 @@ function ExperienceEntry({ entry }) {
           <div className="experience-card-header-content">
             <h3>{entry.title}</h3>
             <p className="experience-organization">
-              {entry.organization} <span aria-hidden="true">·</span> {entry.location}
+              {entry.organization}
+              {entry.employmentType && <><span aria-hidden="true"> · </span>{entry.employmentType}</>}
+              <span aria-hidden="true"> · </span> {entry.location}
             </p>
           </div>
         </div>
@@ -357,7 +384,7 @@ function ExperiencePage({ currentPath }) {
           <section className="experience-history" aria-labelledby="work-history-title">
             <div className="projects-section-heading">
               <p className="section-label" id="work-history-title">Work history</p>
-              <span className="section-count">01—04</span>
+              <span className="section-count">01—05</span>
             </div>
 
             <ol className="experience-timeline">
