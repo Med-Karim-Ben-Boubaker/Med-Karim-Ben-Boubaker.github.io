@@ -137,6 +137,41 @@ h1 {
   text-align: left;
 }
 
+.about-social-links {
+  display: flex;
+  max-width: 600px;
+  margin: 16px 0 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  list-style: none;
+}
+
+.about-social-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--body);
+  text-decoration-color: var(--hairline-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.about-social-link:hover,
+.about-social-link:focus-visible {
+  color: var(--primary);
+  text-decoration-color: currentColor;
+}
+
+.about-social-icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
 .about-portrait {
   width: 100%;
   margin: 40px 0 0;

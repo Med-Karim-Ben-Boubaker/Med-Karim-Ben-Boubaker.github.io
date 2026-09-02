@@ -1,5 +1,6 @@
 import PageShell from './components/PageShell'
 import ProjectTechnologies from './components/ProjectTechnologies'
+import SocialLinks from './components/SocialLinks'
 import ArticlePage from './pages/ArticlePage'
 import BlogPage from './pages/BlogPage'
 import { normalizePath, withBasePath } from './site-url'
@@ -51,6 +52,7 @@ function AboutPage({ currentPath }) {
               <p className="about-intro">
                 I’m exploring how humans and AI agents can collaborate, especially in knowledge work. I build reliable and transparent knowledge systems that help people find, understand, and use domain information with less friction. My work brings together LLMs, symbolic AI, information retrieval, and knowledge graphs.
               </p>
+              <SocialLinks />
             </div>
 
             <figure className="about-portrait">
