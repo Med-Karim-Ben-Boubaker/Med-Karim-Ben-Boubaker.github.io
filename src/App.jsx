@@ -7,7 +7,6 @@ import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.png'
 import projectPlaceholder from './assets/project-placeholder.png'
 import hochschuleOffenburgLogo from './assets/experience/hochschule-offenburg.png'
-import hahnSchickardLogo from './assets/experience/hahn-schickard.png'
 import greenEarthXLogo from './assets/experience/greenearthx.jpg'
 import oratioLogo from './assets/experience/oratio.jpg'
 import actiaLogo from './assets/experience/actia.jpg'
@@ -176,11 +175,10 @@ const experienceEntries = [
   {
     period: '03/2026 — Present',
     duration: '6 mos',
-    status: 'Current · research engineering',
     title: 'AI Research Engineer',
     organization: 'Hochschule Offenburg & Hahn-Schickard',
     location: 'Offenburg, Germany',
-    logos: [hochschuleOffenburgLogo, hahnSchickardLogo],
+    logos: [hochschuleOffenburgLogo],
     description: 'Building evidence-grounded AI systems that turn medical literature into validated probability distributions for clinical Bayesian networks.',
     highlights: [
       'Built a PydanticAI ReAct agent that searches medical literature, reasons over retrieved evidence, and generates validated probability distributions for clinical Bayesian networks.',
@@ -198,7 +196,6 @@ const experienceEntries = [
   {
     period: '11/2025 — 03/2026',
     duration: '4 mos',
-    status: 'Industry · AI engineering',
     title: 'AI Engineer',
     organization: 'GreenEarthX',
     location: 'Palo Alto, CA · Remote',
@@ -220,7 +217,6 @@ const experienceEntries = [
   {
     period: '06/2025 — 11/2025',
     duration: '5 mos',
-    status: 'Industry · AI engineering',
     title: 'AI Engineer',
     organization: 'Oratio Technologies',
     location: 'Tunis, Tunisia',
@@ -242,7 +238,6 @@ const experienceEntries = [
   {
     period: '06/2024 — 09/2024',
     duration: '3 mos',
-    status: 'Industry · machine learning',
     title: 'ML Engineering Intern',
     organization: 'ACTIA Engineering Services',
     location: 'Ariana, Tunisia',
@@ -298,8 +293,7 @@ function ExperienceEntry({ entry }) {
               <img className="experience-logo" key={`${entry.organization}-${index}`} src={logo} width="48" height="48" alt="" />
             ))}
           </div>
-          <div>
-            <p className="project-status">{entry.status}</p>
+          <div className="experience-card-header-content">
             <h3>{entry.title}</h3>
             <p className="experience-organization">
               {entry.organization} <span aria-hidden="true">·</span> {entry.location}
