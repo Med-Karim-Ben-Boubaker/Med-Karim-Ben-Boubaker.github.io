@@ -285,30 +285,6 @@ const experienceEntries = [
   },
 ]
 
-const additionalExperience = [
-  {
-    period: '01/2025 — 02/2025',
-    duration: '1 mo',
-    title: 'Machine Learning Instructor',
-    organization: 'Data Overflow',
-    description: 'Conducted an in-depth session on LLMs for 20+ attendees, covering sequence models, transformers, and prompt engineering; co-hosted a computer vision session on convolutional neural networks.',
-  },
-  {
-    period: '09/2024 — Present',
-    duration: '2 yrs',
-    title: 'Technical Team Member',
-    organization: 'IEEE INSAT Robotics and Automation Society Chapter',
-    description: 'Delivered interactive AI/ML workshops covering neural networks, computer vision, and TinyML for beginner learners.',
-  },
-  {
-    period: '08/2022 — Present',
-    duration: '4 yrs 1 mo',
-    title: 'Vice Chairman',
-    organization: 'INSAT ACM Student Chapter',
-    description: 'Helped organize the Tunisian Collegiate Programming Contest 2022, where students competed for qualification to the Africa and Arab Collegiate Programming Contest.',
-  },
-]
-
 function ExperienceEntry({ entry }) {
   return (
     <li className={`experience-entry${entry.current ? ' is-current' : ''}`}>
@@ -346,32 +322,6 @@ function ExperienceEntry({ entry }) {
   )
 }
 
-function AdditionalExperienceSection() {
-  return (
-    <section className="additional-experience" aria-labelledby="additional-experience-title">
-      <div className="projects-section-heading">
-        <p className="section-label" id="additional-experience-title">Community &amp; teaching</p>
-        <span className="section-count">05—07</span>
-      </div>
-      <div className="additional-experience-list">
-        {additionalExperience.map((entry) => (
-          <article className="additional-experience-entry" key={`${entry.period}-${entry.title}`}>
-            <p className="additional-experience-date">
-              <span>{entry.period}</span>
-              <span className="experience-duration">{entry.duration}</span>
-            </p>
-            <div>
-              <h3>{entry.title}</h3>
-              <p className="additional-experience-organization">{entry.organization}</p>
-              <p className="additional-experience-description">{entry.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function ExperiencePage({ currentPath }) {
   return (
     <PageShell currentPath={currentPath} variant="standard" className="experience-page" labelledBy="experience-title">
@@ -392,12 +342,6 @@ function ExperiencePage({ currentPath }) {
             </ol>
           </section>
 
-          <AdditionalExperienceSection />
-
-          <aside className="projects-note experience-note" aria-label="Experience documentation note">
-            <span className="projects-note-mark" aria-hidden="true">+</span>
-            <p>The work timeline follows the current resume; teaching and student-leadership roles are listed separately from professional employment.</p>
-          </aside>
     </PageShell>
   )
 }

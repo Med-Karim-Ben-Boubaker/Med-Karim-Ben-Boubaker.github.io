@@ -691,63 +691,6 @@ h1 {
   margin-top: 20px;
 }
 
-.additional-experience {
-  margin-top: 67.2px;
-}
-
-.additional-experience-list {
-  display: grid;
-  gap: 0;
-}
-
-.additional-experience-entry {
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  gap: 26px;
-  padding: 20px 0;
-  border-top: 1px solid var(--hairline);
-}
-
-.additional-experience-date {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  color: var(--muted);
-  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.additional-experience-date .experience-duration {
-  margin-top: 4px;
-}
-
-.additional-experience-entry h3 {
-  margin: 0;
-  color: var(--ink);
-  font-size: 18px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
-}
-
-.additional-experience-organization {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.additional-experience-description {
-  max-width: 640px;
-  margin: 10px 0 0;
-  color: var(--body);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.experience-note { max-width: 720px; }
-
 @media (max-width: 860px) {
   .site-nav {
     padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
@@ -775,8 +718,7 @@ h1 {
 
   .projects-featured,
   .projects-selection,
-  .experience-history,
-  .additional-experience { margin-top: 56px; }
+  .experience-history { margin-top: 56px; }
 
   .project-feature-card {
     grid-template-columns: 1fr;
@@ -800,8 +742,6 @@ h1 {
   }
 
   .projects-note { margin-top: 56px; }
-
-  .experience-note { margin-top: 56px; }
 
   .site-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
@@ -860,14 +800,6 @@ h1 {
   .experience-card { padding: 18px; }
 
   .experience-card-header { gap: 12px; }
-
-  .additional-experience-entry {
-    display: block;
-  }
-
-  .additional-experience-date {
-    margin-bottom: 10px;
-  }
 
   .site-footer-inner { grid-template-columns: 1fr; }
 
