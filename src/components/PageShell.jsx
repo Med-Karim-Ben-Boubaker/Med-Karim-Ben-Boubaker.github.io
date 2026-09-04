@@ -22,7 +22,7 @@ export default function PageShell({ currentPath, variant = 'standard', className
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar currentPath={currentPath} />
       <main id="main-content">
-        <AmbientSignalField route={signalRoute} />
+        {signalRoute !== 'article' && <AmbientSignalField route={signalRoute} />}
         <article
           className={pageClassName}
           aria-labelledby={labelledBy}
