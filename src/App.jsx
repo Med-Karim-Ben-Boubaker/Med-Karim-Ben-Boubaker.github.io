@@ -1,3 +1,6 @@
+import { Icon } from '@iconify/react/dist/offline'
+import githubIcon from '@iconify-icons/thesvg/github'
+import pdfIcon from '@iconify-icons/simple-icons/adobeacrobatreader'
 import PageShell from './components/PageShell'
 import ProjectTechnologies from './components/ProjectTechnologies'
 import SocialLinks from './components/SocialLinks'
@@ -35,16 +38,37 @@ function ProjectMeta({ children }) {
   return <li className="project-meta">{children}</li>
 }
 
+const resourceIcons = {
+  github: githubIcon,
+  pdf: pdfIcon,
+}
+
+function ResourceIcon({ kind }) {
+  const icon = resourceIcons[kind]
+
+  if (icon) {
+    return <Icon className="project-link-icon" icon={icon} aria-hidden="true" focusable="false" />
+  }
+
+  return (
+    <svg className="project-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9S14.3 18.5 12 21c-2.3-2.5-3.5-5.5-3.5-9S9.7 5.5 12 3Z" />
+    </svg>
+  )
+}
+
 function ProjectLinks({ title, links }) {
   if (!links?.length) return null
 
   return (
     <ul className="project-links" aria-label={`${title} resources`}>
-      {links.map(({ label, href }) => (
+      {links.map(({ label, href, kind = 'url' }) => (
         <li key={href}>
-          <a href={href} target="_blank" rel="noreferrer">
-            <span>{label}</span>
-            <span aria-hidden="true">↗</span>
+          <a href={href} target="_blank" rel="noreferrer" aria-label={`${kind === 'github' ? 'GitHub' : kind === 'pdf' ? 'PDF document' : 'URL'}: ${label}`}>
+            <ResourceIcon kind={kind} />
+            <span className="project-link-label">{label}</span>
+            <span className="project-link-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
       ))}
@@ -52,21 +76,20 @@ function ProjectLinks({ title, links }) {
   )
 }
 
-function ProjectCard({ title, description, status, period, organization, highlights, meta, technologies, media, visualLabel, visualDetail, links }) {
+function ProjectCard({ title, description, period, organization, highlights, meta, technologies, media, visualLabel, visualDetail, links }) {
   return (
     <article className="project-card" aria-label={title}>
       <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} />
       <div className="project-card-content">
         <div className="project-card-heading">
-          <p className="project-status">{status}</p>
           <h3>{title}</h3>
         </div>
         <p className="project-card-period">{period}</p>
         {organization && <p className="project-card-organization">{organization}</p>}
         <p className="project-card-description">{description}</p>
-        <ul className="project-highlights">
-          {highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-        </ul>
+        <div className="project-highlights">
+          {highlights.map((highlight) => <p key={highlight}>{highlight}</p>)}
+        </div>
         <ul className="project-meta-list" aria-label={`${title} details`}>
           {meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>

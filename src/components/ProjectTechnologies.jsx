@@ -4,6 +4,7 @@ import cplusplusIcon from '@iconify-icons/thesvg/cplusplus'
 import fastapiIcon from '@iconify-icons/thesvg/fastapi'
 import gnuBashIcon from '@iconify-icons/thesvg/gnu-bash'
 import githubIcon from '@iconify-icons/thesvg/github'
+import huggingFaceIcon from '@iconify-icons/thesvg/hugging-face'
 import jupyterIcon from '@iconify-icons/thesvg/jupyter'
 import langchainIcon from '@iconify-icons/thesvg/langchain'
 import langfuseIcon from '@iconify-icons/thesvg/langfuse'
@@ -14,6 +15,7 @@ import obsidianIcon from '@iconify-icons/thesvg/obsidian'
 import openrouterIcon from '@iconify-icons/thesvg/openrouter'
 import pydanticaiIcon from '@iconify-icons/thesvg/pydanticai'
 import pythonIcon from '@iconify-icons/thesvg/python'
+import pytorchIcon from '@iconify-icons/thesvg/pytorch'
 import qdrantIcon from '@iconify-icons/simple-icons/qdrant'
 import raspberryPiIcon from '@iconify-icons/thesvg/raspberry-pi'
 import reactIcon from '@iconify-icons/thesvg/react'
@@ -29,6 +31,7 @@ const technologyIcons = {
   cpp: cplusplusIcon,
   fastapi: fastapiIcon,
   github: githubIcon,
+  huggingFace: huggingFaceIcon,
   jupyter: jupyterIcon,
   langchain: langchainIcon,
   langfuse: langfuseIcon,
@@ -39,6 +42,7 @@ const technologyIcons = {
   openrouter: openrouterIcon,
   pydanticai: pydanticaiIcon,
   python: pythonIcon,
+  pytorch: pytorchIcon,
   qdrant: qdrantIcon,
   raspberryPi: raspberryPiIcon,
   react: reactIcon,

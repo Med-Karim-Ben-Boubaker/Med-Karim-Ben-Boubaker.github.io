@@ -300,8 +300,7 @@ h1 {
 }
 
 .section-label,
-.section-count,
-.project-status {
+.section-count {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
@@ -318,11 +317,6 @@ h1 {
 .section-count {
   margin: 0;
   color: var(--muted);
-}
-
-.project-status {
-  margin: 0;
-  color: var(--primary);
 }
 
 .projects-selection h2 {
@@ -488,7 +482,7 @@ h1 {
 }
 
 .project-card-heading h3 {
-  margin: 8px 0 0;
+  margin: 0;
   color: var(--ink);
   font-size: 18px;
   font-weight: 500;
@@ -518,11 +512,13 @@ h1 {
   display: grid;
   gap: 7px;
   margin: 14px 0 0;
-  padding-left: 18px;
+  padding: 0;
   color: var(--body);
   font-size: 13px;
   line-height: 1.5;
 }
+
+.project-highlights p { margin: 0; }
 
 .project-card .project-meta-list { margin-top: 15px; }
 .project-card .project-meta { min-height: 26px; padding-inline: 8px; font-size: 11px; }
@@ -541,9 +537,9 @@ h1 {
 }
 
 .project-links a {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center;
   gap: 10px;
   color: var(--ink);
   font-size: 12px;
@@ -551,9 +547,17 @@ h1 {
   text-decoration: none;
 }
 
-.project-links a span:first-child {
+.project-link-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+}
+
+.project-link-label {
   min-width: 0;
 }
+
+.project-link-arrow { color: var(--muted); }
 
 .project-links a:hover,
 .project-links a:focus-visible {
