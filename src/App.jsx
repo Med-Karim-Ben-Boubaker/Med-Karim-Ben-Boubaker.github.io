@@ -76,7 +76,7 @@ function ProjectLinks({ title, links }) {
   )
 }
 
-function ProjectCard({ title, description, period, organization, highlights, meta, technologies, media, visualLabel, visualDetail, links }) {
+function ProjectCard({ title, description, period, highlights, meta, technologies, media, visualLabel, visualDetail, links }) {
   return (
     <article className="project-card" aria-label={title}>
       <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} />
@@ -85,7 +85,6 @@ function ProjectCard({ title, description, period, organization, highlights, met
           <h3>{title}</h3>
         </div>
         <p className="project-card-period">{period}</p>
-        {organization && <p className="project-card-organization">{organization}</p>}
         <p className="project-card-description">{description}</p>
         <div className="project-highlights">
           {highlights.map((highlight) => <p key={highlight}>{highlight}</p>)}
@@ -148,7 +147,7 @@ function ProjectsPage({ currentPath }) {
                 <p className="section-label">Selected work</p>
                 <h2 id="selection-title">Research, prototypes, and shipped experiments.</h2>
               </div>
-              <span className="section-count">01—06</span>
+              <span className="section-count">01—07</span>
             </div>
 
             <div className="project-card-list">

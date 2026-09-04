@@ -1,6 +1,7 @@
 import ckeeperImage from '../assets/projects/ckeeper-cover.png'
 import embeddedSpeechImage from '../assets/projects/embedded-speech-inference.png'
 import gptImage from '../assets/projects/gpt-2-loss-train.png'
+import ieeeInsatEurobotImage from '../assets/projects/ieee-insat-eurobot-2024.png'
 import localumeImage from '../assets/projects/localume.png'
 import oncologyImage from '../assets/projects/oncology-system.png'
 import rerailImage from '../assets/projects/rerail-rails-status.png'
@@ -36,8 +37,11 @@ const projects = [
     ],
     meta: ['DevOps', 'Incident diagnosis', 'Entrepreneurship'],
     technologies: [
-      { name: 'Python', icon: 'python' },
       { name: 'FastAPI', icon: 'fastapi' },
+      { name: 'Qdrant', icon: 'qdrant' },
+      { name: 'LangGraph', icon: 'langgraph' },
+      { name: 'Google Cloud Platform', icon: 'googleCloud' },
+      { name: 'Terraform', icon: 'terraform' },
     ],
     media: [{ src: ckeeperImage, alt: 'Ckeeper Agentic DevOps Platform project preview' }],
     links: [
@@ -93,9 +97,9 @@ const projects = [
     ],
     meta: ['Computer vision', 'YOLO', 'Data annotation'],
     technologies: [
-      { name: 'Python', icon: 'python' },
       { name: 'FastAPI', icon: 'fastapi' },
       { name: 'TensorFlow', icon: 'tensorflow' },
+      { name: 'YOLO', icon: 'yolo' },
     ],
     media: [{ src: rerailImage, alt: 'Rerail railway track inspection project preview' }],
     links: [
@@ -106,7 +110,6 @@ const projects = [
   {
     period: 'Jul 2024 — Sep 2024',
     title: 'Embedded Speech Recognition System on STM32F407G-DISC1 Board',
-    organization: 'Associated with ACTIA Engineering Services',
     description: 'An embedded speech command recognition system for an STM32F407 Discovery board with 112KB of RAM.',
     highlights: [
       'Predicts the keywords “yes” and “no” while classifying other sounds as noise.',
@@ -122,6 +125,26 @@ const projects = [
       { label: 'View the project on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/Embedded-Speech-Recognition-STM32F407' },
       { label: 'View the embedded AI presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1929811109/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
     ],
+  },
+  {
+    period: 'Sep 2023 — Jul 2024',
+    title: 'Autonomous robot software',
+    description: 'Led development of core software for an autonomous robot that qualified for the Eurobot 2024 international competition in France.',
+    highlights: [
+      'Designed a decision-making engine with a path planning algorithm fusing LiDAR, computer vision, and odometry for autonomous navigation.',
+      'Engineered a task scheduler optimizing priorities by distance, resource availability, and multi-factor criteria.',
+      'Architected a ROS system with service interfaces uniting LiDAR, camera, navigation, and task scheduling for seamless autonomous operation.',
+      'Established reliable CAN Bus communication via SocketCAN and RS485/CAN HAT between Raspberry Pi 4 and STM32F407.',
+    ],
+    meta: ['Autonomous robotics', 'ROS', 'Embedded systems'],
+    technologies: [
+      { name: 'ROS1', icon: 'ros' },
+      { name: 'Ubuntu', icon: 'ubuntu' },
+      { name: 'Python', icon: 'python' },
+      { name: 'Raspberry Pi', icon: 'raspberryPi' },
+      { name: 'Bash', icon: 'bash' },
+    ],
+    media: [{ src: ieeeInsatEurobotImage, alt: 'IEEE INSAT autonomous Eurobot project preview' }],
   },
 ]
 

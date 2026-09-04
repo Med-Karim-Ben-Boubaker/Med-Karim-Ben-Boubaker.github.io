@@ -4,6 +4,7 @@ import cplusplusIcon from '@iconify-icons/thesvg/cplusplus'
 import fastapiIcon from '@iconify-icons/thesvg/fastapi'
 import gnuBashIcon from '@iconify-icons/thesvg/gnu-bash'
 import githubIcon from '@iconify-icons/thesvg/github'
+import googleCloudIcon from '@iconify-icons/simple-icons/googlecloud'
 import huggingFaceIcon from '@iconify-icons/thesvg/hugging-face'
 import jupyterIcon from '@iconify-icons/thesvg/jupyter'
 import langchainIcon from '@iconify-icons/thesvg/langchain'
@@ -24,6 +25,7 @@ import tensorflowIcon from '@iconify-icons/thesvg/tensorflow'
 import terraformIcon from '@iconify-icons/thesvg/terraform'
 import ubuntuIcon from '@iconify-icons/thesvg/ubuntu'
 import viteIcon from '@iconify-icons/thesvg/vite'
+import yoloIcon from '@iconify-icons/simple-icons/yolo'
 
 // Keep this registry explicit: display names are not converted to provider slugs at runtime.
 const technologyIcons = {
@@ -31,6 +33,7 @@ const technologyIcons = {
   cpp: cplusplusIcon,
   fastapi: fastapiIcon,
   github: githubIcon,
+  googleCloud: googleCloudIcon,
   huggingFace: huggingFaceIcon,
   jupyter: jupyterIcon,
   langchain: langchainIcon,
@@ -51,6 +54,7 @@ const technologyIcons = {
   terraform: terraformIcon,
   ubuntu: ubuntuIcon,
   vite: viteIcon,
+  yolo: yoloIcon,
   bash: gnuBashIcon,
 }
 
