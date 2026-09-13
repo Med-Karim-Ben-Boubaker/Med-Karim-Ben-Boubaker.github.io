@@ -10,11 +10,7 @@ const projects = [
   {
     period: 'Sep 2025 — Dec 2025',
     title: 'GPT-2 from Scratch',
-    description: 'Implemented and trained a GPT-2 architecture LLM from first principles to understand Transformers, LLM training phases, and dataset engineering at a deep level.',
-    highlights: [
-      'Produced a 35M-parameter GPT-2 model in PyTorch with a custom tokenizer, pretraining loops, and instruction fine-tuning.',
-      'Documented the complete process from dataset engineering through model training.',
-    ],
+    description: 'Built and trained a 35M-parameter GPT-2 model in PyTorch from scratch, with a custom tokenizer, pretraining pipeline, and instruction fine-tuning. Documented the full process from dataset preparation to model training.',
     meta: ['Deep learning', 'PyTorch', 'LLMs'],
     technologies: [
       { name: 'Python', icon: 'python' },
@@ -30,12 +26,8 @@ const projects = [
   {
     period: 'May 2025 — Oct 2025',
     title: 'Ckeeper: Agentic DevOps Platform',
-    description: 'Co-founded an AI-native DevOps startup building a platform for cloud-aware incident diagnosis, workflow automation, and root-cause analysis for engineering teams.',
-    highlights: [
-      'Collaborated on product ideation, MVP development, and startup pitching.',
-      'Ranked Top 5 among 30 teams in the OSTX Bootcamp Ideation Program.',
-    ],
-    meta: ['DevOps', 'Incident diagnosis', 'Entrepreneurship'],
+    description: 'Co-founded an AI-native DevOps startup and helped build an MVP for cloud-aware incident diagnosis, workflow automation, and root-cause analysis. Contributed to product ideation, development, and pitching; the team placed among the top five of 30 teams in the OSTX Bootcamp Ideation Program.',
+    meta: ['DevOps', 'Startup', 'Entrepreneurship'],
     technologies: [
       { name: 'FastAPI', icon: 'fastapi' },
       { name: 'Qdrant', icon: 'qdrant' },
@@ -46,55 +38,43 @@ const projects = [
     media: [{ src: ckeeperImage, alt: 'Ckeeper Agentic DevOps Platform project preview' }],
     links: [
       { label: 'View the Ckeeper presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1153334096/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
-      { label: 'View the DevOps agent on GitHub', kind: 'github', href: 'https://github.com/ckeeper-io/devops-agent' },
-      { label: 'Open the startup announcement', kind: 'url', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7368667819904851968/' },
+      { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/ckeeper-io/devops-agent' },
+      { label: 'Read the startup announcement', kind: 'url', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7368667819904851968/' },
     ],
   },
   {
     period: 'Mar 2025 — Jun 2025',
-    title: 'Personalized Oncology Education Question-Answering System',
-    description: 'A personalized therapy Q&A system for cancer patient education, developed in collaboration with the Tunisian Oncology Association.',
-    highlights: [
-      'Designed to reduce the workload on oncology doctors by providing reliable, direct answers to cancer-related questions.',
-      'Focused on patient understanding, access to educational information, and support outside clinical consultations.',
-    ],
-    meta: ['RAG', 'Vector databases', 'Patient education'],
+    title: 'Personalized oncology education Q&A system',
+    description: 'Built a personalized Q&A system for cancer-therapy education with the Tunisian Oncology Association. The system was designed to provide grounded educational answers outside clinical consultations and support oncology teams.',
+    meta: ['RAG', 'Vector databases', 'Chatbot'],
     technologies: [
       { name: 'Python', icon: 'python' },
       { name: 'FastAPI', icon: 'fastapi' },
     ],
-    media: [{ src: oncologyImage, alt: 'Personalized Oncology Education Question-Answering System project preview' }],
+    media: [{ src: oncologyImage, alt: 'Personalized oncology education Q&A system project preview' }],
     links: [
-      { label: 'Read the end-of-year project report', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/751279696/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
-      { label: 'View the project on GitHub', kind: 'github', href: 'https://github.com/PFA2025/Cancer-QA-System' },
+      { label: 'Read the project report', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/751279696/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
+      { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/PFA2025/Cancer-QA-System' },
     ],
   },
   {
     period: 'Dec 2024 — Jan 2025',
     title: 'Localume',
-    description: 'A desktop application for semantic search across documents using vector embeddings and retrieval technology.',
-    highlights: [
-      'Monitors specified directories in real time and automatically indexes new or modified files.',
-      'Keeps a searchable local database up to date as documents change.',
-    ],
-    meta: ['Vector databases', 'Tkinter', 'Semantic search'],
+    description: 'Built a desktop application for semantic document search using vector embeddings, with real-time directory monitoring and automatic indexing to keep the local search index up to date.',
+    meta: ['Vector databases', 'Watchdogs', 'Semantic search'],
     technologies: [
       { name: 'Python', icon: 'python' },
     ],
     media: [{ src: localumeImage, alt: 'Localume semantic document search project preview' }],
     links: [
-      { label: 'Open the Localume project resource', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1390468996/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
-      { label: 'View Localume on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/localume' },
+      { label: 'View the Localume project page', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1390468996/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
+      { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/localume' },
     ],
   },
   {
     period: 'Oct 2024 — Nov 2024',
-    title: 'Rerail: Hack for Good 3.0 Junior Entreprise INSAT',
-    description: 'Collaborated on an MVP for a railway health monitoring service during the Hack for Good 3.0 hackathon, organized by Junior Entreprise INSAT.',
-    highlights: [
-      'Our team, CodeTribe, ranked 2nd among 17 participating teams with a computer vision solution for automated railway track inspection.',
-      'Trained YOLO models on self-annotated rail-defect images using Roboflow, ran local inference, and served the model through FastAPI.',
-    ],
+    title: 'Rerail: Railway Track Inspection',
+    description: 'Collaborated on a railway track-inspection MVP for the Hack for Good 3.0 hackathon. CodeTribe placed second among 17 teams with a computer-vision system using annotated rail-defect images, YOLO models, local inference, and FastAPI.',
     meta: ['Computer vision', 'YOLO', 'Data annotation'],
     technologies: [
       { name: 'FastAPI', icon: 'fastapi' },
@@ -103,18 +83,14 @@ const projects = [
     ],
     media: [{ src: rerailImage, alt: 'Rerail railway track inspection project preview' }],
     links: [
-      { label: 'View the Rerail project media', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
-      { label: 'View all four project media items', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/image-list/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
+      { label: 'View the Rerail project page', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
+      { label: 'View all Rerail media', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/image-list/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
     ],
   },
   {
     period: 'Jul 2024 — Sep 2024',
-    title: 'Embedded Speech Recognition System on STM32F407G-DISC1 Board',
-    description: 'An embedded speech command recognition system for an STM32F407 Discovery board with 112KB of RAM.',
-    highlights: [
-      'Predicts the keywords “yes” and “no” while classifying other sounds as noise.',
-      'Uses embedded audio processing and deep learning techniques for efficient recognition on a microcontroller.',
-    ],
+    title: 'Embedded speech recognition on STM32F407',
+    description: 'Built an embedded speech-command recognizer for the STM32F407 Discovery board (112 KB of RAM), recognizing “yes” and “no” and classifying other sounds as noise with on-device audio processing and deep learning.',
     meta: ['Speech recognition', 'CNNs', 'Embedded systems'],
     technologies: [
       { name: 'TensorFlow', icon: 'tensorflow' },
@@ -122,21 +98,15 @@ const projects = [
     ],
     media: [{ src: embeddedSpeechImage, alt: 'Embedded speech recognition project preview' }],
     links: [
-      { label: 'View the project on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/Embedded-Speech-Recognition-STM32F407' },
-      { label: 'View the embedded AI presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1929811109/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
+      { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/Embedded-Speech-Recognition-STM32F407' },
+      { label: 'View the embedded speech presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1929811109/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
     ],
   },
   {
     period: 'Sep 2023 — Jul 2024',
     title: 'Autonomous robot software',
-    description: 'Led development of core software for an autonomous robot that qualified for the Eurobot 2024 international competition in France.',
-    highlights: [
-      'Designed a decision-making engine with a path planning algorithm fusing LiDAR, computer vision, and odometry for autonomous navigation.',
-      'Engineered a task scheduler optimizing priorities by distance, resource availability, and multi-factor criteria.',
-      'Architected a ROS system with service interfaces uniting LiDAR, camera, navigation, and task scheduling for seamless autonomous operation.',
-      'Established reliable CAN Bus communication via SocketCAN and RS485/CAN HAT between Raspberry Pi 4 and STM32F407.',
-    ],
-    meta: ['Autonomous robotics', 'ROS', 'Embedded systems'],
+    description: 'Led core software development for an autonomous robot that qualified for Eurobot 2024, designing ROS-based navigation and task scheduling with LiDAR, computer vision, odometry, and CAN bus communication between a Raspberry Pi 4 and STM32F407.',
+    meta: ['Autonomous robotics', 'Algorithm Design', 'Embedded systems'],
     technologies: [
       { name: 'ROS1', icon: 'ros' },
       { name: 'Ubuntu', icon: 'ubuntu' },
