@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react/dist/offline'
 import githubIcon from '@iconify-icons/thesvg/github'
 import pdfIcon from '@iconify-icons/simple-icons/adobeacrobatreader'
 import PageShell from './components/PageShell'
+import PointerSpotlightCard, { PointerSpotlightGroup } from './components/PointerSpotlightCard'
 import ProjectTechnologies from './components/ProjectTechnologies'
 import SocialLinks from './components/SocialLinks'
 import ArticlePage from './pages/ArticlePage'
@@ -78,7 +79,7 @@ function ProjectLinks({ title, links }) {
 
 function ProjectCard({ title, description, period, meta, technologies, media, visualLabel, visualDetail, links }) {
   return (
-    <article className="project-card" aria-label={title}>
+    <PointerSpotlightCard as="article" className="project-card" aria-label={title}>
       <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} />
       <div className="project-card-content">
         <div className="project-card-heading">
@@ -92,7 +93,7 @@ function ProjectCard({ title, description, period, meta, technologies, media, vi
         <ProjectTechnologies title={title} items={technologies} />
         <ProjectLinks title={title} links={links} />
       </div>
-    </article>
+    </PointerSpotlightCard>
   )
 }
 
@@ -147,9 +148,9 @@ function ProjectsPage({ currentPath }) {
               <span className="section-count">01—07</span>
             </div>
 
-            <div className="project-card-list">
+            <PointerSpotlightGroup className="project-card-list">
               {projects.map((project) => <ProjectCard key={project.title} {...project} />)}
-            </div>
+            </PointerSpotlightGroup>
           </section>
 
           <aside className="projects-note" aria-label="Project documentation note">
@@ -281,7 +282,7 @@ function ExperienceEntry({ entry }) {
         <span className="experience-duration">{entry.duration}</span>
       </div>
       <span className="experience-marker" aria-hidden="true" />
-      <article className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
+      <PointerSpotlightCard as="article" className="experience-card" aria-label={`${entry.title} at ${entry.organization}`}>
         <div className="experience-card-header">
           <div className="experience-logos" aria-hidden="true">
             {entry.logos.map((logo, index) => (
@@ -305,7 +306,7 @@ function ExperienceEntry({ entry }) {
           {entry.meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
         <ProjectTechnologies title={entry.title} items={entry.technologies} />
-          </article>
+      </PointerSpotlightCard>
     </li>
   )
 }
@@ -325,9 +326,9 @@ function ExperiencePage({ currentPath }) {
               <span className="section-count">01—05</span>
             </div>
 
-            <ol className="experience-timeline">
+            <PointerSpotlightGroup as="ol" className="experience-timeline">
               {experienceEntries.map((entry) => <ExperienceEntry key={`${entry.period}-${entry.title}`} entry={entry} />)}
-            </ol>
+            </PointerSpotlightGroup>
           </section>
 
     </PageShell>

@@ -17,6 +17,7 @@ colors:
   hairline: "rgba(237, 236, 236, 0.10)"
   hairline-soft: "rgba(237, 236, 236, 0.025)"
   hairline-strong: "rgba(237, 236, 236, 0.60)"
+  card-spotlight: "rgba(237, 236, 236, 0.24)"
   action-surface: "#edecec"
   action-surface-active: "#d9d5cf"
   action-ink: "#14120b"
@@ -220,6 +221,11 @@ components:
     border: 1px solid "{colors.hairline}"
     rounded: "{rounded.xs}"
     padding: 17.5px
+  pointer-spotlight-card:
+    backgroundColor: "{colors.surface-card}"
+    border: 1px solid "{colors.hairline}"
+    rounded: "{rounded.xs}"
+    interaction: fine-pointer-only, group-level border-only radial highlight using "{colors.card-spotlight}"
   comparison-card:
     backgroundColor: "{colors.surface-card}"
     textColor: "{colors.text-primary}"
@@ -353,6 +359,7 @@ The composition is intentionally quiet: a fixed compact header, centered navigat
 - **Hairline** (`{colors.hairline}` — `rgba(237, 236, 236, 0.10)`): Default borders and dividers.
 - **Hairline soft** (`{colors.hairline-soft}` — `rgba(237, 236, 236, 0.025)`): Subtle pill and secondary-control outlines.
 - **Hairline strong** (`{colors.hairline-strong}` — `rgba(237, 236, 236, 0.60)`): Focused or high-contrast outlines.
+- **Card spotlight** (`{colors.card-spotlight}` — `rgba(237, 236, 236, 0.24)`): Low-opacity pointer highlight for documented interactive card borders.
 
 ### Actions and accent
 
@@ -579,6 +586,13 @@ Articles use a centered editorial column capped at approximately 720px, with `{t
 - Respect reduced-motion preferences for product demonstrations and process timelines.
 - Use semantic headings in visual order; do not choose heading levels only for size.
 - Maintain keyboard access to every link, button, tab, menu, input, and expandable panel.
+
+### Pointer spotlight cards
+
+- The project and experience cards may use a narrow pointer spotlight as an interaction-only exception to the no-gradient rule.
+- On fine, hover-capable pointers, one shared pointer source drives a low-opacity radial highlight across every card in the active collection; local coordinates are calculated per card only to clip the shared position to each 1px border.
+- The effect must not introduce scale, tilt, shadow, glow, layout movement, or new card semantics.
+- Coarse pointers, touch input, and reduced-motion preferences use the static surface-hover state without pointer tracking.
 
 ## Do's and don'ts
 
