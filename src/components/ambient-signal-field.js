@@ -1,5 +1,6 @@
 const SIGNAL_PROFILES = {
   about: {
+    interactive: true,
     opacity: 0.075,
     pointerOpacity: 0.12,
     speed: 1,
@@ -8,6 +9,7 @@ const SIGNAL_PROFILES = {
     phase: 0,
   },
   projects: {
+    interactive: false,
     opacity: 0.065,
     pointerOpacity: 0.11,
     speed: 0.95,
@@ -16,6 +18,7 @@ const SIGNAL_PROFILES = {
     phase: 1.4,
   },
   experience: {
+    interactive: false,
     opacity: 0.05,
     pointerOpacity: 0.09,
     speed: 0.85,
@@ -24,6 +27,7 @@ const SIGNAL_PROFILES = {
     phase: 2.6,
   },
   blog: {
+    interactive: false,
     opacity: 0.04,
     pointerOpacity: 0.075,
     speed: 0.72,
@@ -32,6 +36,7 @@ const SIGNAL_PROFILES = {
     phase: 3.8,
   },
   article: {
+    interactive: false,
     opacity: 0.032,
     pointerOpacity: 0.06,
     speed: 0.65,

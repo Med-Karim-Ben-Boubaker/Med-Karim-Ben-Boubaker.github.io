@@ -13,6 +13,7 @@ export default function AmbientSignalField({ route }) {
     const canvas = canvasRef.current
     const profile = getAmbientSignalProfile(route)
     if (!canvas || !profile) return undefined
+    const isInteractive = profile.interactive === true
 
     const context = canvas.getContext('2d')
     if (!context) return undefined
@@ -49,7 +50,7 @@ export default function AmbientSignalField({ route }) {
       const time = (timestamp / 1000) * profile.speed
       const isReducedMotion = reducedMotionQuery.matches
 
-      if (!isReducedMotion && pointer.active) {
+      if (isInteractive && !isReducedMotion && pointer.active) {
         pointer.x += (pointer.targetX - pointer.x) * 0.12
         pointer.y += (pointer.targetY - pointer.y) * 0.12
       }
@@ -71,7 +72,7 @@ export default function AmbientSignalField({ route }) {
           let intensity = clamp(0.04 + ((waveOne + 1) * 0.1) + ((waveTwo + 1) * 0.08) + ((waveThree + 1) * 0.05))
           let pointerInfluence = 0
 
-          if (pointer.active) {
+          if (isInteractive && pointer.active) {
             const distanceX = (normalizedX - pointer.x) * 1.35
             const distanceY = (normalizedY - pointer.y)
             const distance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY))
@@ -134,20 +135,24 @@ export default function AmbientSignalField({ route }) {
     draw()
     if (!reducedMotionQuery.matches) frameId = window.requestAnimationFrame(render)
     window.addEventListener('resize', handleResize)
-    window.addEventListener('pointermove', handlePointerMove, { passive: true })
-    window.addEventListener('blur', handlePointerLeave)
-    document.addEventListener('mouseleave', handlePointerLeave)
-    document.addEventListener('focusin', handleFocusIn)
-    document.addEventListener('focusout', handleFocusOut)
+    if (isInteractive) {
+      window.addEventListener('pointermove', handlePointerMove, { passive: true })
+      window.addEventListener('blur', handlePointerLeave)
+      document.addEventListener('mouseleave', handlePointerLeave)
+      document.addEventListener('focusin', handleFocusIn)
+      document.addEventListener('focusout', handleFocusOut)
+    }
 
     return () => {
       if (frameId !== null) window.cancelAnimationFrame(frameId)
       window.removeEventListener('resize', handleResize)
-      window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('blur', handlePointerLeave)
-      document.removeEventListener('mouseleave', handlePointerLeave)
-      document.removeEventListener('focusin', handleFocusIn)
-      document.removeEventListener('focusout', handleFocusOut)
+      if (isInteractive) {
+        window.removeEventListener('pointermove', handlePointerMove)
+        window.removeEventListener('blur', handlePointerLeave)
+        document.removeEventListener('mouseleave', handlePointerLeave)
+        document.removeEventListener('focusin', handleFocusIn)
+        document.removeEventListener('focusout', handleFocusOut)
+      }
     }
   }, [route])
 
