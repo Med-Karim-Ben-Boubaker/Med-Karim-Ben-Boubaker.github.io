@@ -76,7 +76,7 @@ function ProjectLinks({ title, links }) {
   )
 }
 
-function ProjectCard({ title, description, period, highlights, meta, technologies, media, visualLabel, visualDetail, links }) {
+function ProjectCard({ title, description, period, meta, technologies, media, visualLabel, visualDetail, links }) {
   return (
     <article className="project-card" aria-label={title}>
       <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} />
@@ -86,9 +86,6 @@ function ProjectCard({ title, description, period, highlights, meta, technologie
         </div>
         <p className="project-card-period">{period}</p>
         <p className="project-card-description">{description}</p>
-        <div className="project-highlights">
-          {highlights.map((highlight) => <p key={highlight}>{highlight}</p>)}
-        </div>
         <ul className="project-meta-list" aria-label={`${title} details`}>
           {meta.map((item) => <ProjectMeta key={item}>{item}</ProjectMeta>)}
         </ul>
@@ -135,9 +132,9 @@ function ProjectsPage({ currentPath }) {
     <PageShell currentPath={currentPath} variant="wide" className="projects-page" labelledBy="projects-title">
           <section className="projects-intro">
             <p className="eyebrow">Projects</p>
-            <h1 id="projects-title">A few systems I’m building.</h1>
+            <h1 id="projects-title">A few systems I've built</h1>
             <p className="projects-lead">
-              A selection of projects across language models, healthcare, knowledge tooling, computer vision, and embedded AI.
+              A selection of projects that I have built.
             </p>
           </section>
 
@@ -157,7 +154,7 @@ function ProjectsPage({ currentPath }) {
 
           <aside className="projects-note" aria-label="Project documentation note">
             <span className="projects-note-mark" aria-hidden="true">+</span>
-            <p>Project details and resource links are drawn from the project record on LinkedIn, with supporting media included where available.</p>
+            <p>Project details are summarized from original project records, with supporting links included where available.</p>
           </aside>
     </PageShell>
   )

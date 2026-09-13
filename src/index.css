@@ -58,7 +58,11 @@ body {
   flex-direction: column;
 }
 
-main { flex: 1 0 auto; }
+main {
+  position: relative;
+  isolation: isolate;
+  flex: 1 0 auto;
+}
 
 a { color: inherit; }
 
@@ -69,9 +73,16 @@ a:focus-visible {
 
 .page-shell {
   /* Both-edge scrollbar gutters already reserve one viewport gutter on each side. */
+  position: relative;
+  isolation: isolate;
   width: min(var(--page-width), calc(100% - (var(--page-gutter) / 2)));
   margin-inline: auto;
   padding-block: calc(var(--page-top) + var(--nav-height)) var(--page-bottom);
+}
+
+.page-shell > :not(.ambient-signal-field) {
+  position: relative;
+  z-index: 1;
 }
 
 .page-shell--standard { --page-width: var(--page-width-standard); }
