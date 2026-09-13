@@ -482,6 +482,56 @@ h1 {
   gap: 10px;
 }
 
+.pointer-spotlight-card {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.pointer-spotlight-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--spotlight-x) var(--spotlight-y), var(--card-spotlight), transparent 68%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.pointer-spotlight-card > * { position: relative; z-index: 1; }
+
+.pointer-spotlight-group[data-spotlight-active="true"] .pointer-spotlight-card::before {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pointer-spotlight-card {
+    transition: background-color 180ms ease;
+  }
+
+  .pointer-spotlight-card:hover {
+    background: var(--surface-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pointer-spotlight-card::before { display: none; }
+
+  .pointer-spotlight-card:hover,
+  .pointer-spotlight-card:focus-within {
+    background: var(--surface-hover);
+  }
+}
+
 .project-card {
   display: flex;
   min-width: 0;
