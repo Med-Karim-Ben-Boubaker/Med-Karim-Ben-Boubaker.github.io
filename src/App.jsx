@@ -6,6 +6,7 @@ import PointerSpotlightCard, { PointerSpotlightGroup } from './components/Pointe
 import ProjectTechnologies from './components/ProjectTechnologies'
 import SocialLinks from './components/SocialLinks'
 import experienceEntries from './content/experience'
+import { currentRole, featuredProjects, projectAnchor } from './content/home'
 import projects from './content/projects'
 import { normalizePath, withBasePath } from './site-url'
 import portrait from './assets/karim-portrait.webp'
@@ -84,7 +85,7 @@ function ProjectLinks({ title, links }) {
 
 function ProjectCard({ title, description, period, meta, technologies, media, visualLabel, visualDetail, links, priority }) {
   return (
-    <PointerSpotlightCard as="article" className="project-card" aria-label={title}>
+    <PointerSpotlightCard as="article" className="project-card" id={projectAnchor(title)} aria-label={title}>
       <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} priority={priority} />
       <div className="project-card-content">
         <div className="project-card-heading">
@@ -102,31 +103,75 @@ function ProjectCard({ title, description, period, meta, technologies, media, vi
   )
 }
 
+function FeaturedProjectCard({ title, period, description, media }) {
+  const image = media[0]
+
+  return (
+    <PointerSpotlightCard as="li" className="home-work-card">
+      <a className="home-work-link" href={withBasePath(`/projects/#${projectAnchor(title)}`)} aria-label={`${title}, ${period}`}>
+        {image && <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" />}
+        <span className="home-work-copy">
+          <span className="home-work-period">{period}</span>
+          <span className="home-work-title">{title}</span>
+          <span className="home-work-description">{description}</span>
+        </span>
+      </a>
+    </PointerSpotlightCard>
+  )
+}
+
 function AboutPage({ currentPath }) {
   return (
     <PageShell currentPath={currentPath} variant="standard" className="about-page" labelledBy="about-title">
           <section className="about-hero">
-            <div className="about-hero-copy">
-              <p className="eyebrow">About</p>
-              <h1 id="about-title">Hello, I’m Karim.</h1>
-              <p className="about-role">AI Engineer</p>
-              <p className="about-intro">
-                I’m exploring how humans and AI agents can collaborate, especially in knowledge work. I build reliable and transparent knowledge systems that help people find, understand, and use domain information with less friction. My work brings together LLMs, symbolic AI, information retrieval, and knowledge graphs.
+            <div className="home-identity">
+              <img className="home-avatar" src={portrait} width="560" height="560" fetchPriority="high" decoding="async" alt="Portrait of Mohamed Karim Ben Boubaker" />
+              <p className="home-name">
+                Karim Ben Boubaker
+                <span className="about-role">{currentRole?.title || 'AI Engineer'}</span>
               </p>
-              <SocialLinks />
             </div>
 
-            <figure className="about-portrait">
-              <img src={portrait} width="560" height="560" fetchPriority="high" decoding="async" alt="Portrait of Mohamed Karim Ben Boubaker" />
-            </figure>
+            <h1 id="about-title">I build AI agents people can trust with their knowledge.</h1>
+
+            <p className="about-intro">
+              I’m exploring how humans and AI agents can collaborate, especially in knowledge work. I build reliable and transparent knowledge systems that help people find, understand, and use domain information with less friction. My work brings together LLMs, symbolic AI, information retrieval, and knowledge graphs.
+            </p>
+
+            <div className="home-actions">
+              <a className="pill-button pill-button--primary" href={withBasePath('/projects/')}>View projects</a>
+              <a className="pill-button pill-button--secondary" href={withBasePath('/blog/')}>Read the blog</a>
+              <SocialLinks />
+            </div>
+          </section>
+
+          <section className="home-work" aria-labelledby="home-work-title">
+            <div className="projects-section-heading">
+              <h2 className="section-label" id="home-work-title">Selected work</h2>
+              <a className="home-section-link" href={withBasePath('/projects/')}>All projects <span aria-hidden="true">→</span></a>
+            </div>
+            <PointerSpotlightGroup as="ul" className="home-work-grid">
+              {featuredProjects.map((project) => <FeaturedProjectCard key={project.title} {...project} />)}
+            </PointerSpotlightGroup>
           </section>
 
           <section className="about-trajectory" aria-labelledby="trajectory-title">
             <div className="about-trajectory-copy">
-              <h2 id="trajectory-title">From components to complete systems</h2>
+              <h2 id="trajectory-title">One layer of abstraction at a time</h2>
               <p>
                 I began my engineering journey in robotics and embedded systems, where I learned how software is built in layers of abstraction: each layer hides the complexity below it so we can focus on what matters. AI adds another layer to that stack, helping us handle more complexity and stay focused on the important questions. I began my career working on this layer in legal technology and regulatory compliance, and more recently in healthcare.
               </p>
+              <a className="home-section-link" href={withBasePath('/experience/')}>Full experience <span aria-hidden="true">→</span></a>
+            </div>
+
+          </section>
+
+          <section className="home-cta" aria-labelledby="home-cta-title">
+            <h2 id="home-cta-title">Working on trustworthy AI for knowledge work?</h2>
+            <p>I’m happy to talk about agents, knowledge graphs and evidence-grounded systems.</p>
+            <div className="home-actions">
+              <a className="pill-button pill-button--primary" href="mailto:karimbb2002@gmail.com">Email me</a>
+              <a className="pill-button pill-button--secondary" href="https://www.linkedin.com/in/mohamed-karim-ben-boubaker/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
             </div>
           </section>
     </PageShell>

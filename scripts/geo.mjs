@@ -26,7 +26,7 @@ function firstText(html, pattern) {
 
 export function parseAbout(html) {
   return {
-    role: firstText(html, /<p class="about-role">([\s\S]*?)<\/p>/) || JOB_TITLE,
+    role: firstText(html, /<(?:p|span) class="about-role">([\s\S]*?)<\/(?:p|span)>/) || JOB_TITLE,
     intro: firstText(html, /<p class="about-intro">([\s\S]*?)<\/p>/),
     trajectoryTitle: firstText(html, /<section class="about-trajectory"[\s\S]*?<h2[^>]*>([\s\S]*?)<\/h2>/),
     trajectory: firstText(html, /<div class="about-trajectory-copy">[\s\S]*?<\/h2>\s*<p>([\s\S]*?)<\/p>/),

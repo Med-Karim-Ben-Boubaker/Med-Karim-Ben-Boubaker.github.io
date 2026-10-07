@@ -11,12 +11,12 @@ import { formatDuration, formatPeriod } from './dates'
 const entries = [
   {
     start: '2026-03',
-    end: null,
+    end: '2026-09',
     title: 'AI Research Engineer',
     organization: 'Hochschule Offenburg & Hahn-Schickard',
     location: 'Offenburg, Germany',
     logos: [{ src: hochschuleOffenburgLogo, width: 144, height: 144 }, { src: hahnSchickardLogo, width: 144, height: 93 }],
-    description: 'Building evidence-grounded AI systems that turn medical literature into validated probability distributions for clinical Bayesian networks.',
+    description: 'Built evidence-grounded AI systems that turn medical literature into validated probability distributions for clinical Bayesian networks.',
     highlights: [
       'Built a PydanticAI ReAct agent that searches medical literature, reasons over retrieved evidence, and generates validated probability distributions for clinical Bayesian networks.',
       'Designed a context-tree compression method for large Bayesian CPTs, reducing LLM elicitation calls by 79.4% on average.',
@@ -29,7 +29,6 @@ const entries = [
       { name: 'Qdrant', icon: 'qdrant' },
       { name: 'OpenRouter', icon: 'openrouter' },
     ],
-    current: true,
   },
   {
     start: '2025-11',

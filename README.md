@@ -38,6 +38,7 @@ The blog pages (`BlogPage`, `ArticlePage`), the article content and KaTeX are co
 | Experience | `src/content/experience.js` (start/end as `YYYY-MM`, `end: null` = Present) |
 | Date formatting | `src/content/dates.js` |
 | About copy | `AboutPage` in `src/App.jsx` |
+| Home featured projects | `src/content/home.js` |
 
 ### Article front matter
 

@@ -213,36 +213,67 @@ h1 {
   --page-bottom: 80px;
 }
 
-.about-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: clamp(56px, 5vw, 72px);
-  align-items: start;
+/* Home hero: status line, identity row, statement headline, lead and actions. */
+.home-identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.about-hero-copy { min-width: 0; }
+.home-avatar {
+  width: 112px;
+  height: 112px;
+  flex: 0 0 auto;
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  object-fit: cover;
+}
 
-.about-role {
-  margin: 16px 0 0;
-  color: var(--muted);
+.home-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  color: var(--ink);
   font-size: 18px;
-  letter-spacing: -0.02em;
+  font-weight: 500;
   line-height: 1.4;
+}
+
+.home-name .about-role {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* DESIGN.md display-mega: a statement headline (32px on mobile). */
+.about-hero h1 {
+  max-width: 880px;
+  margin-top: 30px;
+  font-size: clamp(32px, 6.4vw, 72px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .about-intro {
   max-width: 600px;
-  margin: 24px 0 0;
+  margin: 30px 0 0;
   color: var(--body);
   font-size: 18px;
   line-height: 1.55;
-  text-align: left;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
 }
 
 .about-social-links {
   display: flex;
-  max-width: 600px;
-  margin: 16px 0 0;
+  margin: 0;
   padding: 0;
   flex-wrap: wrap;
   gap: 4px 20px;
@@ -254,15 +285,6 @@ h1 {
   min-height: 44px;
   align-items: center;
   gap: 8px;
-  color: var(--primary);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.about-social-link:hover {
-  color: var(--accent-active);
-  text-decoration-thickness: 2px;
 }
 
 .about-social-icon {
@@ -273,43 +295,218 @@ h1 {
   fill: currentColor;
 }
 
-.about-portrait {
-  width: 100%;
-  margin: 40px 0 0;
+.home-actions .about-social-links {
+  margin: 0 0 0 10px;
+  gap: 4px 15px;
 }
 
-.about-portrait img {
+.home-actions .about-social-link {
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.home-actions .about-social-link:hover {
+  color: var(--ink);
+}
+
+/* DESIGN.md button-primary / button-secondary pills. */
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 43px;
+  padding: 12.5px 21.6px;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pill-button--primary {
+  background: var(--surface-inverse);
+  color: var(--canvas);
+}
+
+.pill-button--primary:hover,
+.pill-button--primary:active {
+  background: var(--surface-inverse-active);
+}
+
+.pill-button--secondary {
+  border-color: var(--hairline);
+  background: var(--surface-strong);
+  color: var(--ink);
+}
+
+.pill-button--secondary:hover {
+  border-color: var(--hairline-strong);
+}
+
+.home-section-link {
+  color: var(--primary);
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-section-link:hover {
+  color: var(--accent-active);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Selected work: three featured projects linking to their cards on /projects/. */
+.home-work {
+  margin-top: 112px;
+}
+
+.home-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-work-card {
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: var(--surface-card);
+}
+
+.home-work-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-work-link img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
   height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: center;
-  border: 1px solid var(--hairline-strong);
-  border-radius: 2px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--canvas-soft);
 }
 
+.home-work-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 17.5px;
+}
+
+.home-work-period {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.home-work-title {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.home-work-description {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.home-work-link:hover .home-work-title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Trajectory: the career story across the full content width. */
 .about-trajectory {
-  margin-top: 72px;
+  margin-top: 112px;
 }
-
-.about-trajectory-copy { max-width: 600px; }
 
 .about-trajectory h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  letter-spacing: -0.325px;
+  line-height: 1.25;
 }
 
-.about-trajectory p {
-  margin: 12px 0 0;
+.about-trajectory-copy p {
+  margin: 15px 0 20px;
   color: var(--body);
-  font-size: 15px;
-  line-height: 1.6;
-  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Closing call to action. */
+@media (pointer: coarse) {
+  .pill-button { min-height: 44px; }
+}
+
+/* Phones: featured projects become compact rows with a thumbnail. */
+@media (max-width: 639px) {
+  .home-work-link { flex-direction: row; }
+
+  .home-work-link img {
+    width: 104px;
+    flex: 0 0 104px;
+    height: auto;
+    aspect-ratio: 1;
+    border-right: 1px solid var(--hairline);
+    border-bottom: 0;
+  }
+
+  .home-work-copy { padding: 12.5px 15px; min-width: 0; }
+
+  .home-work-title { font-size: 16px; }
+
+  .home-work-description { -webkit-line-clamp: 2; }
+}
+
+.home-cta {
+  margin-top: 112px;
+  padding-top: 50px;
+  border-top: 1px solid var(--hairline);
+}
+
+.home-cta h2 {
+  max-width: 640px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.72px;
+  line-height: 1.2;
+}
+
+.home-cta p {
+  max-width: 600px;
+  margin: 15px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Keep the ASCII texture in the margins on the home page so text sits on a clean canvas. */
+main:has(.about-page) > .ambient-signal-field {
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(50% - 600px), transparent calc(50% - 420px), transparent calc(50% + 420px), #000 calc(50% + 600px), #000 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(50% - 600px), transparent calc(50% - 420px), transparent calc(50% + 420px), #000 calc(50% + 600px), #000 100%);
 }
 
 .projects-intro { max-width: 720px; }
@@ -829,21 +1026,31 @@ h1 {
 }
 
 @media (max-width: 860px) {
-  .about-hero {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .about-portrait {
-    width: min(200px, 62vw);
-    margin-top: 0;
-    margin-inline: 0;
-    order: 2;
-  }
-
   .about-intro { font-size: 16px; }
-  .about-trajectory { margin-top: 56px; }
+
+  .home-work,
+  .about-trajectory,
+  .home-cta { margin-top: 72px; }
+
+  .home-work-grid { grid-template-columns: 1fr; }
+
+
+  .home-avatar {
+    width: 88px;
+    height: 88px;
+  }
+
+  .home-cta h2 {
+    font-size: 28px;
+    letter-spacing: -0.56px;
+  }
+
+  /* Phone margins are too narrow for the texture to sit beside the text; fade it instead. */
+  main:has(.about-page) > .ambient-signal-field {
+    -webkit-mask-image: none;
+    mask-image: none;
+    opacity: 0.35;
+  }
 
   .projects-lead { font-size: 16px; }
 
