@@ -155,7 +155,7 @@ layout:
   page-width-standard: 960px
   page-width-wide: 1100px
   page-width-reading: 720px
-  page-width-article: 760px
+  page-width-article: 720px
   font-sans: "system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
 
 components:

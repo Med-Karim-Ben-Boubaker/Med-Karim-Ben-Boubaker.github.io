@@ -1,7 +1,11 @@
 import PageShell from '../components/PageShell'
+import { getArticleImageSize } from '../content/article-images'
+import { formatDate } from '../content/dates'
 import { withArticleAssetPath, withBasePath } from '../site-url'
 
-function ArticleListItem({ article }) {
+function ArticleListItem({ article, priority }) {
+  const { width, height } = article.cover ? getArticleImageSize(article.slug, article.cover) : {}
+
   return (
     <li className="article-list-item">
       <a className="article-list-link" href={withBasePath(`/blog/${article.slug}/`)}>
@@ -10,17 +14,19 @@ function ArticleListItem({ article }) {
             <img
               className="article-list-cover"
               src={withArticleAssetPath(article.slug, article.cover)}
+              width={width}
+              height={height}
               alt=""
-              loading="lazy"
+              loading={priority ? undefined : 'lazy'}
+              decoding="async"
             />
           )}
           <div className="article-list-copy">
             <div className="article-list-heading">
               <h2>{article.title}</h2>
-              <time dateTime={article.date}>{article.date}</time>
+              <time dateTime={article.date}>{formatDate(article.date)}</time>
             </div>
             <p>{article.summary}</p>
-            {article.author && <p className="article-list-author">By {article.author}</p>}
           </div>
         </div>
       </a>
@@ -33,21 +39,20 @@ export default function BlogPage({ articles, currentPath = '/blog/' }) {
     <PageShell currentPath={currentPath} variant="reading" className="blog-page" labelledBy="blog-title">
           <header className="blog-intro">
             <p className="eyebrow">Blog</p>
-            <h1 id="blog-title">Notes on building reliable systems.</h1>
+            <h1 id="blog-title">Writing</h1>
             <p className="blog-lead">
-              Writing about agents, knowledge systems, and the practical work of making AI easier to understand and use.
+              Build logs, paper reviews and essays on LLMs, AI agents and AI infrastructure.
             </p>
           </header>
 
-          <section className="blog-list-section" aria-labelledby="latest-articles-title">
+          <section className="blog-list-section" aria-label="Articles">
             <div className="projects-section-heading">
-              <p className="section-label" id="latest-articles-title">Latest articles</p>
               <span className="section-count">{String(articles.length).padStart(2, '0')}</span>
             </div>
 
             {articles.length > 0 ? (
               <ol className="article-list">
-                {articles.map((article) => <ArticleListItem key={article.slug} article={article} />)}
+                {articles.map((article, index) => <ArticleListItem key={article.slug} article={article} priority={index === 0} />)}
               </ol>
             ) : (
               <div className="blog-empty-state">

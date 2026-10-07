@@ -1,6 +1,9 @@
 import { renderToString } from 'react-dom/server'
 import App from './App.jsx'
+import ArticlePage from './pages/ArticlePage.jsx'
+import BlogPage from './pages/BlogPage.jsx'
 import { loadArticles } from './content/articles.js'
+import projects from './content/projects.js'
 import { normalizePath } from './site-url.js'
 
 export function getPublicRoutes() {
@@ -16,6 +19,15 @@ export function getPageMetadata(pathname, articles) {
     return {
       title: `${article.title} · Karim Ben Boubaker`,
       description: article.summary,
+      article,
+    }
+  }
+
+  if (currentPath !== '/' && !['/projects', '/experience', '/blog'].includes(currentPath)) {
+    return {
+      title: 'Page not found · Karim Ben Boubaker',
+      description: 'The page you requested does not exist.',
+      notFound: true,
     }
   }
 
@@ -30,20 +42,25 @@ export function getPageMetadata(pathname, articles) {
     },
     '/experience': {
       title: 'Experience · Karim Ben Boubaker',
-      description: 'A chronological record of professional experience and technical direction.',
+      description: 'Where Karim Ben Boubaker has worked: from robotics software and embedded ML to LLM agents, knowledge graphs and clinical AI research.',
     },
     '/blog': {
       title: 'Blog · Karim Ben Boubaker',
-      description: 'Notes on building reliable agents and knowledge systems for knowledge work.',
+      description: 'Build logs, paper reviews and essays by Karim Ben Boubaker on LLMs, AI agents and AI infrastructure.',
     },
   }
 
-  return pageMetadata[currentPath] || pageMetadata['/']
+  return pageMetadata[currentPath]
+}
+
+/** Structured site content for build-time SEO/GEO outputs (sitemap, llms.txt, JSON-LD). */
+export function getSiteData() {
+  return { articles: loadArticles({ includeDrafts: false }), projects }
 }
 
 export function renderPage(pathname) {
   const articles = loadArticles({ includeDrafts: false })
-  const html = renderToString(<App pathname={pathname} articles={articles} />)
+  const html = renderToString(<App pathname={pathname} articles={articles} pages={{ ArticlePage, BlogPage }} />)
   const metadata = getPageMetadata(pathname, articles)
 
   return { html, metadata }

@@ -10,7 +10,7 @@
 
 - This is a frontend-only React/Vite site. There is no runtime backend, database, CMS, or article API.
 - `src/components/PageShell.jsx` is the shared outer frame for every route. Keep the skip link, navbar, main landmark, page centering, and page-level spacing there.
-- PageShell variants provide the shared width contract: `standard` (960px) for About and Experience, `wide` (1100px) for Projects, `reading` (720px) for the Blog and fallback pages, and `article` (760px) for article content.
+- PageShell variants provide the shared width contract: `standard`, `wide` and `reading` all resolve to the 960px standard width so About, Projects, Experience, Blog and fallback pages share one heading edge; `article` (720px) is the narrower reading column for article content.
 - Shared layout behavior belongs in `src/index.css` and its custom properties (`--page-gutter`, `--page-top`, `--page-bottom`, the page-width tokens, `--font-sans`, and stable scrollbar gutters). Page-specific styles should describe content structure, not recreate the outer shell.
 - Markdown files in `src/content/articles/` are the source of truth for article metadata and body content.
 - Vite's eager raw content glob loads the same Markdown module in the browser and in the SSR/prerender entry. Keep the loader browser-safe; do not add Node-only parsing dependencies to it.
@@ -115,7 +115,7 @@ If the change affects the renderer or prerender script, inspect both the rendere
 - Reuse the existing CSS custom properties from `src/index.css` (`--canvas`, `--ink`, `--body`, `--muted`, `--hairline`, `--primary`, and related tokens). Add a token to `DESIGN.md` and `src/index.css` together if a genuinely new semantic value is necessary.
 - Treat the PageShell variants and layout tokens documented in `DESIGN.md` as the shared configuration across pages. Update the shared primitive or token when a cross-page inconsistency is found; add a page-specific rule only when the content genuinely needs different behavior.
 - Preserve the dark editorial direction: warm near-black canvas, off-white hierarchy, restrained orange accent, hairline borders, flat surfaces, compact controls, and generous whitespace.
-- Keep the documented PageShell widths: 960px standard, 1100px wide, 720px reading, and 760px article. The shared gutter and responsive spacing rules apply to all variants.
+- Keep the documented PageShell widths: 960px for every non-article page (standard, wide and reading variants) and 720px for articles. The shared gutter and responsive spacing rules apply to all variants.
 - Article styles must remain independent of individual Markdown files. Add semantic renderer classes and shared CSS rules instead of one-off content-specific selectors.
 - Tables and long code/math expressions must be horizontally contained within the article surface. They must not create page-level horizontal overflow on mobile.
 - Keep links visibly distinguishable, headings hierarchical, images supplied with meaningful alt text, and interactive controls keyboard-accessible. Preserve the skip link and visible `:focus-visible` treatment.

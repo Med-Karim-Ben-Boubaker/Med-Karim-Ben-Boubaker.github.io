@@ -1,10 +1,11 @@
-import ckeeperImage from '../assets/projects/ckeeper-cover.png'
-import embeddedSpeechImage from '../assets/projects/embedded-speech-inference.png'
-import gptImage from '../assets/projects/gpt-2-loss-train.png'
-import ieeeInsatEurobotImage from '../assets/projects/ieee-insat-eurobot-2024.png'
-import localumeImage from '../assets/projects/localume.png'
-import oncologyImage from '../assets/projects/oncology-system.png'
-import rerailImage from '../assets/projects/rerail-rails-status.png'
+import { withBasePath } from '../site-url'
+import ckeeperImage from '../assets/projects/ckeeper-cover.webp'
+import embeddedSpeechImage from '../assets/projects/embedded-speech-inference.webp'
+import gptImage from '../assets/projects/gpt-2-loss-train.webp'
+import ieeeInsatEurobotImage from '../assets/projects/ieee-insat-eurobot-2024.webp'
+import localumeImage from '../assets/projects/localume.webp'
+import oncologyImage from '../assets/projects/oncology-system.webp'
+import rerailImage from '../assets/projects/rerail-rails-status.webp'
 
 const projects = [
   {
@@ -17,9 +18,9 @@ const projects = [
       { name: 'PyTorch', icon: 'pytorch' },
       { name: 'Hugging Face', icon: 'huggingFace' },
     ],
-    media: [{ src: gptImage, alt: 'GPT-2 from Scratch project preview' }],
+    media: [{ src: gptImage, width: 800, height: 290, alt: 'GPT-2 from Scratch project preview' }],
     links: [
-      { label: 'Read the GPT-2 build log', kind: 'url', href: 'https://karimbenboubaker.me/posts/artificial-intelligence/gpt-from-scratch/' },
+      { label: 'Read the GPT-2 build log', kind: 'url', href: withBasePath('/blog/gpt-from-scratch/'), internal: true },
       { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/gpt-2-from-scratch' },
     ],
   },
@@ -35,7 +36,7 @@ const projects = [
       { name: 'Google Cloud Platform', icon: 'googleCloud' },
       { name: 'Terraform', icon: 'terraform' },
     ],
-    media: [{ src: ckeeperImage, alt: 'Ckeeper Agentic DevOps Platform project preview' }],
+    media: [{ src: ckeeperImage, width: 800, height: 450, alt: 'Ckeeper Agentic DevOps Platform project preview' }],
     links: [
       { label: 'View the Ckeeper presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1153334096/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
       { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/ckeeper-io/devops-agent' },
@@ -51,7 +52,7 @@ const projects = [
       { name: 'Python', icon: 'python' },
       { name: 'FastAPI', icon: 'fastapi' },
     ],
-    media: [{ src: oncologyImage, alt: 'Personalized oncology education Q&A system project preview' }],
+    media: [{ src: oncologyImage, width: 800, height: 462, alt: 'Personalized oncology education Q&A system project preview' }],
     links: [
       { label: 'Read the project report', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/751279696/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
       { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/PFA2025/Cancer-QA-System' },
@@ -65,7 +66,7 @@ const projects = [
     technologies: [
       { name: 'Python', icon: 'python' },
     ],
-    media: [{ src: localumeImage, alt: 'Localume semantic document search project preview' }],
+    media: [{ src: localumeImage, width: 800, height: 445, alt: 'Localume semantic document search project preview' }],
     links: [
       { label: 'View the Localume project page', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1390468996/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
       { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/localume' },
@@ -81,7 +82,7 @@ const projects = [
       { name: 'TensorFlow', icon: 'tensorflow' },
       { name: 'YOLO', icon: 'yolo' },
     ],
-    media: [{ src: rerailImage, alt: 'Rerail railway track inspection project preview' }],
+    media: [{ src: rerailImage, width: 800, height: 449, alt: 'Rerail railway track inspection project preview' }],
     links: [
       { label: 'View the Rerail project page', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
       { label: 'View all Rerail media', kind: 'url', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1157063098/image-list/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
@@ -96,7 +97,7 @@ const projects = [
       { name: 'TensorFlow', icon: 'tensorflow' },
       { name: 'C++', icon: 'cpp' },
     ],
-    media: [{ src: embeddedSpeechImage, alt: 'Embedded speech recognition project preview' }],
+    media: [{ src: embeddedSpeechImage, width: 800, height: 413, alt: 'Embedded speech recognition project preview' }],
     links: [
       { label: 'View source on GitHub', kind: 'github', href: 'https://github.com/Med-Karim-Ben-Boubaker/Embedded-Speech-Recognition-STM32F407' },
       { label: 'View the embedded speech presentation', kind: 'pdf', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/overlay/Project/1929811109/treasury/?profileId=ACoAADG7jRwBxfizq2Kx102TECyWMpmBnNDgrkM' },
@@ -106,7 +107,7 @@ const projects = [
     period: 'Sep 2023 — Jul 2024',
     title: 'Autonomous robot software',
     description: 'Led core software development for an autonomous robot that qualified for Eurobot 2024, designing ROS-based navigation and task scheduling with LiDAR, computer vision, odometry, and CAN bus communication between a Raspberry Pi 4 and STM32F407.',
-    meta: ['Autonomous robotics', 'Algorithm Design', 'Embedded systems'],
+    meta: ['Autonomous robotics', 'Algorithm design', 'Embedded systems'],
     technologies: [
       { name: 'ROS1', icon: 'ros' },
       { name: 'Ubuntu', icon: 'ubuntu' },
@@ -114,7 +115,7 @@ const projects = [
       { name: 'Raspberry Pi', icon: 'raspberryPi' },
       { name: 'Bash', icon: 'bash' },
     ],
-    media: [{ src: ieeeInsatEurobotImage, alt: 'IEEE INSAT autonomous Eurobot project preview' }],
+    media: [{ src: ieeeInsatEurobotImage, width: 800, height: 445, alt: 'IEEE INSAT autonomous Eurobot project preview' }],
   },
 ]
 

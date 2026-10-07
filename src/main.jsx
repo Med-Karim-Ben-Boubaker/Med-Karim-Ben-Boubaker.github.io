@@ -2,17 +2,22 @@ import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { loadArticles } from './content/articles.js'
+import { loadRouteData } from './route-pages.js'
 
-const rootElement = document.getElementById('root')
-const app = (
-  <StrictMode>
-    <App articles={loadArticles({ includeDrafts: import.meta.env.DEV })} />
-  </StrictMode>
-)
+async function start() {
+  const rootElement = document.getElementById('root')
+  const { pages, articles } = await loadRouteData(window.location.pathname)
+  const app = (
+    <StrictMode>
+      <App pages={pages} articles={articles} />
+    </StrictMode>
+  )
 
-if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, app)
-} else {
-  createRoot(rootElement).render(app)
+  if (rootElement.hasChildNodes()) {
+    hydrateRoot(rootElement, app)
+  } else {
+    createRoot(rootElement).render(app)
+  }
 }
+
+start()

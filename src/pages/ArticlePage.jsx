@@ -2,14 +2,25 @@ import Markdown, { defaultUrlTransform } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import ArticleContent from '../components/ArticleContent'
 import PageShell from '../components/PageShell'
+import { getArticleImageSize } from '../content/article-images'
+import { formatDate } from '../content/dates'
 import { withArticleAssetPath, withBasePath } from '../site-url'
 
 function CoverFigure({ article }) {
   if (!article.cover) return null
 
+  const { width, height } = getArticleImageSize(article.slug, article.cover)
+
   return (
     <figure className="article-cover">
-      <img src={withArticleAssetPath(article.slug, article.cover)} alt={article.title} />
+      <img
+        src={withArticleAssetPath(article.slug, article.cover)}
+        width={width}
+        height={height}
+        fetchPriority="high"
+        decoding="async"
+        alt={article.title}
+      />
       {article.coverCaption && (
         <figcaption>
           <Markdown
@@ -34,8 +45,7 @@ export default function ArticlePage({ article, currentPath = `/blog/${article.sl
             <p className="eyebrow">Article</p>
             <h1 id="article-title">{article.title}</h1>
             <div className="article-meta">
-              {article.author && <span>By {article.author}</span>}
-              <time dateTime={article.date}>{article.date}</time>
+              <time dateTime={article.date}>{formatDate(article.date)}</time>
             </div>
             <p className="article-summary">{article.summary}</p>
             <CoverFigure article={article} />

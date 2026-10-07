@@ -1,7 +1,7 @@
 ---
-title: "I Built a GPT from Scratch It Speaks Fluent English But Thinks France is in Germany"
+title: "I Built a GPT from Scratch: It Speaks Fluent English but Thinks France Is in Germany"
 date: 2025-12-15
-summary: "Detailed documentation about my journey building my first LLM, from architectural implimentation, dataset engineering, training loop implimentation to instruction finetuning."
+summary: "Detailed documentation about my journey building my first LLM, from architectural implementation, dataset engineering, training loop implementation to instruction fine-tuning."
 author: "Karim Ben Boubaker"
 draft: false
 cover: "cover.jpg"
@@ -14,11 +14,11 @@ You can check the source code here [Med-Karim-Ben-Boubaker/gpt-2-from-scratch](h
 
 I completed my most educational project yet: building an LLM from scratch. By “from scratch,” I mean implementing the fundamental building blocks of a basic GPT‑2–style model (Radford et al., 2019) using mostly plain PyTorch. The result is an LLM that’s fluent in English, but sometimes insists that France is in Germany, or gives bizarre answers to simple geography questions like “What is the capital of Spain?”
 
-![Pasted image 20251207124202.png](./Pasted%20image%2020251207124202.png)
+![Pasted image 20251207124202.png](./pasted-image-20251207124202.webp)
 
 But sometimes it surprises me with how accurate the answer is, which is not something I expected from a ~35M-parameter model:
 
-![Pasted image 20251207124222.png](./Pasted%20image%2020251207124222.png)
+![Pasted image 20251207124222.png](./pasted-image-20251207124222.webp)
 
 In today’s article, I’m going to walk through the project end-to-end: the steps, the challenges, and how I did all of this on a small GPU (an RTX 3050 with only 4GB of VRAM) with ~10 hours of pre-training and ~3 hour of instruction fine-tuning.
 ## Introduction and motivation
@@ -29,11 +29,11 @@ Most resources talk about implementation and mathematical equations, but don’t
 
 My first resource that helped me with the implementation of the Transformer, tokenizer, and basic training scripts was **Build a Large Language Model (From Scratch)** (Raschka, 2024). It also helped me understand some of the theory behind LLMs.
 
-![Pasted image 20251207124321.png](./Pasted%20image%2020251207124321.png)
+![Pasted image 20251207124321.png](./pasted-image-20251207124321.webp)
 
 For more depth, especially *why* the Transformer exists in the first place, I highly recommend the lectures provided by CS231n: Deep Learning for Computer Vision by Stanford (focus on Lecture 8: Attention and Transformers) (Stanford CS231n, n.d.).
 
-![Pasted image 20251207124424.png](./Pasted%20image%2020251207124424.png)
+![Pasted image 20251207124424.png](./pasted-image-20251207124424.webp)
 
 Let’s start by understanding the most important steps:
 ## The processing unit of the Transformer (tokens)
@@ -44,7 +44,7 @@ Let's take this sentence as an example: "Many words map to one token, but some d
 
 However, for LLMs, this basic logic is not optimized and presents several problems. We must remember that LLMs don't necessarily see words for their meaning; to the model, they are just a bunch of numbers.
 
-![Pasted image 20251207124449.png](./Pasted%20image%2020251207124449.png)
+![Pasted image 20251207124449.png](./pasted-image-20251207124449.webp)
 
 Using the GPT-4o tokenizer (OpenAI, 2023), you can clearly see that while humans tokenize "indivisible" as one word, the GPT-4o tokenizer doesn't recognize it as a single, unique word, but rather as two independent tokens.
 
@@ -63,7 +63,7 @@ So, we need to balance different factors. Having a larger vocabulary results in 
 
 This tokenization challenge is effectively addressed using algorithms like BPE (Byte-Pair Encoding) (Sennrich et al., 2016), which iteratively encodes text into a fixed vocabulary by merging the most frequent adjacent pairs of bytes or characters.
 
-![Pasted image 20251207124523.png](./Pasted%20image%2020251207124523.png)
+![Pasted image 20251207124523.png](./pasted-image-20251207124523.webp)
 
 Based on this token-count distribution per chunk, you can see a clear difference: a 52k vocabulary yields better compression (average tokens per chunk is ~10.7k). With the same chunk size, using an 8k vocabulary increases the average to ~13.5k tokens.
 
@@ -76,9 +76,9 @@ However, that increase in tokens (around ~20%) is negligible compared to the par
 
 After tokenizing the text, transforming human text into a sequence of predefined numbers (`token_id`), these tokens still need to be mapped into high-dimensional vectors called **embeddings**.
 
-Let $V$ be the vocabulary size, $d$ the embedding dimension, and $C$ the context length. We learn an embedding matrix $E \in \mathbb{R}^{V \times d}$. For token IDs $x \in \mathbb{N}^C$, the lookup produces $y \in \mathbb{R}^{C \times d}$ by selecting rows of $E$.
+Let $V$ be the vocabulary size, $d$ the embedding dimension, and $C$ the context length. We learn an embedding matrix $E \in \mathbb{R}^{V \times d}$. For token IDs $x \in \mathbb{N}^C$, the lookup produces $y \in \mathbb{R}^{C \times d}$ by selecting rows of $E$.
 
-We also learn positional embedding $P \in \mathbb{R}^{C \times d}$ to encode order. The model sums token and positional embedding: $H_0 = y + P$, and feeds $H_0$ to the attention layers.
+We also learn positional embedding $P \in \mathbb{R}^{C \times d}$ to encode order. The model sums token and positional embedding: $H_0 = y + P$, and feeds $H_0$ to the attention layers.
 
 For intuition on why this matters: the embedding space is where meaning becomes geometry. Similar words get nearby vectors (under distance functions like Euclidean distance or cosine similarity), making it easier for attention to share information across related tokens.
 
@@ -89,11 +89,11 @@ Single-head self-attention with causal masking (Vaswani et al., 2017) starts fro
 
 We form queries, keys, and values via $Q = H_0 W_Q,\quad K = H_0 W_K,\quad V = H_0 W_V,$ with trainable projections $W_Q, W_K, W_V \in \mathbb{R}^{d \times d}.$
 
-![Pasted image 20251215220027.png](./Pasted%20image%2020251215220027.png)
+![Pasted image 20251215220027.png](./pasted-image-20251215220027.webp)
 
 We first compute a dot product between $Q$ and $K^\top$. Intuitively, $QK^\top$ scores pairwise relevance (“how much should this token look at that token?”). The result is scaled by $\frac{1}{\sqrt{d_k}}$ (Vaswani et al., 2017), where $d_k = \frac{d}{h}$ and $d$ is the embedding dimension and $h$ is the number of attention heads). Attention heads are simply parallel attention blocks.
 
-![Pasted image 20251215220243.png](./Pasted%20image%2020251215220243.png)
+![Pasted image 20251215220243.png](./pasted-image-20251215220243.webp)
 #### Why scaling is important?
 
 But why do we scale the dot-product result? Without scaling, these dot products can explode in high dimensions. Imagine two high-dimensional random vectors: their dot product has mean 0, but variance grows linearly with dimension $d_k$. For large $d_k$, scores become overly sensitive and can range into large magnitudes $[-50, 50]$, which saturates the softmax, limits learning, and ruins gradients.
@@ -106,7 +106,7 @@ For each term, $\mathrm{Var}(q_i k_i) = \mathbb{E}[q_i^2]\mathbb{E}[k_i^2] = 1 \
 
 And here is a plot that empirically illustrates the phenomenon:
 
-![Pasted image 20251208130923.png](./Pasted%20image%2020251208130923.png)
+![Pasted image 20251208130923.png](./pasted-image-20251208130923.webp)
 
 Since the variance grows linearly with $d_k$, scaling by $\frac{1}{\sqrt{d_k}}$ yields $\mathrm{Var}(A) \approx 1$, preventing softmax saturation.
 #### Causal attention
@@ -194,7 +194,7 @@ Self-attention’s role is to aggregate information across token positions throu
 
 I used the standard GPT architecture, which is a simple Multi-Layer Perceptron (MLP) applied position-wise. This means the exact same weights are applied to every token in the sequence, effectively in parallel.
 
-![Pasted image 20251215221502.png](./Pasted%20image%2020251215221502.png)
+![Pasted image 20251215221502.png](./pasted-image-20251215221502.webp)
 #### Dimensional Expansion:
 
 An important design choice in Transformers is the **expansion factor** (Vaswani et al., 2017). The input projects from embedding dimension $d$ to a hidden dimension $4d$, and then back down to $d$.
@@ -208,7 +208,7 @@ For the non-linearity component, the standard for GPT-2, BERT, and many modern L
 
 GELU is used because it behaves like a “soft” version of ReLU that keeps gradients non-zero (very small values near zero or even negative values still carry information, unlike hard zeros).
 
-![Pasted image 20251215221819.png](./Pasted%20image%2020251215221819.png)
+![Pasted image 20251215221819.png](./pasted-image-20251215221819.webp)
 
 The problem ReLU has with hard zeros is that when negative values appear, ReLU maps them to 0, meaning no gradient for those activations. This can cause parts of the network to stop learning, a failure mode called “dying ReLU.”
 
@@ -247,7 +247,7 @@ The core task is **Next Token Prediction**. We feed the model a sequence of text
 
 In my implementation, I treat the raw text (from the FineWeb dataset) (Penedo et al., 2024) as one massive stream of tokens. To create training examples, I use a sliding window approach.
 
-![Pasted image 20251215223654.png](./Pasted%20image%2020251215223654.png)
+![Pasted image 20251215223654.png](./pasted-image-20251215223654.webp)
 
 For a context length $L$, we take a chunk of text. The **input** is the sequence from index $0$ to $L-1$, and the **target** (the "label") is the sequence from index $1$ to $L$.
 
@@ -302,7 +302,7 @@ One of the most common mistakes when training LLMs is guessing the dataset size.
 
 But how do we find the sweet spot? The **Chinchilla scaling laws** (Hoffmann et al., 2022) addressed this question with an experimental heuristic.
 
-![Pasted image 20251215225002.png](./Pasted%20image%2020251215225002.png)
+![Pasted image 20251215225002.png](./pasted-image-20251215225002.webp)
 
 The core finding of the Chinchilla paper is that for a given compute budget, the model size ($N$) and the number of training tokens ($D$) should scale equally. The golden rule of thumb derived from their extensive experiments is a **20:1 ratio**:
 $$ D \approx 20 \times N $$
@@ -375,7 +375,7 @@ Standard stochastic gradient descent (SGD) is usually slow and much more sensiti
 
 However, AdamW adapts the learning rate for every single parameter individually. If a parameter receives large gradients (is changing a lot), AdamW slows it down; if it receives small updates (is rarely used), AdamW speeds it up.
 
-![Pasted image 20251215230008.png](./Pasted%20image%2020251215230008.png)
+![Pasted image 20251215230008.png](./pasted-image-20251215230008.webp)
 
 I used PyTorch's native implementation, enabling the `fused=True` flag to run the entire optimization step as a single CUDA kernel, speeding up gradient calculations:
 
@@ -421,7 +421,7 @@ This allowed me to simulate a batch size of 32 or 64, which helped me approximat
 
 And here is an image of the evolution of loss:
 
-![Pasted image 20251215181538.png](./Pasted%20image%2020251215181538.png)
+![Pasted image 20251215181538.png](./pasted-image-20251215181538.webp)
 #### The problem with fixed learning rate
 
 Training with a constant learning rate usually leads to one of two outcomes: a high learning rate makes the model learn quickly at first but diverge later; a low learning rate keeps training stable but takes too long to learn anything useful.
@@ -455,7 +455,7 @@ scheduler = SequentialLR(optimizer, schedulers=[warmup, decay], milestones=[warm
 
 You can see the learning-rate schedule below (plotted with TensorBoard):
 
-![Pasted image 20251215181356.png](./Pasted%20image%2020251215181356.png)
+![Pasted image 20251215181356.png](./pasted-image-20251215181356.webp)
 ## Instruction fine-tuning
 
 After hours of pre-training, I had a model that could speak fluent English. But if I asked it, “Who is the president of the US?”, it confidently produced the following:
@@ -555,7 +555,7 @@ We’re finally able to get some serious answers from an undertrained LLM. When 
 Machine learning is a type of artificial intellgience that can be used to solve complex problems and behavior. It allows people to learn from data, interact with patterns in different ways, and make predictions based on their own perspectives.<|endoftext|>
 ```
 
-![Pasted image 20251215202744.png](./Pasted%20image%2020251215202744.png)
+![Pasted image 20251215202744.png](./pasted-image-20251215202744.webp)
 
 The answer is not perfect, but I'm proud that the model is finally able to generate such a response.
 
@@ -565,7 +565,7 @@ But the model is still far from perfect—it gave the following answer to `What 
 The capital of France is a major city located in Germany and has a population of over 150,000 people worldwide.<|endoftext|>
 ```
 
-![Pasted image 20251215202904.png](./Pasted%20image%2020251215202904.png)
+![Pasted image 20251215202904.png](./pasted-image-20251215202904.webp)
 ## The importance of sampling
 
 Even with a perfectly trained model, the way you select the next word can ruin everything. When I first ran my model using simple "Greedy Decoding" (always picking the most likely next word), I asked it: *"Who is the president of the US?"* And as previously mentioned, I got this output:

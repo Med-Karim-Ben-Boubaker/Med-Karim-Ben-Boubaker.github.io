@@ -161,10 +161,6 @@
 }
 
 .article-content :not(pre) > code {
-  padding: 2px 5px;
-  border: 1px solid var(--hairline);
-  border-radius: 4px;
-  background: var(--canvas-soft);
   color: var(--ink);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
@@ -182,6 +178,11 @@
   font-size: 13px;
   line-height: 1.55;
   white-space: pre;
+}
+
+.article-content .article-code-block:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .article-content .article-code-block code {

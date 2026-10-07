@@ -17,13 +17,20 @@
   --primary: #f54e00;
   --accent-active: #d04200;
   --focus: #f54e00;
+  --accent-border: rgb(245 78 0 / 0.35);
+  --on-accent: #ffffff;
+  --logo-surface: var(--on-accent);
   --page-gutter: 20px;
   --page-top: 67.2px;
   --page-bottom: 112px;
   --page-width-standard: 960px;
   --page-width-wide: 1100px;
   --page-width-reading: 720px;
-  --page-width-article: 760px;
+  --page-width-article: 720px;
+  --gutter-start: max(var(--page-gutter), env(safe-area-inset-left));
+  --gutter-end: max(var(--page-gutter), env(safe-area-inset-right));
+  /* Touch/overlay-scrollbar default: the full DESIGN.md gutter on each side. */
+  --shell-avail: calc(100% - var(--gutter-start) - var(--gutter-end));
   --nav-control-size: 40px;
   --nav-gap: 16px;
   --nav-top-padding: max(6px, env(safe-area-inset-top));
@@ -73,10 +80,9 @@ a:focus-visible {
 }
 
 .page-shell {
-  /* Both-edge scrollbar gutters already reserve one viewport gutter on each side. */
   position: relative;
   isolation: isolate;
-  width: min(var(--page-width), calc(100% - (var(--page-gutter) / 2)));
+  width: min(var(--page-width), var(--shell-avail));
   margin-inline: auto;
   padding-block: calc(var(--page-top) + var(--nav-height)) var(--page-bottom);
 }
@@ -86,9 +92,10 @@ a:focus-visible {
   z-index: 1;
 }
 
-.page-shell--standard { --page-width: var(--page-width-standard); }
-.page-shell--wide { --page-width: var(--page-width-wide); }
-.page-shell--reading { --page-width: var(--page-width-reading); }
+/* One shared width for every non-article page so headings share a left edge. */
+.page-shell--standard,
+.page-shell--wide,
+.page-shell--reading { --page-width: var(--page-width-standard); }
 .page-shell--article { --page-width: var(--page-width-article); }
 
 .skip-link {
@@ -104,6 +111,11 @@ a:focus-visible {
 }
 
 .skip-link:focus { transform: translateY(0); }
+
+/* Mouse/desktop: both-edge scrollbar gutters already reserve most of the side gutter. */
+@media (hover: hover) and (pointer: fine) {
+  :root { --shell-avail: calc(100% - (var(--page-gutter) / 2)); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

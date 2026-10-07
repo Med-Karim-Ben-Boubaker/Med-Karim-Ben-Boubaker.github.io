@@ -112,9 +112,14 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: center;
   gap: 10px;
-  width: min(100%, 1300px);
+  width: min(var(--page-width-standard), var(--shell-avail));
   margin-inline: auto;
-  padding: 40px 20px 20px;
+  padding: 40px 0 20px;
+}
+
+/* Article pages use the narrower reading column; keep the footer on the same edges. */
+#root:has(.page-shell--article) .site-footer-inner {
+  width: min(var(--page-width-article), var(--shell-avail));
 }
 
 .site-footer-credit {
@@ -179,19 +184,29 @@
 .eyebrow {
   margin: 0 0 24px;
   color: var(--primary);
-  font-family: "JetBrains Mono", "Fira Code", monospace;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.72px;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 h1 {
   margin: 0;
   color: var(--ink);
-  font-size: clamp(40px, 5.2vw, 60px);
+  /* DESIGN.md display-lg; mobile (<640px) drops to 28px. */
+  font-size: 36px;
   font-weight: 400;
-  letter-spacing: -0.04em;
-  line-height: 1.04;
+  letter-spacing: -0.72px;
+  line-height: 1.2;
+}
+
+@media (max-width: 639px) {
+  h1 {
+    font-size: 28px;
+    letter-spacing: -0.56px;
+  }
 }
 
 .about-page {
@@ -239,16 +254,15 @@ h1 {
   min-height: 44px;
   align-items: center;
   gap: 8px;
-  color: var(--body);
-  text-decoration-color: var(--hairline-strong);
+  color: var(--primary);
+  text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  text-underline-offset: 3px;
 }
 
-.about-social-link:hover,
-.about-social-link:focus-visible {
-  color: var(--primary);
-  text-decoration-color: currentColor;
+.about-social-link:hover {
+  color: var(--accent-active);
+  text-decoration-thickness: 2px;
 }
 
 .about-social-icon {
@@ -300,10 +314,7 @@ h1 {
 
 .projects-intro { max-width: 720px; }
 
-.projects-intro h1 {
-  max-width: 680px;
-  font-size: clamp(40px, 5.2vw, 60px);
-}
+.projects-intro h1 { max-width: 680px; }
 
 .projects-lead {
   max-width: 640px;
@@ -337,17 +348,9 @@ h1 {
 }
 
 .section-count {
-  margin: 0;
+  margin: 0 0 0 auto;
   color: var(--muted);
-}
-
-.projects-selection h2 {
-  margin: 12px 0 0;
-  color: var(--ink);
-  font-size: 26px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  white-space: nowrap;
 }
 
 .project-meta-list {
@@ -381,9 +384,9 @@ h1 {
 .project-technologies-label {
   margin: 0;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.72px;
   line-height: 1.35;
   text-transform: uppercase;
 }
@@ -418,7 +421,9 @@ h1 {
 
 .project-visual {
   display: grid;
-  height: 300px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border: 1px solid var(--hairline);
   border-radius: 4px;
@@ -453,8 +458,9 @@ h1 {
 
 .project-visual--empty small {
   color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.72px;
   text-transform: uppercase;
 }
 
@@ -463,18 +469,15 @@ h1 {
   width: 100%;
   height: 100%;
   min-width: 0;
-  object-fit: cover;
+  min-height: 0;
+  /* contain keeps wide charts whole; the canvas-soft frame fills any letterbox. */
+  object-fit: contain;
+  object-position: center;
 }
 
 .projects-selection { margin-top: 67.2px; }
 
 .projects-selection .projects-section-heading { align-items: end; }
-
-.projects-selection h2 {
-  max-width: 580px;
-  margin-top: 8px;
-  font-size: 22px;
-}
 
 .project-card-list {
   display: grid;
@@ -542,7 +545,6 @@ h1 {
 }
 
 .project-card .project-visual {
-  height: 170px;
   border: 0;
   border-bottom: 1px solid var(--hairline);
   border-radius: 0;
@@ -553,11 +555,12 @@ h1 {
   padding: 20px;
 }
 
-.project-card-heading h3 {
+.project-card-heading h2 {
   margin: 0;
   color: var(--ink);
   font-size: 18px;
   font-weight: 500;
+  letter-spacing: 0;
   line-height: 1.4;
 }
 
@@ -565,14 +568,15 @@ h1 {
   margin: 12px 0 0;
   color: var(--body);
   font-size: 14px;
+  letter-spacing: 0.14px;
   line-height: 1.5;
 }
 
 .project-card-period {
   margin: 9px 0 0;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .project-highlights {
@@ -588,15 +592,14 @@ h1 {
 .project-highlights p { margin: 0; }
 
 .project-card .project-meta-list { margin-top: 15px; }
-.project-card .project-meta { min-height: 26px; padding-inline: 8px; font-size: 11px; }
 .project-card .project-technologies { margin-top: 17px; padding-top: 12px; }
 .project-card .project-technologies-list { margin-top: 8px; gap: 7px 11px; }
-.project-card .project-technology { min-height: 20px; font-size: 11px; }
+.project-card .project-technology { min-height: 20px; }
 .project-card .project-technology-icon { width: 14px; height: 14px; }
 
 .project-links {
   display: grid;
-  gap: 7px;
+  gap: 2px;
   margin: 18px 0 0;
   padding: 14px 0 0;
   border-top: 1px solid var(--hairline-soft);
@@ -606,12 +609,18 @@ h1 {
 .project-links a {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr) auto;
+  min-height: 24px;
   align-items: center;
   gap: 10px;
   color: var(--ink);
   font-size: 12px;
   line-height: 1.4;
   text-decoration: none;
+}
+
+@media (pointer: coarse) {
+  .project-links { gap: 0; }
+  .project-links a { min-height: 44px; }
 }
 
 .project-link-icon {
@@ -656,10 +665,7 @@ h1 {
 
 .experience-intro { max-width: 720px; }
 
-.experience-intro h1 {
-  max-width: 680px;
-  font-size: clamp(40px, 5.2vw, 60px);
-}
+.experience-intro h1 { max-width: 680px; }
 
 .experience-lead {
   max-width: 640px;
@@ -702,9 +708,9 @@ h1 {
   flex-direction: column;
   padding-top: 21px;
   color: var(--muted);
-  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.55;
   text-align: right;
   white-space: nowrap;
 }
@@ -712,9 +718,8 @@ h1 {
 .experience-duration {
   margin-top: 4px;
   color: var(--muted);
-  font-family: inherit;
-  font-size: 10px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .experience-marker {
@@ -735,17 +740,17 @@ h1 {
 
 .experience-card {
   min-width: 0;
-  padding: 20px 22px;
+  padding: 20px;
   border: 1px solid var(--hairline);
   border-radius: 4px;
   background: var(--surface-card);
 }
 
-.experience-entry.is-current .experience-card { border-color: rgba(245, 78, 0, 0.35); }
+.experience-entry.is-current .experience-card { border-color: var(--accent-border); }
 
 .experience-card-header {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 14px;
   align-items: center;
 }
@@ -754,7 +759,7 @@ h1 {
   display: flex;
   flex-wrap: nowrap;
   gap: 4px;
-  width: 48px;
+  width: max-content;
   height: 48px;
 }
 
@@ -767,7 +772,7 @@ h1 {
   object-fit: contain;
   border: 1px solid var(--hairline-strong);
   border-radius: 4px;
-  background: #ffffff;
+  background: var(--logo-surface);
 }
 
 .experience-card-header-content {
@@ -778,13 +783,13 @@ h1 {
   justify-content: center;
 }
 
-.experience-card h3 {
+.experience-card h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .experience-organization {
@@ -800,8 +805,9 @@ h1 {
   max-width: 640px;
   margin: 17px 0 0;
   color: var(--body);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  letter-spacing: 0.14px;
+  line-height: 1.5;
 }
 
 .experience-highlights {
@@ -823,10 +829,6 @@ h1 {
 }
 
 @media (max-width: 860px) {
-  .site-nav {
-    padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
-  }
-
   .about-hero {
     display: flex;
     flex-direction: column;
@@ -858,7 +860,7 @@ h1 {
   }
 
   .project-card .project-visual {
-    height: 196px;
+    align-self: start;
     border-right: 1px solid var(--hairline);
     border-bottom: 0;
   }
@@ -881,17 +883,13 @@ h1 {
   .project-card { display: flex; }
 
   .project-card .project-visual {
-    height: 170px;
+    align-self: auto;
     border-right: 0;
     border-bottom: 1px solid var(--hairline);
   }
 }
 
 @media (max-width: 520px) {
-  .projects-intro h1 { font-size: 40px; }
-
-  .experience-intro h1 { font-size: 40px; }
-
   .projects-section-heading { align-items: flex-start; }
 
   .projects-selection .projects-section-heading { align-items: flex-start; }
@@ -921,8 +919,6 @@ h1 {
     width: 13px;
     height: 13px;
   }
-
-  .experience-card { padding: 18px; }
 
   .experience-card-header { gap: 12px; }
 

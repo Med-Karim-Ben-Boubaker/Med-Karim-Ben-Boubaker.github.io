@@ -2,8 +2,8 @@ import Markdown, { defaultUrlTransform } from 'react-markdown'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import { getArticleImageSize } from '../content/article-images'
 import 'katex/dist/katex.min.css'
-import '../styles/article-content.css'
 
 function splitUrlSuffix(source) {
   const match = String(source).match(/^([^?#]*)([?#].*)?$/)
@@ -69,51 +69,58 @@ function hasOnlyImageChild(node) {
 
 function createComponents({ slug, baseUrl }) {
   return {
-    a({ children, href, ...props }) {
-      return <a href={href || undefined} {...props}>{children}</a>
+    a({ node: _node, children, href, ...props }) {
+      // External links open in a new tab; internal and hash links stay put.
+      const external = /^(?:https?:)?\/\//i.test(href || '')
+      const externalProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+      return <a href={href || undefined} {...props} {...externalProps}>{children}</a>
     },
 
-    blockquote({ children, ...props }) {
+    blockquote({ node: _node, children, ...props }) {
       return <blockquote className="article-blockquote" {...props}>{children}</blockquote>
     },
 
-    code({ children, className, ...props }) {
+    code({ node: _node, children, className, ...props }) {
       return <code className={className || undefined} {...props}>{children}</code>
     },
 
-    h1({ children, ...props }) {
+    h1({ node: _node, children, ...props }) {
       return <h1 className="article-heading article-heading-1" {...props}>{children}</h1>
     },
 
-    h2({ children, ...props }) {
+    h2({ node: _node, children, ...props }) {
       return <h2 className="article-heading article-heading-2" {...props}>{children}</h2>
     },
 
-    h3({ children, ...props }) {
+    h3({ node: _node, children, ...props }) {
       return <h3 className="article-heading article-heading-3" {...props}>{children}</h3>
     },
 
-    h4({ children, ...props }) {
+    h4({ node: _node, children, ...props }) {
       return <h4 className="article-heading article-heading-4" {...props}>{children}</h4>
     },
 
-    h5({ children, ...props }) {
+    h5({ node: _node, children, ...props }) {
       return <h5 className="article-heading article-heading-5" {...props}>{children}</h5>
     },
 
-    h6({ children, ...props }) {
+    h6({ node: _node, children, ...props }) {
       return <h6 className="article-heading article-heading-6" {...props}>{children}</h6>
     },
 
-    img({ alt, src, title, ...props }) {
+    img({ node: _node, alt, src, title, ...props }) {
       const resolvedSrc = resolveArticleImageUrl(src, { slug, baseUrl })
+      const { width, height } = getArticleImageSize(slug, src)
       return (
         <img
           {...props}
           src={resolvedSrc || undefined}
           alt={alt || ''}
           title={title || undefined}
+          width={width}
+          height={height}
           loading="lazy"
+          decoding="async"
         />
       )
     },
@@ -132,11 +139,12 @@ function createComponents({ slug, baseUrl }) {
       return <p {...props}>{children}</p>
     },
 
-    pre({ children, ...props }) {
-      return <pre className="article-code-block" {...props}>{children}</pre>
+    pre({ node: _node, children, ...props }) {
+      // Focusable so keyboard users can scroll overflowing code.
+      return <pre className="article-code-block" tabIndex={0} {...props}>{children}</pre>
     },
 
-    table({ children, ...props }) {
+    table({ node: _node, children, ...props }) {
       return (
         <div className="article-table-wrap">
           <table {...props}>{children}</table>

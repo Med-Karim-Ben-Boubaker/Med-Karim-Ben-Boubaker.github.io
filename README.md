@@ -1,67 +1,64 @@
-# Karim's personal website
+# Karim Ben Boubaker — personal website
 
-This is a React project initialized with [Vite](https://vite.dev/).
+Personal site of Karim Ben Boubaker (AI Engineer): about, projects, experience and a blog of technical articles.
 
-## Initialize a new project
+## Stack
 
-To recreate this setup in an empty directory:
+- React 19 + Vite 8, plain CSS (`src/App.css`, `src/index.css`, `src/styles/`)
+- Markdown articles rendered with `react-markdown`, `remark-gfm`, `remark-math` and `rehype-katex`
+- Icons from `@iconify-icons/*` (bundled offline, imported one by one)
+- Linting with `oxlint`
 
-```bash
-npm create vite@latest . -- --template react
-npm install
-```
-
-The `--template react` option selects the React starter. Vite also supports other templates, such as `vanilla`, `vue`, `svelte`, and `react-ts`.
-
-## Development commands
+## Commands
 
 ```bash
-# Start the development server
-npm run dev
-
-# Check the code with Oxlint
-npm run lint
-
-# Build the production bundle
-npm run build
-
-# Preview the production build locally
-npm run preview
+npm install       # install dependencies
+npm run dev       # dev server at http://localhost:5173 (drafts are shown)
+npm run build     # production build, see below
+npm run preview   # serve the built site (vite preview)
+npm run lint      # oxlint over src and scripts
 ```
 
-## Articles
+## How the build works
 
-Create one Markdown file at `src/content/articles/<slug>.md`. The filename is the stable URL slug, so `reliable-knowledge-systems.md` becomes `/blog/reliable-knowledge-systems/`.
+`npm run build` runs three steps: a client build, an SSR build of `src/entry-server.jsx` into `.prerender/`, and `scripts/prerender.mjs`, which renders every public route to static HTML in `dist/`. The pages are then hydrated in the browser by `src/main.jsx`. The build also generates `sitemap.xml`, `robots.txt`, `llms.txt` and `404.html`.
 
-Published articles require `title`, `date` in `YYYY-MM-DD` format, and `summary`. Add `draft: true` while writing; drafts are visible with `npm run dev` and excluded from the static output of `npm run build`.
+The blog pages (`BlogPage`, `ArticlePage`), the article content and KaTeX are code-split: `src/route-pages.js` loads them with a dynamic `import()` only on `/blog` routes and awaits them before hydration, while the server entry imports them statically. The other routes do not download the Markdown/KaTeX chunk.
 
-````md
+"Present" in the experience timeline and its durations are computed from the build date (`__BUILD_DATE__`, injected in `vite.config.js`), so rebuild to roll them forward.
+
+## Where content lives
+
+| Content | Location |
+|---|---|
+| Articles | `src/content/articles/<slug>.md` (kebab-case file name = URL slug) |
+| Article images | `public/articles/<slug>/` |
+| Article image sizes | `src/content/article-image-sizes.json` |
+| Projects | `src/content/projects.js` |
+| Experience | `src/content/experience.js` (start/end as `YYYY-MM`, `end: null` = Present) |
+| Date formatting | `src/content/dates.js` |
+| About copy | `AboutPage` in `src/App.jsx` |
+
+### Article front matter
+
+```yaml
 ---
-title: Reliable knowledge systems
-date: 2026-09-01
-summary: Notes on building transparent AI systems.
-draft: true
+title: "Article title"
+date: 2025-12-15          # ISO YYYY-MM-DD, required
+summary: "One or two sentences used on the list page and as meta description."
+author: "Karim Ben Boubaker"   # optional; metadata only, not shown on the page
+cover: "cover.jpg"             # optional, file in public/articles/<slug>/
+coverCaption: "Markdown caption"   # optional
+draft: false                   # optional; drafts only show in `npm run dev`
 ---
-
-Inline math: $E = mc^2$
-
-$$
-P(A \mid B) = \frac{P(B \mid A)P(A)}{P(B)}
-$$
-
-![System diagram](./diagram.png)
-
-| Method | Result |
-| --- | ---: |
-| Retrieval | 0.82 |
-
-```js
-const answer = "grounded";
 ```
-````
 
-Articles support CommonMark, GFM tables/task lists/footnotes/strikethrough, fenced code, images, links, and inline or display LaTeX rendered with KaTeX. Store local images in `public/articles/<slug>/` and reference them relative to the article, for example `![System diagram](./diagram.png)`.
+Reference images in the body as `![alt text](./image-1.webp)`. Math uses `$inline$` and `$$block$$` (use regular spaces inside math, not U+00A0).
 
-The blog index is latest-first. Markdown remains presentation-neutral: the article renderer owns semantic markup and applies the design-system tokens documented in `DESIGN.md`.
+## Image guidelines
 
-After adding or editing an article, validate it with `npm run dev`, `npm run lint`, `npm run build`, and `npm run preview`. Deployment automation for the generated static files is a future issue.
+- Use WebP, at about 2x the largest rendered size: portrait 560 px, experience logos 96-144 px, project images about 800 px wide, article inline images at most 1520 px wide.
+- Article covers stay JPG (or PNG), at most 1200 px wide: they are used as `og:image`.
+- Use kebab-case file names without spaces.
+- Every `<img>` needs `width` and `height`. Project and experience images carry their size in the content files; article images are looked up in `src/content/article-image-sizes.json`, so add an entry when you add an image (`slug/filename` -> `[width, height]`).
+- Below-the-fold images use `loading="lazy"`; hero images (portrait, article cover) use `fetchpriority="high"`.
