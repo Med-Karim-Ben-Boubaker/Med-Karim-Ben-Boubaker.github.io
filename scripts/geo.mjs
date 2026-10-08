@@ -1,4 +1,6 @@
 // Build-time GEO outputs: llms.txt, llms-full.txt and per-article markdown copies.
+// `articleMarkdown` is also used by the article page's "Copy as Markdown" button,
+// so the copied text matches /blog/<slug>/index.md.
 // Articles and projects come from the content modules; About and Experience are
 // defined inside App.jsx, so they are read from the prerendered HTML.
 

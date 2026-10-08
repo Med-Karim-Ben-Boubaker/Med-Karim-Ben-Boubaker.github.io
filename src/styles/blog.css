@@ -159,7 +159,12 @@
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 5px 15px;
+}
+
+.article-copy-markdown {
+  margin-left: auto;
 }
 
 .article-summary {

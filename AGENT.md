@@ -104,6 +104,7 @@ If the change affects the renderer or prerender script, inspect both the rendere
 
 - `src/content/articles.js` owns discovery, front-matter validation, draft filtering, and deterministic sorting.
 - `src/components/ArticleContent.jsx` owns Markdown-to-semantic-HTML rendering, KaTeX integration, safe URL handling, responsive tables, code blocks, and article image figures.
+- `src/components/ArticleTools.jsx` owns the reading tools: code blocks with a language label and copy button, full-screen image buttons, and the copy buttons. `src/components/use-image-lightbox.jsx` is the shared full-screen image viewer. Syntax highlighting languages are registered in `src/content/code-languages.js`.
 - `src/entry-server.jsx` owns the published route list and server-side HTML rendering used by the build.
 - `scripts/prerender.mjs` owns insertion of rendered markup and page metadata into the Vite HTML template. Keep replacement logic safe for article text containing `$` characters.
 - Use trailing-slash URLs for the blog index and articles: `/blog/` and `/blog/<slug>/`. Keep route normalization centralized in `src/site-url.js`.

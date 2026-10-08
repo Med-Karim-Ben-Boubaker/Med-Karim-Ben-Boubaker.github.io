@@ -1,19 +1,24 @@
 import Markdown, { defaultUrlTransform } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { articleMarkdown } from '../../scripts/geo.mjs'
 import ArticleContent from '../components/ArticleContent'
+import { CopyButton, ZoomableImage } from '../components/ArticleTools'
+import { useImageLightbox } from '../components/use-image-lightbox'
 import PageShell from '../components/PageShell'
 import { getArticleImageSize } from '../content/article-images'
 import { formatDate } from '../content/dates'
 import { withArticleAssetPath, withBasePath } from '../site-url'
 
-function CoverFigure({ article }) {
+function CoverFigure({ article, onZoom }) {
   if (!article.cover) return null
 
   const { width, height } = getArticleImageSize(article.slug, article.cover)
 
   return (
     <figure className="article-cover">
-      <img
+      <ZoomableImage
+        className="article-zoom-block"
+        onZoom={onZoom}
         src={withArticleAssetPath(article.slug, article.cover)}
         width={width}
         height={height}
@@ -40,6 +45,8 @@ function CoverFigure({ article }) {
 }
 
 export default function ArticlePage({ article, currentPath = `/blog/${article.slug}/` }) {
+  const [openImage, lightbox] = useImageLightbox()
+
   return (
     <PageShell currentPath={currentPath} variant="article" className="article-page" labelledBy="article-title">
           <div className="reading-progress" aria-hidden="true" />
@@ -49,11 +56,13 @@ export default function ArticlePage({ article, currentPath = `/blog/${article.sl
             <h1 id="article-title">{article.title}</h1>
             <div className="article-meta">
               <time dateTime={article.date}>{formatDate(article.date)}</time>
+              <CopyButton getText={() => articleMarkdown(article)} label="Copy as Markdown" className="article-copy-markdown" />
             </div>
             <p className="article-summary">{article.summary}</p>
-            <CoverFigure article={article} />
+            <CoverFigure article={article} onZoom={openImage} />
           </header>
-          <ArticleContent content={article.content} slug={article.slug} baseUrl={import.meta.env.BASE_URL} />
+          <ArticleContent content={article.content} slug={article.slug} baseUrl={import.meta.env.BASE_URL} onZoomImage={openImage} />
+          {lightbox}
     </PageShell>
   )
 }

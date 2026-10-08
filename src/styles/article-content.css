@@ -20,7 +20,7 @@
 .article-content ol,
 .article-content blockquote,
 .article-content .article-figure,
-.article-content .article-code-block,
+.article-content .article-code,
 .article-content .article-table-wrap,
 .article-content .katex-display {
   margin: 20px 0;
@@ -109,6 +109,7 @@
 
 .article-content .article-figure img {
   display: block;
+  cursor: zoom-in;
   width: auto;
   max-width: 100%;
   height: auto;
@@ -166,13 +167,36 @@
   font-size: 13px;
 }
 
-.article-content .article-code-block {
+.article-content .article-code {
   max-width: 100%;
-  padding: 20px;
-  overflow-x: auto;
+  overflow: hidden;
   border: 1px solid var(--hairline);
   border-radius: 4px;
   background: var(--canvas-soft);
+}
+
+.article-code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px 6px 20px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.article-code-language {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.72px;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.article-content .article-code-block {
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  overflow-x: auto;
   color: var(--ink);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
@@ -187,6 +211,231 @@
 
 .article-content .article-code-block code {
   font: inherit;
+}
+
+/* Syntax highlighting (highlight.js token classes), tuned for --canvas-soft. */
+.article-code-block .hljs-keyword,
+.article-code-block .hljs-selector-tag,
+.article-code-block .hljs-type,
+.article-code-block .hljs-doctag { color: #ff8a4c; }
+.article-code-block .hljs-string,
+.article-code-block .hljs-regexp,
+.article-code-block .hljs-symbol,
+.article-code-block .hljs-template-tag { color: #b8cc8a; }
+.article-code-block .hljs-number,
+.article-code-block .hljs-literal,
+.article-code-block .hljs-meta,
+.article-code-block .hljs-variable.language_ { color: #e6b86a; }
+.article-code-block .hljs-title,
+.article-code-block .hljs-attr,
+.article-code-block .hljs-property,
+.article-code-block .hljs-section { color: #8fbbe0; }
+.article-code-block .hljs-built_in,
+.article-code-block .hljs-params,
+.article-code-block .hljs-subst { color: #d7a8cb; }
+.article-code-block .hljs-comment,
+.article-code-block .hljs-quote {
+  color: #9a978d;
+  font-style: italic;
+}
+
+/* Copy buttons (code blocks and "Copy as Markdown"). */
+.article-tool-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.article-tool-button:hover {
+  border-color: var(--hairline-strong);
+  color: var(--ink);
+}
+
+.article-tool-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+/* Images with a full-screen button. */
+.article-zoom {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.article-zoom-block {
+  display: block;
+}
+
+.article-zoom img {
+  cursor: zoom-in;
+}
+
+.article-zoom-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: rgb(20 18 11 / 0.78);
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 150ms ease;
+}
+
+.article-zoom-button:hover,
+.article-zoom-button:focus-visible {
+  opacity: 1;
+}
+
+.article-zoom-button .article-tool-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (pointer: coarse) {
+  .article-tool-button {
+    min-height: 44px;
+  }
+
+  .article-zoom-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Full-screen image viewer. */
+.image-lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: max(64px, env(safe-area-inset-top)) var(--gutter-end) max(20px, env(safe-area-inset-bottom)) var(--gutter-start);
+  border: 0;
+  overflow: hidden;
+  background: rgb(10 9 6);
+  cursor: zoom-out;
+  /* Pinch, pan and double-tap are handled by the viewer, not the browser. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Beats `.page-shell > :not(...)`, whose position: relative would make the modal scroll with the page. */
+dialog.image-lightbox:modal {
+  position: fixed;
+  inset: 0;
+}
+
+.image-lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-lightbox::backdrop {
+  background: transparent;
+}
+
+.image-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform-origin: 0 0;
+  cursor: zoom-in;
+  will-change: transform;
+}
+
+.image-lightbox.is-zoomed img {
+  cursor: grab;
+}
+
+.image-lightbox.is-zoomed img:active {
+  cursor: grabbing;
+}
+
+.image-lightbox-hint {
+  position: fixed;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 0;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 150ms ease;
+}
+
+.image-lightbox.is-zoomed .image-lightbox-hint {
+  opacity: 0;
+}
+
+.image-lightbox-hint-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .image-lightbox-hint-touch {
+    display: inline;
+  }
+
+  .image-lightbox-hint-mouse {
+    display: none;
+  }
+}
+
+.image-lightbox-close {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: var(--canvas-soft);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.image-lightbox-close .article-tool-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Lock page scroll and drop the reserved scrollbar gutters so the viewer spans the full width. */
+html:has(.image-lightbox[open]) {
+  overflow: hidden;
+  scrollbar-gutter: auto;
 }
 
 .article-content .katex-display {
@@ -219,5 +468,9 @@
 
   .article-content .article-code-block {
     padding: 15px;
+  }
+
+  .article-code-bar {
+    padding-left: 15px;
   }
 }
