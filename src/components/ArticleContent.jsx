@@ -1,8 +1,12 @@
+import { useMemo } from 'react'
 import Markdown, { defaultUrlTransform } from 'react-markdown'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import { getArticleImageSize } from '../content/article-images'
+import { codeLanguageLabel } from '../content/code-languages'
+import rehypeCodeHighlight from '../content/rehype-code-highlight'
+import { CodeBlock, ZoomableImage } from './ArticleTools'
 import 'katex/dist/katex.min.css'
 
 function splitUrlSuffix(source) {
@@ -67,7 +71,14 @@ function hasOnlyImageChild(node) {
   )
 }
 
-function createComponents({ slug, baseUrl }) {
+function codeLanguage(preNode) {
+  const code = preNode?.children?.find((child) => child.tagName === 'code')
+  const classes = code?.properties?.className || []
+  const languageClass = classes.find((name) => String(name).startsWith('language-'))
+  return languageClass ? String(languageClass).slice('language-'.length) : ''
+}
+
+function createComponents({ slug, baseUrl, onZoomImage }) {
   return {
     a({ node: _node, children, href, ...props }) {
       // External links open in a new tab; internal and hash links stay put.
@@ -112,8 +123,9 @@ function createComponents({ slug, baseUrl }) {
       const resolvedSrc = resolveArticleImageUrl(src, { slug, baseUrl })
       const { width, height } = getArticleImageSize(slug, src)
       return (
-        <img
+        <ZoomableImage
           {...props}
+          onZoom={onZoomImage}
           src={resolvedSrc || undefined}
           alt={alt || ''}
           title={title || undefined}
@@ -139,9 +151,8 @@ function createComponents({ slug, baseUrl }) {
       return <p {...props}>{children}</p>
     },
 
-    pre({ node: _node, children, ...props }) {
-      // Focusable so keyboard users can scroll overflowing code.
-      return <pre className="article-code-block" tabIndex={0} {...props}>{children}</pre>
+    pre({ node, children, ...props }) {
+      return <CodeBlock language={codeLanguageLabel(codeLanguage(node))} {...props}>{children}</CodeBlock>
     },
 
     table({ node: _node, children, ...props }) {
@@ -159,15 +170,17 @@ function createComponents({ slug, baseUrl }) {
  * Raw HTML is intentionally not enabled; content is limited to Markdown and
  * the explicitly configured remark/rehype transformations.
  */
-export default function ArticleContent({ content, children, slug, baseUrl = '/' }) {
+export default function ArticleContent({ content, children, slug, baseUrl = '/', onZoomImage }) {
   const markdown = typeof content === 'string' ? content : children
+  // Stable component identities: a new map would remount every image and code block on each render.
+  const components = useMemo(() => createComponents({ slug, baseUrl, onZoomImage }), [slug, baseUrl, onZoomImage])
 
   return (
     <div className="article-content">
       <Markdown
-        components={createComponents({ slug, baseUrl })}
+        components={components}
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex]}
+        rehypePlugins={[rehypeKatex, rehypeCodeHighlight]}
         skipHtml
         urlTransform={defaultUrlTransform}
       >

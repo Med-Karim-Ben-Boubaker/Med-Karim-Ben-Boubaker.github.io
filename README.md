@@ -55,6 +55,10 @@ draft: false                   # optional; drafts only show in `npm run dev`
 
 Reference images in the body as `![alt text](./image-1.webp)`. Math uses `$inline$` and `$$block$$` (use regular spaces inside math, not U+00A0).
 
+Tag fenced code blocks with their language (` ```python `). Highlighting runs at build time with highlight.js through `src/content/rehype-code-highlight.js`; registered languages are Python, JSON, Bash, Shell, JavaScript, TypeScript and YAML. To add one, import it in `src/content/code-languages.js`. `text`, `txt` and unregistered languages render unhighlighted.
+
+Article pages also have a copy button on each code block, a full-screen button on each image (pinch, wheel or double-tap to zoom inside the viewer), and a "Copy as Markdown" button that copies the same text as `/blog/<slug>/index.md`.
+
 ## Image guidelines
 
 - Use WebP, at about 2x the largest rendered size: portrait 560 px, experience logos 96-144 px, project images about 800 px wide, article inline images at most 1520 px wide.

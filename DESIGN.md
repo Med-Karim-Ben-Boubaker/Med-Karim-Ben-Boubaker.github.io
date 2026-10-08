@@ -544,6 +544,10 @@ The site implementation uses a full-width, fixed viewport layer with the centere
 
 **`code-block`** uses `{colors.canvas-soft}`, monospace text, 20px padding, a 1px hairline, and 4px corners. Keep long lines horizontally scrollable. Inline code should inherit the same monospace family without creating a separate decorative capsule unless the surrounding context requires it.
 
+A header bar above the code shows the language in the uppercase 12px label style and a hairline "Copy" button. Syntax highlighting is the one place muted accent hues are allowed, each at least 6:1 against `{colors.canvas-soft}`: keywords `#ff8a4c`, strings `#b8cc8a`, numbers and literals `#e6b86a`, names and attributes `#8fbbe0`, built-ins and parameters `#d7a8cb`, comments `#9a978d` italic.
+
+Article images carry a 32px full-screen button in their top-right corner (44px on touch). It opens a solid `#0a0906` full-screen viewer with a 44px close button and a muted 12px hint at the bottom ("Pinch or double-tap to zoom" on touch, "Scroll or double-click to zoom" with a mouse) that fades out once zoomed. In the viewer, pinch or wheel zooms up to 5×, dragging pans, and double-tap or double-click toggles 2.5×; Escape, the close button or a tap on the background closes it.
+
 ### Pricing and comparison tiers
 
 **`pricing-tier-card`** uses the standard card surface, 30px padding, a 1px hairline, and 4px corners.
@@ -570,7 +574,7 @@ Articles use a centered editorial column capped at approximately 720px, with `{t
 
 - Treat Markdown as presentation-neutral. The article renderer owns semantic markup and applies these design-system tokens.
 - Preserve the dark editorial palette: `{colors.canvas}` for the page floor, `{colors.surface-card}` or `{colors.canvas-soft}` for flat content surfaces, `{colors.text-primary}` for main text, and `{colors.accent}` for links and directional emphasis.
-- Use flat hairline surfaces for code blocks, figures, tables, and quotes; do not add default shadows, gradients, or new saturated colors.
+- Use flat hairline surfaces for code blocks, figures, tables, and quotes; do not add default shadows, gradients, or new saturated colors (the syntax-highlighting palette under Code is the only exception).
 - Keep fenced code in `{typography.code}` with readable padding and horizontal scrolling when needed.
 - Make images responsive, preserve meaningful alternative text, and pair captions with semantic figures where captions are present.
 - Wrap wide tables for horizontal scrolling on narrow screens without reducing body text below a readable size.
