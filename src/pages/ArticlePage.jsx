@@ -20,6 +20,8 @@ function CoverFigure({ article }) {
         fetchPriority="high"
         decoding="async"
         alt={article.title}
+        data-vt-name={`cover-${article.slug}`}
+        data-vt-href={withBasePath(`/blog/${article.slug}/`)}
       />
       {article.coverCaption && (
         <figcaption>
@@ -40,6 +42,7 @@ function CoverFigure({ article }) {
 export default function ArticlePage({ article, currentPath = `/blog/${article.slug}/` }) {
   return (
     <PageShell currentPath={currentPath} variant="article" className="article-page" labelledBy="article-title">
+          <div className="reading-progress" aria-hidden="true" />
           <a className="article-back-link" href={withBasePath('/blog/')}>Back to articles</a>
           <header className="article-header">
             <p className="eyebrow">Article</p>

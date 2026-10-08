@@ -19,6 +19,8 @@ function ArticleListItem({ article, priority }) {
               alt=""
               loading={priority ? undefined : 'lazy'}
               decoding="async"
+              data-vt-name={`cover-${article.slug}`}
+              data-vt-href={withBasePath(`/blog/${article.slug}/`)}
             />
           )}
           <div className="article-list-copy">

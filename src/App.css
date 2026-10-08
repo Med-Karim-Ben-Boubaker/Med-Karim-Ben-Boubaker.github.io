@@ -38,8 +38,17 @@
   text-decoration: none;
 }
 
-.site-nav-link:hover,
-.site-nav-link.is-current { background: var(--surface-card); }
+.site-nav-link:hover { background: var(--surface-card); }
+
+/* Current-page background as its own element so page transitions can slide it. */
+.site-nav-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--surface-card);
+}
+
+.site-nav-link .site-nav-icon { position: relative; }
 
 .site-nav-link:focus-visible { outline-offset: 2px; }
 

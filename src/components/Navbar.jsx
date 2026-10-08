@@ -34,6 +34,7 @@ export default function Navbar({ currentPath = typeof window !== 'undefined' ? w
                 aria-label={item.label}
                 aria-current={isCurrent ? 'page' : undefined}
               >
+                {isCurrent && <span className="site-nav-indicator" aria-hidden="true" />}
                 <Icon name={item.icon} />
                 <span className="site-nav-tooltip" aria-hidden="true">{item.label}</span>
               </a>

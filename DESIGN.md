@@ -594,6 +594,17 @@ Articles use a centered editorial column capped at approximately 720px, with `{t
 - The effect must not introduce scale, tilt, shadow, glow, layout movement, or new card semantics.
 - Coarse pointers, touch input, and reduced-motion preferences use the static surface-hover state without pointer tracking.
 
+### Motion
+
+Motion lives in `src/styles/motion.css` and is progressive enhancement: content is visible without it, unsupported browsers keep the static page, and `prefers-reduced-motion: reduce` turns it off (the article reading-progress bar stays, since it only mirrors scroll position).
+
+- **Tokens:** one curve, `--ease-out` (`cubic-bezier(0.2, 0, 0, 1)`); three durations, `--duration-fast` 150ms for hover and press, `--duration-base` 250ms for page transitions, `--duration-slow` 400ms for entrances; at most `--motion-distance` (8px) of travel.
+- **Page transitions:** cross-document view transitions. Old content fades out, new content fades in with an 8px rise; the navigation bar stays fixed and its current-page indicator slides between icons beneath them. Matching images carry over between pages (`cover-<slug>` for blog covers, `project-<anchor>` for project images), but only for the link being followed and only when the image is on screen on both pages; otherwise the page simply cross-fades. Images opt in with `data-vt-name` and `data-vt-href`, and the inline script in `index.html` assigns the `view-transition-name` at navigation time.
+- **Entrance:** on the home page the identity row, intro and actions rise in with 80ms steps. The headline never animates, so the page reads as loaded at once.
+- **Scroll reveal:** project cards, experience entries, blog rows and home sections fade up once as they enter, driven by a scroll timeline; cards in one row are offset by 5% of their entry. The experience line draws as the list scrolls, and each marker fills when its entry crosses the middle of the viewport.
+- **Reading progress:** a 2px `{colors.accent}` line under the navigation on article pages.
+- **Micro-interactions:** arrows nudge 2px toward their direction on hover; pill buttons change colour on press. No scale, tilt, glow or bounce.
+
 ## Do's and don'ts
 
 ### Do
@@ -652,7 +663,7 @@ Articles use a centered editorial column capped at approximately 720px, with `{t
 
 ## Known gaps
 
-- Animation timing for process labels, panel reveals, and media transitions is intentionally unspecified.
+- Animation timing for process labels and panel reveals is unspecified; page, entrance and scroll motion follow the Motion section.
 - Complex in-product surfaces are represented as structural patterns, not a complete component library.
 - Exact illustration, texture, icon, and logo treatments are content-layer decisions and should be defined separately.
 - If a custom typeface is introduced later, it must preserve the documented sizes, weights, line heights, and tracking rather than replace them with arbitrary defaults.

@@ -1,0 +1,164 @@
+/*
+ * Motion. One easing curve, three durations and at most 8px of travel.
+ * Everything here is progressive enhancement: content is visible without it,
+ * browsers without support keep the static page, and reduced-motion users get
+ * no movement (the reading progress bar is scroll-linked, not autonomous).
+ */
+:root {
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --motion-distance: 8px;
+}
+
+@keyframes motion-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-distance));
+  }
+}
+
+@keyframes motion-fade-out {
+  to { opacity: 0; }
+}
+
+/* Cross-page transitions: content cross-fades with a small rise while the
+   navigation bar stays put and its current-page indicator slides. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.site-nav { view-transition-name: site-nav; }
+.site-nav-list { view-transition-name: site-nav-icons; }
+.site-nav-indicator { view-transition-name: site-nav-indicator; }
+
+::view-transition-group(*) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(root) {
+  animation: motion-fade-out var(--duration-fast) var(--ease-out) both;
+}
+
+::view-transition-new(root) {
+  animation: motion-rise-in var(--duration-base) var(--ease-out) both;
+}
+
+/* The indicator slides beneath the icons rather than over them. */
+::view-transition-group(site-nav-indicator) { z-index: 1; }
+::view-transition-group(site-nav-icons) { z-index: 2; }
+
+/* Page-load entrance on the home page. The headline stays instant so the
+   page reads as loaded immediately (and LCP is not delayed). */
+@media (prefers-reduced-motion: no-preference) {
+  .about-hero .home-identity,
+  .about-hero .about-intro,
+  .about-hero .home-actions {
+    animation: motion-rise-in var(--duration-slow) var(--ease-out) both;
+  }
+
+  .about-hero .about-intro { animation-delay: 80ms; }
+  .about-hero .home-actions { animation-delay: 160ms; }
+}
+
+/* Scroll reveal: cards and sections fade up as they enter, once, driven by
+   scroll position. Items already in view render fully visible. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .home-work-card,
+    .about-trajectory,
+    .home-cta,
+    .project-card,
+    .experience-entry,
+    .article-list-item {
+      animation: motion-rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    /* Stagger cards that share a row. */
+    .home-work-card:nth-child(3n + 2),
+    .project-card:nth-child(3n + 2) { animation-range: entry 5% entry 40%; }
+
+    .home-work-card:nth-child(3n),
+    .project-card:nth-child(3n) { animation-range: entry 10% entry 45%; }
+
+    /* Experience timeline: the line draws as the list scrolls through and is
+       complete once its end is on screen; each marker fills as its entry
+       crosses the middle of the viewport. */
+    .experience-timeline { view-timeline-name: --experience-timeline; }
+
+    .experience-timeline::before {
+      transform-origin: top;
+      animation: motion-draw-line linear both;
+      animation-timeline: --experience-timeline;
+      animation-range: entry 50% exit 0%;
+    }
+
+    .experience-marker {
+      animation: motion-fill-marker linear both;
+      animation-timeline: view();
+      animation-range: cover 46% cover 52%;
+    }
+  }
+}
+
+@keyframes motion-draw-line {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes motion-fill-marker {
+  to {
+    border-color: var(--primary);
+    background: var(--primary);
+  }
+}
+
+/* Reading progress on articles: a 2px accent line under the navigation. */
+#main-content .reading-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  #main-content .reading-progress {
+    position: fixed;
+    inset-inline: 0;
+    top: calc(var(--nav-height) - 1px);
+    z-index: 21;
+    display: block;
+    height: 2px;
+    background: var(--primary);
+    transform-origin: left;
+    animation: motion-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes motion-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Micro-interactions. */
+.home-section-link span[aria-hidden],
+.project-link-arrow,
+.site-footer-social a span[aria-hidden] {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.home-section-link:hover span[aria-hidden] { transform: translateX(2px); }
+
+.project-links a:hover .project-link-arrow,
+.site-footer-social a:hover span[aria-hidden] { transform: translate(2px, -2px); }
+
+.pill-button {
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}

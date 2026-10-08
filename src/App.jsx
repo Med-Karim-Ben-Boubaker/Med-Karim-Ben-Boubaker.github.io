@@ -13,8 +13,9 @@ import portrait from './assets/karim-portrait.webp'
 import './App.css'
 import './styles/article-content.css'
 import './styles/blog.css'
+import './styles/motion.css'
 
-function ProjectVisual({ media = [], title, visualLabel, visualDetail, priority }) {
+function ProjectVisual({ media = [], title, visualLabel, visualDetail, priority, transitionName }) {
   if (media.length === 0) {
     return (
       <div className="project-visual project-visual--empty" aria-label={`${title} visual`}>
@@ -26,9 +27,11 @@ function ProjectVisual({ media = [], title, visualLabel, visualDetail, priority 
 
   return (
     <div className={`project-visual${media.length > 1 ? ' project-visual--multiple' : ''}`}>
-      {media.map(({ src, alt, width, height }) => (
+      {media.map(({ src, alt, width, height }, index) => (
         <img
           key={src}
+          data-vt-name={index === 0 && transitionName ? transitionName.name : undefined}
+          data-vt-href={index === 0 && transitionName ? transitionName.href : undefined}
           src={src}
           width={width}
           height={height}
@@ -86,7 +89,7 @@ function ProjectLinks({ title, links }) {
 function ProjectCard({ title, description, period, meta, technologies, media, visualLabel, visualDetail, links, priority }) {
   return (
     <PointerSpotlightCard as="article" className="project-card" id={projectAnchor(title)} aria-label={title}>
-      <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} priority={priority} />
+      <ProjectVisual media={media} title={title} visualLabel={visualLabel} visualDetail={visualDetail} priority={priority} transitionName={{ name: `project-${projectAnchor(title)}`, href: withBasePath(`/projects/#${projectAnchor(title)}`) }} />
       <div className="project-card-content">
         <div className="project-card-heading">
           <h2>{title}</h2>
@@ -108,8 +111,8 @@ function FeaturedProjectCard({ title, period, description, media }) {
 
   return (
     <PointerSpotlightCard as="li" className="home-work-card">
-      <a className="home-work-link" href={withBasePath(`/projects/#${projectAnchor(title)}`)} aria-label={`${title}, ${period}`}>
-        {image && <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" />}
+      <a className="home-work-link" href={withBasePath(`/projects/#${projectAnchor(title)}`)}>
+        {image && <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" data-vt-name={`project-${projectAnchor(title)}`} data-vt-href={withBasePath(`/projects/#${projectAnchor(title)}`)} />}
         <span className="home-work-copy">
           <span className="home-work-period">{period}</span>
           <span className="home-work-title">{title}</span>

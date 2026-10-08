@@ -10,6 +10,48 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="description" content="Karim Ben Boubaker is an AI Engineer building reliable agents and knowledge systems for knowledge work." />
     <title>Karim Ben Boubaker</title>
+    <script>
+      // Shared-image page transitions. An image marked with data-vt-name morphs
+      // into its counterpart only when it belongs to the link being followed and
+      // is on screen on both pages; otherwise the page simply cross-fades, so
+      // off-screen images never fly in from outside the viewport. Inline in
+      // <head> because pagereveal fires before the deferred app bundle runs.
+      (function () {
+        var KEY = 'vt-shared-image'
+        function key(url) { var u = new URL(url, location.href); return u.pathname + u.hash }
+        function onScreen(el) {
+          var r = el.getBoundingClientRect()
+          return r.width > 0 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth
+        }
+        function clear() {
+          document.querySelectorAll('[data-vt-name]').forEach(function (el) { el.style.viewTransitionName = '' })
+        }
+        addEventListener('pageswap', function (event) {
+          clear()
+          sessionStorage.removeItem(KEY)
+          if (!event.viewTransition || !event.activation || !event.activation.entry) return
+          var to = key(event.activation.entry.url)
+          var here = key(location.href)
+          var images = document.querySelectorAll('[data-vt-name]')
+          for (var i = 0; i < images.length; i++) {
+            var target = key(images[i].getAttribute('data-vt-href'))
+            if ((target === to || target === here) && onScreen(images[i])) {
+              images[i].style.viewTransitionName = images[i].getAttribute('data-vt-name')
+              sessionStorage.setItem(KEY, images[i].getAttribute('data-vt-name'))
+              return
+            }
+          }
+        })
+        addEventListener('pagereveal', function (event) {
+          clear()
+          var name = sessionStorage.getItem(KEY)
+          sessionStorage.removeItem(KEY)
+          if (!event.viewTransition || !name) return
+          var el = document.querySelector('[data-vt-name="' + CSS.escape(name) + '"]')
+          if (el && onScreen(el)) el.style.viewTransitionName = name
+        })
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
