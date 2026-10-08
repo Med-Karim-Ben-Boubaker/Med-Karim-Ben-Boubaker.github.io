@@ -11,6 +11,8 @@ export const PROFILES = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mohamed-karim-ben-boubaker/' },
   { label: 'GitHub', href: 'https://github.com/Med-Karim-Ben-Boubaker' },
 ]
+// One-page PDF résumé, copied into public/ from the LaTeX source.
+export const RESUME_PATH = '/karim-ben-boubaker-resume.pdf'
 // Topics named in the About text.
 export const KNOWS_ABOUT = [
   'Large language models',

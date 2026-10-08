@@ -354,6 +354,25 @@ h1 {
   border-color: var(--hairline-strong);
 }
 
+.resume-button { gap: 8px; }
+
+.resume-button-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.resume-button-meta {
+  padding: 3px 6px;
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.experience-intro .home-actions { margin-top: 28px; }
+
 .home-section-link {
   color: var(--primary);
   font-size: 14px;

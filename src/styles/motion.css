@@ -147,12 +147,15 @@
 /* Micro-interactions. */
 .home-section-link span[aria-hidden],
 .project-link-arrow,
-.site-footer-social a span[aria-hidden] {
+.site-footer-social a span[aria-hidden],
+.resume-button-icon {
   display: inline-block;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .home-section-link:hover span[aria-hidden] { transform: translateX(2px); }
+
+.resume-button:hover .resume-button-icon { transform: translateY(2px); }
 
 .project-links a:hover .project-link-arrow,
 .site-footer-social a:hover span[aria-hidden] { transform: translate(2px, -2px); }

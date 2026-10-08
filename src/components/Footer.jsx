@@ -1,3 +1,5 @@
+import { resumeFilename, resumeHref } from '../content/resume'
+
 const footerLinks = [
   {
     label: 'karimbb2002@gmail.com',
@@ -13,6 +15,11 @@ const footerLinks = [
     href: 'https://github.com/Med-Karim-Ben-Boubaker',
     external: true,
   },
+  {
+    label: 'Résumé',
+    href: resumeHref,
+    download: resumeFilename,
+  },
 ]
 
 export default function Footer() {
@@ -24,13 +31,14 @@ export default function Footer() {
         <p className="site-footer-credit">Made by Mohamed Karim Ben Boubaker <span aria-hidden="true">·</span> © {year}</p>
         <nav className="site-footer-social" aria-label="Footer links">
           <ul>
-            {footerLinks.map(({ label, href, external }) => (
+            {footerLinks.map(({ label, href, external, download }) => (
               <li key={label}>
                 <a
                   href={href}
+                  download={download}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
-                  {label}{external && <> <span aria-hidden="true">↗</span></>}
+                  {label}{external && <> <span aria-hidden="true">↗</span></>}{download && <> <span aria-hidden="true">↓</span></>}
                 </a>
               </li>
             ))}

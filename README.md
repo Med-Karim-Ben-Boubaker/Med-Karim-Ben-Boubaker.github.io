@@ -37,6 +37,7 @@ The blog pages (`BlogPage`, `ArticlePage`), the article content and KaTeX are co
 | Projects | `src/content/projects.js` |
 | Experience | `src/content/experience.js` (start/end as `YYYY-MM`, `end: null` = Present) |
 | Date formatting | `src/content/dates.js` |
+| Résumé PDF | `public/karim-ben-boubaker-resume.pdf` (compiled from the LaTeX résumé kept outside this repo; replace the file to update it) |
 | About copy | `AboutPage` in `src/App.jsx` |
 | Home featured projects | `src/content/home.js` |
 

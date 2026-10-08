@@ -4,6 +4,7 @@ import pdfIcon from '@iconify-icons/simple-icons/adobeacrobatreader'
 import PageShell from './components/PageShell'
 import PointerSpotlightCard, { PointerSpotlightGroup } from './components/PointerSpotlightCard'
 import ProjectTechnologies from './components/ProjectTechnologies'
+import ResumeButton from './components/ResumeButton'
 import SocialLinks from './components/SocialLinks'
 import experienceEntries from './content/experience'
 import { currentRole, featuredProjects, projectAnchor } from './content/home'
@@ -143,7 +144,7 @@ function AboutPage({ currentPath }) {
 
             <div className="home-actions">
               <a className="pill-button pill-button--primary" href={withBasePath('/projects/')}>View projects</a>
-              <a className="pill-button pill-button--secondary" href={withBasePath('/blog/')}>Read the blog</a>
+              <ResumeButton />
               <SocialLinks />
             </div>
           </section>
@@ -250,6 +251,9 @@ function ExperiencePage({ currentPath }) {
             <p className="eyebrow">Experience</p>
             <h1 id="experience-title">Where I’ve worked</h1>
             <p className="experience-lead">From robotics software and embedded ML to LLM agents, knowledge graphs and clinical AI research.</p>
+            <div className="home-actions">
+              <ResumeButton />
+            </div>
           </section>
 
           <section className="experience-history" aria-label="Work history">

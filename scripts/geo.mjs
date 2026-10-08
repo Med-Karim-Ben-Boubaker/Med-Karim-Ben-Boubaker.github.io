@@ -4,7 +4,7 @@
 // Articles and projects come from the content modules; About and Experience are
 // defined inside App.jsx, so they are read from the prerendered HTML.
 
-import { PERSON_NAME, PERSON_ALTERNATE_NAME, JOB_TITLE, PROFILES, absoluteUrl, articleAssetUrl } from './seo.mjs'
+import { PERSON_NAME, PERSON_ALTERNATE_NAME, JOB_TITLE, PROFILES, RESUME_PATH, absoluteUrl, articleAssetUrl } from './seo.mjs'
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' }
 
@@ -109,6 +109,7 @@ export function buildLlmsTxt({ articles, about, experience, description }) {
     `- [Projects](${absoluteUrl('/projects/')}): Selected projects on agents, RAG, embedded ML and robotics`,
     `- [Experience](${absoluteUrl('/experience/')}): Roles from robotics software and embedded ML to LLM agents, knowledge graphs and clinical AI research`,
     `- [Blog](${absoluteUrl('/blog/')}): Articles on AI agents and knowledge systems`,
+    `- [Résumé](${absoluteUrl(RESUME_PATH)}): One-page PDF résumé`,
     '',
     '## Articles',
     '',
@@ -134,6 +135,7 @@ export function buildLlmsFullTxt({ articles, projects, about, experience, descri
     '',
     `Website: ${absoluteUrl('/')}`,
     ...PROFILES.map((profile) => `${profile.label}: ${profile.href}`),
+    `Résumé (PDF): ${absoluteUrl(RESUME_PATH)}`,
     '',
     '## About',
     '',
