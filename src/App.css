@@ -846,29 +846,6 @@ main:has(.about-page) > .ambient-signal-field {
   color: var(--primary);
 }
 
-.projects-note {
-  display: flex;
-  max-width: 720px;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 67.2px;
-  padding-top: 20px;
-  border-top: 1px solid var(--hairline);
-}
-
-.projects-note-mark {
-  color: var(--primary);
-  font-size: 20px;
-  line-height: 1.2;
-}
-
-.projects-note p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
 .experience-intro { max-width: 720px; }
 
 .experience-intro h1 { max-width: 680px; }
@@ -1080,8 +1057,6 @@ main:has(.about-page) > .ambient-signal-field {
     border-right: 1px solid var(--hairline);
     border-bottom: 0;
   }
-
-  .projects-note { margin-top: 56px; }
 
   .site-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 

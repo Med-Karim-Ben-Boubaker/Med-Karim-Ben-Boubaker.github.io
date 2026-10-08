@@ -201,11 +201,6 @@ function ProjectsPage({ currentPath }) {
               {projects.map((project, index) => <ProjectCard key={project.title} {...project} priority={index === 0} />)}
             </PointerSpotlightGroup>
           </section>
-
-          <aside className="projects-note" aria-label="Project documentation note">
-            <span className="projects-note-mark" aria-hidden="true">+</span>
-            <p>Project details are summarized from original project records, with supporting links included where available.</p>
-          </aside>
     </PageShell>
   )
 }
